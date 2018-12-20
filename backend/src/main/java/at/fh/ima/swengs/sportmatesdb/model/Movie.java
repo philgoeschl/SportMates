@@ -1,4 +1,4 @@
-package at.fh.ima.swengs.moviedbv3.model;
+package at.fh.ima.swengs.sportmatesdb.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

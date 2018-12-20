@@ -1,4 +1,4 @@
-package at.fh.ima.swengs.moviedbv3.model;
+package at.fh.ima.swengs.sportmatesdb.model;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;

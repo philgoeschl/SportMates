@@ -1,8 +1,8 @@
-package at.fh.ima.swengs.moviedbv3;
+package at.fh.ima.swengs.sportmatesdb;
 
 
-import at.fh.ima.swengs.moviedbv3.filter.JwtTokenAuthenticationFilter;
-import at.fh.ima.swengs.moviedbv3.filter.JwtUsernameAndPasswordAuthenticationFilter;
+import at.fh.ima.swengs.sportmatesdb.filter.JwtTokenAuthenticationFilter;
+import at.fh.ima.swengs.sportmatesdb.filter.JwtUsernameAndPasswordAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

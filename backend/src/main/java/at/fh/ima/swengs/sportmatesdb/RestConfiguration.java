@@ -1,4 +1,4 @@
-package at.fh.ima.swengs.moviedbv3;
+package at.fh.ima.swengs.sportmatesdb;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
