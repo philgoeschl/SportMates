@@ -2,6 +2,7 @@ package at.fh.ima.swengs.sportmatesdb.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +16,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
+
+    @ManyToMany(mappedBy = "users")
+    private List<Sport> sports;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Event> events;
 
 
     @Version
