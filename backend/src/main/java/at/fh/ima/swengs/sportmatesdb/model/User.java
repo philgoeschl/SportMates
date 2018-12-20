@@ -9,36 +9,29 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Actor {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
 
+
+    @Version
+    private long version;
+
+
+    private Boolean isAdmin;
     private String firstName;
     private String lastName;
+    private String username;
 
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd.MM.yyyy")
     private Date dayOfBirth;
 
-    @ManyToMany(mappedBy = "actors")
-    private List<Movie> movies;
-
-
-    @Version
-    @JsonIgnore
-    private long version;
-
-    public Actor() {
-    }
-
-    public Actor(String firstName, String lastName, Date dayOfBirth) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dayOfBirth = dayOfBirth;
-    }
+    private String homeTown;
+    private String userLocation;
 
     public long getId() {
         return id;
@@ -46,6 +39,14 @@ public class Actor {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 
     public String getFirstName() {
@@ -64,6 +65,14 @@ public class Actor {
         this.lastName = lastName;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public Date getDayOfBirth() {
         return dayOfBirth;
     }
@@ -72,43 +81,54 @@ public class Actor {
         this.dayOfBirth = dayOfBirth;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
+    public String getHomeTown() {
+        return homeTown;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
+    public void setHomeTown(String homeTown) {
+        this.homeTown = homeTown;
     }
 
-    public long getVersion() {
-        return version;
+    public String getUserLocation() {
+        return userLocation;
     }
 
-    public void setVersion(long version) {
-        this.version = version;
+    public void setUserLocation(String userLocation) {
+        this.userLocation = userLocation;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", isAdmin=" + isAdmin +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", dayOfBirth=" + dayOfBirth +
+                ", homeTown='" + homeTown + '\'' +
+                ", userLocation='" + userLocation + '\'' +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Actor actor = (Actor) o;
-        return id == actor.id;
+        User user = (User) o;
+        return id == user.id &&
+                Objects.equals(isAdmin, user.isAdmin) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(dayOfBirth, user.dayOfBirth) &&
+                Objects.equals(homeTown, user.homeTown) &&
+                Objects.equals(userLocation, user.userLocation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Actor{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dayOfBirth='" + dayOfBirth + '\'' +
-                ", version=" + version +
-                '}';
+        return Objects.hash(id, isAdmin, firstName, lastName, username, dayOfBirth, homeTown, userLocation);
     }
 }
