@@ -1,4 +1,4 @@
-package at.fh.ima.swengs.moviedbv3.model;
+package at.fh.ima.swengs.sportmatesdb.model;
 
 import javax.persistence.*;
 import java.util.List;

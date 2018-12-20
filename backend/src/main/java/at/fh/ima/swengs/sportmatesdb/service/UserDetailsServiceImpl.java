@@ -1,4 +1,4 @@
-package at.fh.ima.swengs.moviedbv3.service;
+package at.fh.ima.swengs.sportmatesdb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

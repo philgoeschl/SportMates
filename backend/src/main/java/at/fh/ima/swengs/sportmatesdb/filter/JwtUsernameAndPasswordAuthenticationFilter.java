@@ -1,7 +1,7 @@
-package at.fh.ima.swengs.moviedbv3.filter;
+package at.fh.ima.swengs.sportmatesdb.filter;
 
 
-import at.fh.ima.swengs.moviedbv3.JwtConfig;
+import at.fh.ima.swengs.sportmatesdb.JwtConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
