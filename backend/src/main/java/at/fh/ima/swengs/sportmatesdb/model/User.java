@@ -18,11 +18,11 @@ public class User {
 
 
 
-    @ManyToMany(mappedBy = "users")
+    /*@ManyToMany(mappedBy = "users")
     private List<Sport> sports;
 
     @ManyToMany(mappedBy = "users")
-    private List<Event> events;
+    private List<Event> events;*/
 
 
     @Version
@@ -33,6 +33,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String username;
+    private String password;
 
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd.MM.yyyy")
@@ -105,19 +106,12 @@ public class User {
         this.userLocation = userLocation;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", isAdmin=" + isAdmin +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", username='" + username + '\'' +
-                ", dayOfBirth=" + dayOfBirth +
-                ", homeTown='" + homeTown + '\'' +
-                ", userLocation='" + userLocation + '\'' +
-                '}';
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -126,10 +120,12 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id &&
+                version == user.version &&
                 Objects.equals(isAdmin, user.isAdmin) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) &&
                 Objects.equals(dayOfBirth, user.dayOfBirth) &&
                 Objects.equals(homeTown, user.homeTown) &&
                 Objects.equals(userLocation, user.userLocation);
@@ -137,6 +133,45 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isAdmin, firstName, lastName, username, dayOfBirth, homeTown, userLocation);
+        return Objects.hash(id, version, isAdmin, firstName, lastName, username, password, dayOfBirth, homeTown, userLocation);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", version=" + version +
+                ", isAdmin=" + isAdmin +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", dayOfBirth=" + dayOfBirth +
+                ", homeTown='" + homeTown + '\'' +
+                ", userLocation='" + userLocation + '\'' +
+                '}';
+    }
+
+
+    public User() {
+    }
+
+    public User(Boolean isAdmin, String firstName, String lastName, String username, String password, Date dayOfBirth, String homeTown, String userLocation) {
+        this.isAdmin = isAdmin;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.dayOfBirth = dayOfBirth;
+        this.homeTown = homeTown;
+        this.userLocation = userLocation;
+    }
+
+
+    public User(Boolean isAdmin, String firstName, String lastName, String username) {
+        this.isAdmin = isAdmin;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
     }
 }

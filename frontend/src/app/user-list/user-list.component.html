@@ -1,0 +1,13 @@
+<div *ngFor="let user of users">
+  <label>
+    Username:
+    <input type="text" name="username" [(ngModel)]="user.username" readonly/>
+  </label>
+  <label *ngIf="isAdmin">
+    Admin:
+    <input type="checkbox" name="isAdmin" [(ngModel)]="user.admin"/>
+  </label>
+  <button type="button" (click)="editUser(user)" *ngIf="isAdmin">Save</button>
+</div>
+
+

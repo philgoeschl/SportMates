@@ -6,5 +6,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface SportRepository extends PagingAndSortingRepository<Sport,Long> {
-    Sport findBySportName(@Param("sportName")String sportName);
 }

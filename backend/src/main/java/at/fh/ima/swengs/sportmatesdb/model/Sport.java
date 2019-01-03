@@ -1,12 +1,11 @@
 package at.fh.ima.swengs.sportmatesdb.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-
+@Entity
 public class Sport {
 
     @Id
@@ -20,12 +19,12 @@ public class Sport {
     private int teamSize;
     private String sportPicture;
 
-    @ManyToMany
+    /*@ManyToMany
     @JsonIgnoreProperties("sports")
-    private List<User> users;
+    private List<User> users;*/
 
-    @OneToMany(mappedBy = "sport")
-    private List<Event> events;
+    /*@OneToMany(mappedBy = "sport")
+    private List<Event> events;*/
 
     @Version
     @JsonIgnore

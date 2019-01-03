@@ -2,12 +2,10 @@ package at.fh.ima.swengs.sportmatesdb.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,13 +15,13 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
+    /*@ManyToOne
     @JsonIgnoreProperties("sports")
     private Sport sport;
 
     @ManyToMany
     @JsonIgnoreProperties("events")
-    private List<User> users;
+    private List<User> users;*/
 
     private String eventName;
     private String eventType;
