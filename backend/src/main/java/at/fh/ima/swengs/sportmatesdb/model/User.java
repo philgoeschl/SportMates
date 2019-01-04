@@ -17,12 +17,11 @@ public class User {
     private long id;
 
 
-
-    /*@ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users")
     private List<Sport> sports;
 
     @ManyToMany(mappedBy = "users")
-    private List<Event> events;*/
+    private List<Event> events;
 
 
     @Version
@@ -36,7 +35,7 @@ public class User {
     private String password;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd.MM.yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date dayOfBirth;
 
     private String homeTown;

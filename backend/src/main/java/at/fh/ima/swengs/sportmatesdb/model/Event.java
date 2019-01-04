@@ -2,10 +2,12 @@ package at.fh.ima.swengs.sportmatesdb.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,15 +17,15 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    /*@ManyToOne
+    @ManyToOne
     @JsonIgnoreProperties("sports")
     private Sport sport;
 
     @ManyToMany
     @JsonIgnoreProperties("events")
-    private List<User> users;*/
+    private List<User> users;
 
-    private String eventName;
+    private String eventTitle;
     private String eventType;
     private String eventDescription;
     private String eventTown;
@@ -46,7 +48,7 @@ public class Event {
     }
 
     public Event(String eventName, String eventType, String eventDescription, String eventTown, int eventZIP, String eventStreet, Date eventDateTime, String[] eventParticipants, String eventOrganizer, String eventImage) {
-        this.eventName = eventName;
+        this.eventTitle = eventName;
         this.eventType = eventType;
         this.eventDescription = eventDescription;
         this.eventTown = eventTown;
@@ -67,11 +69,11 @@ public class Event {
     }
 
     public String getEventName() {
-        return eventName;
+        return eventTitle;
     }
 
     public void setEventName(String eventName) {
-        this.eventName = eventName;
+        this.eventTitle = eventName;
     }
 
     public String getEventType() {
@@ -171,7 +173,7 @@ public class Event {
     public String toString() {
         return "Event{" +
                 "id=" + id +
-                ", eventName='" + eventName + '\'' +
+                ", eventName='" + eventTitle + '\'' +
                 ", eventType='" + eventType + '\'' +
                 ", eventDescription='" + eventDescription + '\'' +
                 ", eventTown='" + eventTown + '\'' +
