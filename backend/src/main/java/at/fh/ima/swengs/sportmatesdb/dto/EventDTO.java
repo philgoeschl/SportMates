@@ -16,14 +16,14 @@ import java.util.Set;
 public class EventDTO {
 
 
-    private String eventName;
+    private String eventTitle;
     private String eventType;
     private String eventDescription;
     private String eventTown;
+    private String eventManager;
     private int eventZIP;
     private String eventStreet;
     private Date eventDateTime;
-    private String[] eventParticipants;
     private String eventOrganizer;
     private String eventImage;
 
@@ -31,13 +31,6 @@ public class EventDTO {
     private Set<String> users;
 
 
-    public String getEventName() {
-        return eventName;
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
 
     public String getEventType() {
         return eventType;
@@ -87,13 +80,6 @@ public class EventDTO {
         this.eventDateTime = eventDateTime;
     }
 
-    public String[] getEventParticipants() {
-        return eventParticipants;
-    }
-
-    public void setEventParticipants(String[] eventParticipants) {
-        this.eventParticipants = eventParticipants;
-    }
 
     public String getEventOrganizer() {
         return eventOrganizer;
@@ -111,6 +97,15 @@ public class EventDTO {
         this.eventImage = eventImage;
     }
 
+
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
+
     public String getSport() {
         return sport;
     }
@@ -125,5 +120,13 @@ public class EventDTO {
 
     public void setUsers(Set<String> users) {
         this.users = users;
+    }
+
+    public String getEventManager() {
+        return eventManager;
+    }
+
+    public void setEventManager(String eventManager) {
+        this.eventManager = eventManager;
     }
 }

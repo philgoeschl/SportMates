@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @RepositoryRestResource
-public interface UserRepository extends PagingAndSortingRepository<User,Long> {
+public interface UserRepository extends PagingAndSortingRepository<User,String> {
 
 
     public List<User> findAll();
 
-    User findByUsername(String username);
+    public Optional<User> findByUsername (String userName);
 }

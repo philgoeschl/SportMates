@@ -18,6 +18,7 @@ public class UserDTO {
     private String lastName;
     private String username;
     private String password;
+    private String eMail;
     private Date dayOfBirth;
     private String homeTown;
     private String userLocation;
@@ -25,6 +26,7 @@ public class UserDTO {
 
     private Set<String> sports;
     private Set<String> events;
+    private Set<String> managedEvents;
 
 
     public Boolean getAdmin() {
@@ -105,5 +107,21 @@ public class UserDTO {
 
     public void setEvents(Set<String> events) {
         this.events = events;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    public Set<String> getManagedEvents() {
+        return managedEvents;
+    }
+
+    public void setManagedEvents(Set<String> managedEvents) {
+        this.managedEvents = managedEvents;
     }
 }

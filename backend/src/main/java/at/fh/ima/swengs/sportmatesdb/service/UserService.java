@@ -4,8 +4,10 @@ import at.fh.ima.swengs.sportmatesdb.model.User;
 import at.fh.ima.swengs.sportmatesdb.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class UserService {
 
@@ -17,8 +19,19 @@ public class UserService {
     }
 
 
-
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    public Optional<User> findByUserName(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public Set<User> getUsersByUsername(Set<String> dtos) {
+        Set<User> entities = new HashSet<>();
+        if (dtos != null) {
+            dtos.forEach((dto) -> entities.add(userRepository.findByUsername(dto).get()));
+        }
+        return entities;
     }
 }

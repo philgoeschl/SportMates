@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -18,11 +19,13 @@ public class User {
 
 
     @ManyToMany(mappedBy = "users")
-    private List<Sport> sports;
+    private Set<Sport> sports;
 
     @ManyToMany(mappedBy = "users")
-    private List<Event> events;
+    private Set<Event> events;
 
+    @OneToMany(mappedBy="eventManager")
+    private Set<Event> managedEvents;
 
     @Version
     private long version;
@@ -33,6 +36,8 @@ public class User {
     private String lastName;
     private String username;
     private String password;
+    private String eMail;
+
 
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
@@ -113,6 +118,40 @@ public class User {
         this.password = password;
     }
 
+    public Set<Sport> getSports() {
+        return sports;
+    }
+
+    public void setSports(Set<Sport> sports) {
+        this.sports = sports;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    public Set<Event> getManagedEvents() {
+        return managedEvents;
+    }
+
+    public void setManagedEvents(Set<Event> managedEvents) {
+        this.managedEvents = managedEvents;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -120,11 +159,14 @@ public class User {
         User user = (User) o;
         return id == user.id &&
                 version == user.version &&
+                Objects.equals(sports, user.sports) &&
+                Objects.equals(events, user.events) &&
                 Objects.equals(isAdmin, user.isAdmin) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) &&
+                Objects.equals(eMail, user.eMail) &&
                 Objects.equals(dayOfBirth, user.dayOfBirth) &&
                 Objects.equals(homeTown, user.homeTown) &&
                 Objects.equals(userLocation, user.userLocation);
@@ -132,45 +174,62 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, version, isAdmin, firstName, lastName, username, password, dayOfBirth, homeTown, userLocation);
+        return Objects.hash(id, sports, events, version, isAdmin, firstName, lastName, username, password, eMail, dayOfBirth, homeTown, userLocation);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", sports=" + sports +
+                ", events=" + events +
                 ", version=" + version +
                 ", isAdmin=" + isAdmin +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", eMail='" + eMail + '\'' +
                 ", dayOfBirth=" + dayOfBirth +
                 ", homeTown='" + homeTown + '\'' +
                 ", userLocation='" + userLocation + '\'' +
                 '}';
     }
 
-
     public User() {
     }
 
-    public User(Boolean isAdmin, String firstName, String lastName, String username, String password, Date dayOfBirth, String homeTown, String userLocation) {
+    public User(Boolean isAdmin, String firstName, String lastName, String username, String password, String eMail, Date dayOfBirth, String homeTown, String userLocation) {
         this.isAdmin = isAdmin;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+        this.eMail = eMail;
         this.dayOfBirth = dayOfBirth;
         this.homeTown = homeTown;
         this.userLocation = userLocation;
     }
-
 
     public User(Boolean isAdmin, String firstName, String lastName, String username) {
         this.isAdmin = isAdmin;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
+    }
+
+    public User(Set<Sport> sports, Set<Event> events, Set<Event> managedEvents, Boolean isAdmin, String firstName, String lastName, String username, String password, String eMail, Date dayOfBirth, String homeTown, String userLocation) {
+        this.sports = sports;
+        this.events = events;
+        this.managedEvents = managedEvents;
+        this.isAdmin = isAdmin;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.eMail = eMail;
+        this.dayOfBirth = dayOfBirth;
+        this.homeTown = homeTown;
+        this.userLocation = userLocation;
     }
 }

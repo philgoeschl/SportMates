@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 public class Sport {
 
@@ -22,10 +24,10 @@ public class Sport {
 
     @ManyToMany
     @JsonIgnoreProperties("sports")
-    private List<User> users;
+    private Set<User> users;
 
     @OneToMany(mappedBy = "sport")
-    private List<Event> events;
+    private Set<Event> events;
 
     @Version
     @JsonIgnore
@@ -40,6 +42,16 @@ public class Sport {
         this.team = team;
         this.teamSize = teamSize;
         this.sportPicture = sportPicture;
+    }
+
+    public Sport(String sportName, String sportDescription, boolean team, int teamSize, String sportPicture, Set<User> sportUsers, Set<Event> events) {
+        this.sportName = sportName;
+        this.sportDescription = sportDescription;
+        this.team = team;
+        this.teamSize = teamSize;
+        this.sportPicture = sportPicture;
+        this.users = sportUsers;
+        this.events = events;
     }
 
     public long getId() {
@@ -98,6 +110,22 @@ public class Sport {
         this.version = version;
     }
 
+    public Set<User> getSportUsers() {
+        return users;
+    }
+
+    public void setSportUsers(Set<User> sportUsers) {
+        this.users = sportUsers;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,6 +134,9 @@ public class Sport {
         return id == sport.id &&
                 Objects.equals(sportName, sport.sportName);
     }
+
+
+
 
     @Override
     public int hashCode() {

@@ -14,6 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service("userDetailsService")   // It has to be annotated with @Service.
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -27,19 +30,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-            at.fh.ima.swengs.sportmatesdb.model.User user = userRepository.findByUsername(username);
-            if (user.getUsername().equals(username)) {
+            Optional<at.fh.ima.swengs.sportmatesdb.model.User> checkUser = userRepository.findByUsername(username);
+            if (checkUser.isPresent()) {
+                at.fh.ima.swengs.sportmatesdb.model.User user = checkUser.get();
 
-                // Remember that Spring needs roles to be in this format: "ROLE_" + userRole (i.e. "ROLE_ADMIN")
-                // So, we need to set it to that format, so we can verify and compare roles (i.e. hasRole("ADMIN")).
+
                 List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                         .commaSeparatedStringToAuthorityList(user.getAdmin() ? "ROLE_ADMIN" : "ROLE_USER");
-
                 // The "User" class is provided by Spring and represents a model class for user to be returned by UserDetailsService
                 // And used by auth manager to verify and check user authentication.
                 return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         // If user not found. Throw this exception.
         throw new UsernameNotFoundException("Username: " + username + " not found");

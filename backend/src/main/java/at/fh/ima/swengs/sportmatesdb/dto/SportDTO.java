@@ -18,7 +18,7 @@ public class SportDTO {
     private String sportPicture;
 
 
-    private Set<String> users;
+    private Set<String> sportUsers;
     private Set<String> events;
 
     public String getSportName() {
@@ -61,12 +61,12 @@ public class SportDTO {
         this.sportPicture = sportPicture;
     }
 
-    public Set<String> getUsers() {
-        return users;
+    public Set<String> getSportUsers() {
+        return sportUsers;
     }
 
-    public void setUsers(Set<String> users) {
-        this.users = users;
+    public void setSportUsers(Set<String> sportUsers) {
+        this.sportUsers = sportUsers;
     }
 
     public Set<String> getEvents() {
