@@ -1,5 +1,6 @@
 package at.fh.ima.swengs.sportmatesdb.service;
 
+import at.fh.ima.swengs.sportmatesdb.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -8,10 +9,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
+import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service("userDetailsService")   // It has to be annotated with @Service.
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -19,77 +25,46 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        // hard coding the users. All passwords must be encoded.
-        final List<AppUser> users = Arrays.asList(
-                new AppUser(1, "tester", encoder.encode("12345"), "USER"),
-                new AppUser(2, "admin", encoder.encode("12345"), "ADMIN")
-        );
+        try {
+            Optional<at.fh.ima.swengs.sportmatesdb.model.User> checkUser = userRepository.findByUsername(username);
+            if (checkUser.isPresent()) {
+                at.fh.ima.swengs.sportmatesdb.model.User user = checkUser.get();
 
 
-        for (AppUser appUser : users) {
-            if (appUser.getUsername().equals(username)) {
-
-                // Remember that Spring needs roles to be in this format: "ROLE_" + userRole (i.e. "ROLE_ADMIN")
-                // So, we need to set it to that format, so we can verify and compare roles (i.e. hasRole("ADMIN")).
                 List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                        .commaSeparatedStringToAuthorityList("ROLE_" + appUser.getRole());
-
+                        .commaSeparatedStringToAuthorityList(user.getAdmin() ? "ROLE_ADMIN" : "ROLE_USER");
                 // The "User" class is provided by Spring and represents a model class for user to be returned by UserDetailsService
                 // And used by auth manager to verify and check user authentication.
-                return new User(appUser.getUsername(), appUser.getPassword(), grantedAuthorities);
+                return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
         // If user not found. Throw this exception.
         throw new UsernameNotFoundException("Username: " + username + " not found");
     }
 
-    // A (temporary) class represent the user saved in the database.
-    private static class AppUser {
-        private Integer id;
-        private String username, password;
-        private String role;
+    @PostConstruct()
+    @Transactional
+    public void initUsers() {
+        if (userRepository.count() == 0) {
+            at.fh.ima.swengs.sportmatesdb.model.User admin = new at.fh.ima.swengs.sportmatesdb.model.User();
+            admin.setUsername("admin");
+            admin.setPassword(encoder.encode("12345"));
+            admin.setAdmin(true);
+            userRepository.save(admin);
 
-        public AppUser(Integer id, String username, String password, String role) {
-            this.id = id;
-            this.username = username;
-            this.password = password;
-            this.role = role;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getRole() {
-            return role;
-        }
-
-        public void setRole(String role) {
-            this.role = role;
+            at.fh.ima.swengs.sportmatesdb.model.User tester = new at.fh.ima.swengs.sportmatesdb.model.User();
+            tester.setUsername("tester");
+            tester.setPassword(encoder.encode("12345"));
+            tester.setAdmin(false);
+            userRepository.save(tester);
         }
     }
+
 }

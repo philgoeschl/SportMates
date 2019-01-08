@@ -1,21 +1,32 @@
 package at.fh.ima.swengs.sportmatesdb.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "eventTitle")
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String eventName;
+    @ManyToOne
+    @JsonIgnoreProperties("sports")
+    private Sport sport;
+
+    @ManyToMany
+    @JsonIgnoreProperties("events")
+    private Set<User> users;
+
+    @ManyToOne
+    private User eventManager;
+
+    private String eventTitle;
     private String eventType;
     private String eventDescription;
     private String eventTown;
@@ -26,9 +37,10 @@ public class Event {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private Date eventDateTime;
 
-    private String[] eventParticipants;
+
     private String eventOrganizer;
     private String eventImage;
+
 
     @Version
     @JsonIgnore
@@ -37,15 +49,17 @@ public class Event {
     public Event() {
     }
 
-    public Event(String eventName, String eventType, String eventDescription, String eventTown, int eventZIP, String eventStreet, Date eventDateTime, String[] eventParticipants, String eventOrganizer, String eventImage) {
-        this.eventName = eventName;
+    public Event(Sport sport, Set<User> users, User eventManager, String eventTitle, String eventType, String eventDescription, String eventTown, int eventZIP, String eventStreet, Date eventDateTime, String eventOrganizer, String eventImage) {
+        this.sport = sport;
+        this.users = users;
+        this.eventManager = eventManager;
+        this.eventTitle = eventTitle;
         this.eventType = eventType;
         this.eventDescription = eventDescription;
         this.eventTown = eventTown;
         this.eventZIP = eventZIP;
         this.eventStreet = eventStreet;
         this.eventDateTime = eventDateTime;
-        this.eventParticipants = eventParticipants;
         this.eventOrganizer = eventOrganizer;
         this.eventImage = eventImage;
     }
@@ -58,13 +72,6 @@ public class Event {
         this.id = id;
     }
 
-    public String getEventName() {
-        return eventName;
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
 
     public String getEventType() {
         return eventType;
@@ -114,13 +121,6 @@ public class Event {
         this.eventDateTime = eventDateTime;
     }
 
-    public String[] getEventParticipants() {
-        return eventParticipants;
-    }
-
-    public void setEventParticipants(String[] eventParticipants) {
-        this.eventParticipants = eventParticipants;
-    }
 
     public String getEventOrganizer() {
         return eventOrganizer;
@@ -132,6 +132,30 @@ public class Event {
 
     public String getEventImage() {
         return eventImage;
+    }
+
+    public Sport getSport() {
+        return sport;
+    }
+
+    public void setSport(Sport sport) {
+        this.sport = sport;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
     }
 
     public void setEventImage(String eventImage) {
@@ -146,33 +170,37 @@ public class Event {
         this.version = version;
     }
 
+    public void setEventManager(User eventManager) {
+        this.eventManager = eventManager;
+    }
+
+    public User getEventManager() {
+        return eventManager;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return id == event.id;
+        return id == event.id &&
+                eventZIP == event.eventZIP &&
+                version == event.version &&
+                Objects.equals(sport, event.sport) &&
+                Objects.equals(users, event.users) &&
+                Objects.equals(eventTitle, event.eventTitle) &&
+                Objects.equals(eventType, event.eventType) &&
+                Objects.equals(eventDescription, event.eventDescription) &&
+                Objects.equals(eventTown, event.eventTown) &&
+                Objects.equals(eventStreet, event.eventStreet) &&
+                Objects.equals(eventDateTime, event.eventDateTime) &&
+                Objects.equals(eventOrganizer, event.eventOrganizer) &&
+                Objects.equals(eventImage, event.eventImage) &&
+                Objects.equals(eventManager, event.eventManager);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", eventName='" + eventName + '\'' +
-                ", eventType='" + eventType + '\'' +
-                ", eventDescription='" + eventDescription + '\'' +
-                ", eventTown='" + eventTown + '\'' +
-                ", eventZIP='" + eventZIP + '\'' +
-                ", eventStreet='" + eventStreet + '\'' +
-                ", eventDateTime=" + eventDateTime +
-                ", eventParticipants=" + Arrays.toString(eventParticipants) +
-                ", eventOrganizer='" + eventOrganizer + '\'' +
-                ", eventImage='" + eventImage + '\'' +
-                '}';
+        return Objects.hash(id, sport, users, eventManager, eventTitle, eventType, eventDescription, eventTown, eventZIP, eventStreet, eventDateTime, eventOrganizer, eventImage, version);
     }
 }
