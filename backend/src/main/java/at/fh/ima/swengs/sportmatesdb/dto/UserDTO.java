@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class UserDTO {
 
-    private Boolean isAdmin;
+    private boolean isAdmin =false;
     private String firstName;
     private String lastName;
     private String username;

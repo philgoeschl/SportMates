@@ -32,7 +32,7 @@ public class User {
     private long version;
 
 
-    private Boolean isAdmin;
+    private boolean isAdmin =false;
     private String firstName;
     private String lastName;
     private String username;
@@ -55,11 +55,11 @@ public class User {
         this.id = id;
     }
 
-    public Boolean getAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(Boolean admin) {
+    public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
 

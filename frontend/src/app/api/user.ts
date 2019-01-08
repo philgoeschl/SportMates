@@ -2,7 +2,7 @@ export interface User {
   id?: number;
   username: string;
   password: string;
-  isadmin: boolean;
+  isAdmin: boolean;
   firstName?: string;
   lastName?: string;
   eMail?: string;
