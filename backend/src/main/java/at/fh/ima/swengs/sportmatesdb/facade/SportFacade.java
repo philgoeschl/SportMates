@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 @SuppressWarnings("Duplicates")
+
+@Service()
+@Transactional
 public class SportFacade {
 
     @Autowired
@@ -74,7 +77,7 @@ public class SportFacade {
         return dto;
     }
 
-    public List<SportDTO> getAllRoles() {
+    public List<SportDTO> getAllSports() {
         List<SportDTO> roles = new ArrayList<>();
 
         sportService.getAllSports().forEach(entity -> {

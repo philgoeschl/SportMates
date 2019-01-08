@@ -7,12 +7,17 @@ import at.fh.ima.swengs.sportmatesdb.service.EventService;
 import at.fh.ima.swengs.sportmatesdb.service.SportService;
 import at.fh.ima.swengs.sportmatesdb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 @SuppressWarnings("Duplicates")
+
+@Service()
+@Transactional
 public class EventFacade {
 
     @Autowired
@@ -86,5 +91,30 @@ public class EventFacade {
         return events;
     }
 
+    public List<EventDTO> getAllEvents() {
+        List<EventDTO> events = new ArrayList<EventDTO>();
 
+        eventService.getAll().forEach(entity -> {
+            EventDTO dto = new EventDTO();
+            mapEntityToDto(entity,dto);
+            events.add(dto);
+        });
+
+        return events;
+    }
+
+    public EventDTO getEventByID(String eventID) {
+        Event entity = eventService.findById(eventID).get();
+        EventDTO dto = new EventDTO();
+        mapEntityToDto(entity, dto);
+        return dto;
+    }
+
+    public EventDTO update(String eventID, EventDTO dto) {
+        Event entity  = eventService.findById(eventID).get();
+        mapDtoToEntity(dto, entity);
+        mapEntityToDto(eventService.save(entity), dto);
+        return dto;
+
+    }
 }

@@ -6,14 +6,23 @@ import at.fh.ima.swengs.sportmatesdb.service.EventService;
 import at.fh.ima.swengs.sportmatesdb.service.SportService;
 import at.fh.ima.swengs.sportmatesdb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+@Service()
+@Transactional
 public class UserFacade {
 
+    @Autowired @Lazy
+    private BCryptPasswordEncoder encoder;
 
     @Autowired
     private UserService userService;
@@ -25,12 +34,11 @@ public class UserFacade {
     private EventService eventService;
 
 
-    @Autowired
-    private BCryptPasswordEncoder encoder;
-
     void mapDtoToEntity(UserDTO dto, User entity) {
         String passwordEncoded = encoder.encode(dto.getPassword());
         entity.setPassword(passwordEncoded);
+
+
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setAdmin(dto.getAdmin());

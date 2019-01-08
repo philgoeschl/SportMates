@@ -4,11 +4,13 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {JwtModule} from "@auth0/angular-jwt";
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import {BsDatepickerModule} from "ngx-bootstrap";
 export function tokenGetter(){
   return localStorage.getItem('access_token');
 }
@@ -18,12 +20,15 @@ export function tokenGetter(){
     LoginComponent,
     LogoutComponent,
     UserListComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
     JwtModule.forRoot({
       config:{
         tokenGetter: tokenGetter,
