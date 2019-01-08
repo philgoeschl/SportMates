@@ -8,10 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 @RepositoryRestResource
+<<<<<<< Updated upstream
 public interface UserRepository extends PagingAndSortingRepository<User,String> {
 
 
     public List<User> findAll();
 
     public Optional<User> findByUsername (String userName);
+=======
+public interface UserRepository extends PagingAndSortingRepository<Sport,Long> {
+    User findByUsername(String username);
+>>>>>>> Stashed changes
 }
