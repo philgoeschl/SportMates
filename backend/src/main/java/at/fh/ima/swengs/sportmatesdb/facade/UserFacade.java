@@ -60,7 +60,7 @@ public class UserFacade {
         dto.setDayOfBirth(entity.getDayOfBirth());
         dto.setUserLocation(entity.getUserLocation());
         dto.setHomeTown(entity.getHomeTown());
-        dto.setAdmin(entity.getAdmin());
+        dto.setAdmin(entity.isAdmin());
         dto.seteMail(entity.geteMail());
 
         dto.setSports(entity.getSports().stream().map((s) -> s.getSportName()).collect(Collectors.toSet()));

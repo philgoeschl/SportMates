@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-user-form',
@@ -10,7 +10,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class UserFormComponent implements OnInit {
 
-
+  public BooleanValue: Boolean;
   userForm;
   shouldNavigateToList: boolean;
 
@@ -26,6 +26,7 @@ export class UserFormComponent implements OnInit {
         'lastName': new FormControl('', [Validators.required, Validators.minLength(3)]),
         'username': new FormControl('', [Validators.required, Validators.minLength(3)]),
         'password': new FormControl('', [Validators.required, Validators.minLength(3)]),
+        'isAdmin': new FormControl(),
         'eMail': new FormControl('', [Validators.required, Validators.minLength(3)]),
         'dayOfBirth': new FormControl(),
         'homeTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -69,5 +70,7 @@ export class UserFormComponent implements OnInit {
     setShouldNavigateToList() {
       this.shouldNavigateToList = true;
     }
+
+
 
 }

@@ -5,8 +5,9 @@
       <div class="form-group">
         <label for="firstName">First name:</label>
         <input id="firstName" type="text" name="firstName" formControlName="firstName" class="form-control"/>
-        <div *ngIf="userForm.controls.firstName.invalid && (userForm.controls.firstName.dirty || userForm.controls.firstName.touched)"
-             class="alert alert-danger">
+        <div
+          *ngIf="userForm.controls.firstName.invalid && (userForm.controls.firstName.dirty || userForm.controls.firstName.touched)"
+          class="alert alert-danger">
           <div *ngIf="userForm.controls.firstName.errors.required">
             Name is required.
           </div>
@@ -28,18 +29,34 @@
       <label for="password">Password:</label>
       <input id="password" type="text" name="password" formControlName="password" class="form-control"/>
     </div>
+
+
+    <div class="row">
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input" type="hidden" name="isAdmin" id="isAdmin" formControlName="isAdmin" [value]="true">
+        <label class="form-check-label" for="isAdmin">
+        </label>
+      </div>
+    </div>
+  </div>
+
+
     <div class="col">
       <label for="eMail">e-Mail:</label>
       <input id="eMail" type="text" name="eMail" formControlName="eMail" class="form-control"/>
     </div>
 
-  </div><br>
-  <div class="row">
-    <div class="col">
-      <label for="dayOfBirth">Day of birth:</label>
-      <input id="dayOfBirth" type="text" bsDatepicker name="dayOfBirth" formControlName="dayOfBirth" class="form-control" [bsConfig]="{dateInputFormat: 'DD.MM.YYYY'}"/>
-    </div>
-  </div><br>
+  </div>
+  <br>
+
+  <div class="col">
+    <label for="dayOfBirth">Day of birth:</label>
+    <input id="dayOfBirth" type="text" bsDatepicker name="dayOfBirth" formControlName="dayOfBirth" class="form-control"
+           [bsConfig]="{dateInputFormat: 'DD.MM.YYYY'}"/>
+
+  </div>
+  <br>
 
   <div class="row">
     <div class="col">
