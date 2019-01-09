@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {Subject} from 'rxjs';
+import {config, Subject} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {User} from "../api/user";
 import {Actor} from "../api/actor";
@@ -73,5 +73,8 @@ export class UserService {
 
     return false;
   }
+
+
+
 
 }

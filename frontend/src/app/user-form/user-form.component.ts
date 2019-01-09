@@ -13,6 +13,7 @@ export class UserFormComponent implements OnInit {
   public BooleanValue: Boolean;
   userForm;
   shouldNavigateToList: boolean;
+  user: any;
 
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
   }
@@ -64,7 +65,7 @@ export class UserFormComponent implements OnInit {
   }
 
     navigateToList() {
-      this.router.navigate(['/user-list']);
+      this.router.navigate(['/login']);
     }
 
     setShouldNavigateToList() {

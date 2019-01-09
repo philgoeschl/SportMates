@@ -11,6 +11,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import {BsDatepickerModule} from "ngx-bootstrap";
+import { RegisterComponent } from './register/register.component';
 export function tokenGetter(){
   return localStorage.getItem('access_token');
 }
@@ -21,6 +22,7 @@ export function tokenGetter(){
     LogoutComponent,
     UserListComponent,
     UserFormComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
