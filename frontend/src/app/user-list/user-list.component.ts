@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Actor} from '../api/actor';
+
 import {Router} from '@angular/router';
-import {UserService} from '../services/user.service';
-import {User} from '../api/user';
-
-
+import {User} from "../api/user";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-user-list',
@@ -13,28 +14,29 @@ import {User} from '../api/user';
 export class UserListComponent implements OnInit {
 
   users: Array<User>;
-  isAdmin: boolean;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
 
     this.userService.getAll()
-      .subscribe((response: any) => {
-        this.users = response._embedded.users;
+      .subscribe((users: any) => {
+        this.users = users;
       });
-    this.isAdmin = this.userService.getRole();
-    //  console.log(this.isAdmin);
+
   }
 
-  editUser(user: User) {
+  deleteActor(user: User) {
 
-    this.userService.update(user)
+    this.userService.delete(user)
       .subscribe(() => {
-        alert('edited successfully');
         this.ngOnInit();
       });
 
+  }
+
+  createActor() {
+    this.router.navigate(['/user-form']);
   }
 }

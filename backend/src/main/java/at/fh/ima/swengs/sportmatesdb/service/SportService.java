@@ -21,11 +21,11 @@ public class SportService {
         return sportRepository.save(entity);
     }
 
-    public List<Sport> getAllSportsFromUser(String username) {
+    /*public List<Sport> getAllSportsFromUser(String username) {
         return sportRepository.findSportsByUsersUsername(username);
-    }
+    }*/
 
-    public Set<Sport> getSports(Set<String> dtos) {
+    public Set<Sport> getSports(Set<Long> dtos) {
         Set<Sport> entities = new HashSet<>();
         if (dtos != null) {
             dtos.forEach((dto) -> entities.add(sportRepository.findById(dto).get()));
@@ -33,11 +33,15 @@ public class SportService {
         return entities;
     }
 
-    public Optional<Sport> findBySportName(String username) {
-        return sportRepository.findById(username);
+    /*public Optional<Sport> findBySportName(String sportName) {
+        return sportRepository.findBySportName(sportName);
     }
 
     public List<Sport> getAllSports() {
-        return sportRepository.findAll();}
+        return sportRepository.findAll();}*/
+
+    public Optional<Sport> findById(Long id) {
+        return sportRepository.findById(id);
+    }
 
 }

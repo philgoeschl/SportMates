@@ -7,13 +7,13 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 @RepositoryRestResource()
-public interface EventRepository extends PagingAndSortingRepository<Event,String> {
+public interface EventRepository extends PagingAndSortingRepository<Event,Long> {
 
 
-    public List<Event> findByEventTitle(@Param("eventTitle") String eventTitle);
+    //public List<Event> findByEventTitle(@Param("eventTitle") String eventTitle);
 
     public List<Event> findAll();
 
-    public List<Event> findEventByUsersUsername(@Param("username") String username);
+    //public List<Event> findEventByUsersUsername(@Param("username") String username);
 
 }
