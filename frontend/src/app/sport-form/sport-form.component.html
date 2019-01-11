@@ -1,0 +1,44 @@
+<form [formGroup]="sportForm" (ngSubmit)="saveSport()">
+
+  <h1>Create new Sport</h1>
+
+
+  <div class="col">
+    <div class="form-group">
+      <label for="sportName">Sport:</label>
+      <input id="sportName" type="text" name="sportName" formControlName="sportName" class="form-control"/>
+    </div>
+  </div>
+  <div class="col">
+    <label for="sportDescription">Description:</label>
+    <input id="sportDescription" type="text" name="sportDescription" formControlName="sportDescription"
+           class="form-control"/>
+  </div>
+  <br>
+
+
+  <div class="col">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="team" id="team" formControlName="team" [value]="true">
+      <label class="form-check-label" for="team">
+        Team sport
+      </label>
+    </div>
+  </div>
+
+  <div *ngIf="sportForm.controls.team.value === true">
+    <div class="col">
+      <div class="form-group">
+        <label for="teamSize">Team size:</label>
+        <input id="teamSize" type="text" name="teamSize" formControlName="teamSize" class="form-control"/>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col">
+    <button type="submit" class="btn btn-primary" [disabled]="sportForm.invalid">
+      Save
+    </button>
+  </div>
+</form>
