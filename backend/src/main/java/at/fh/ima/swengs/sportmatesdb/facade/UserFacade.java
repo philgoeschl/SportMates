@@ -48,8 +48,8 @@ public class UserFacade {
         entity.setUserLocation(dto.getUserLocation());
         entity.seteMail(dto.geteMail());
         entity.setSports(sportService.getSports(dto.getSports()));
-        entity.setEvents(eventService.getEvents(dto.getEvents()));
-        entity.setManagedEvents(eventService.getEvents(dto.getManagedEvents()));
+        //entity.setEvents(eventService.getEvents(dto.getEvents()));
+        //entity.setManagedEvents(eventService.getEvents(dto.getManagedEvents()));
     }
 
     private void mapEntityToDto(User entity, UserDTO dto) {

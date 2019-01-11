@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @SuppressWarnings("Duplicates")
 
 @Service()
@@ -21,15 +22,16 @@ import java.util.stream.Collectors;
 public class EventFacade {
 
     @Autowired
+    private EventService eventService;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
     private SportService sportService;
 
-    @Autowired
-    private EventService eventService;
 
-    private void mapDtoToEntity(EventDTO dto, Event entity) {
+    void mapDtoToEntity(EventDTO dto, Event entity) {
         entity.setEventDateTime(dto.getEventDateTime());
         entity.setEventDescription(dto.getEventDescription());
         entity.setEventImage(dto.getEventImage());
@@ -42,7 +44,7 @@ public class EventFacade {
         entity.setEventZIP(dto.getEventZIP());
 
         Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
-        if(((Optional) eventManagerOptional).isPresent()) {
+        if (((Optional) eventManagerOptional).isPresent()) {
             entity.setEventManager(eventManagerOptional.get());
         }
 
@@ -53,6 +55,7 @@ public class EventFacade {
 
     private void mapEntityToDto(Event entity, EventDTO dto) {
 
+        dto.setId(entity.getId());
         dto.setEventDateTime(entity.getEventDateTime());
         dto.setEventDescription(entity.getEventDescription());
         dto.setEventImage(entity.getEventImage());
@@ -70,6 +73,14 @@ public class EventFacade {
         dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
     }
 
+    public EventDTO update(Long id, EventDTO dto) {
+        Event entity = eventService.findById(id).get();
+        mapDtoToEntity(dto, entity);
+        mapEntityToDto(eventService.save(entity), dto);
+        return dto;
+
+    }
+
     public EventDTO create(EventDTO dto) {
         Event entity = new Event();
         mapDtoToEntity(dto, entity);
@@ -77,14 +88,20 @@ public class EventFacade {
         return dto;
     }
 
+    public EventDTO getById(Long id) {
+        Event entity = eventService.findById(id).get();
+        EventDTO dto = new EventDTO();
+        mapEntityToDto(entity, dto);
+        return dto;
+    }
 
-
+/*
     public List<EventDTO> getAllEventsFromUser(String eventManagerName) {
         List<EventDTO> events = new ArrayList<EventDTO>();
 
         eventService.getAllEventsFromUser(eventManagerName).forEach(entity -> {
             EventDTO dto = new EventDTO();
-            mapEntityToDto(entity,dto);
+            mapEntityToDto(entity, dto);
             events.add(dto);
         });
 
@@ -96,25 +113,12 @@ public class EventFacade {
 
         eventService.getAll().forEach(entity -> {
             EventDTO dto = new EventDTO();
-            mapEntityToDto(entity,dto);
+            mapEntityToDto(entity, dto);
             events.add(dto);
         });
 
         return events;
-    }
+    }*/
 
-    public EventDTO getEventByID(String eventID) {
-        Event entity = eventService.findById(eventID).get();
-        EventDTO dto = new EventDTO();
-        mapEntityToDto(entity, dto);
-        return dto;
-    }
 
-    public EventDTO update(String eventID, EventDTO dto) {
-        Event entity  = eventService.findById(eventID).get();
-        mapDtoToEntity(dto, entity);
-        mapEntityToDto(eventService.save(entity), dto);
-        return dto;
-
-    }
 }
