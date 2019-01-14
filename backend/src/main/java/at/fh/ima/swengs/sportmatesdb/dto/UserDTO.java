@@ -24,16 +24,16 @@ public class UserDTO {
     private String userLocation;
 
 
-    private Set<String> sports;
-    private Set<String> events;
-    private Set<String> managedEvents;
+    private Set<Long> sports;
+    private Set<Long> events;
+    private Set<Long> managedEvents;
 
 
-    public Boolean getAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(Boolean admin) {
+    public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
 
@@ -93,22 +93,6 @@ public class UserDTO {
         this.userLocation = userLocation;
     }
 
-    public Set<String> getSports() {
-        return sports;
-    }
-
-    public void setSports(Set<String> sports) {
-        this.sports = sports;
-    }
-
-    public Set<String> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Set<String> events) {
-        this.events = events;
-    }
-
     public String geteMail() {
         return eMail;
     }
@@ -117,11 +101,27 @@ public class UserDTO {
         this.eMail = eMail;
     }
 
-    public Set<String> getManagedEvents() {
+    public Set<Long> getSports() {
+        return sports;
+    }
+
+    public void setSports(Set<Long> sports) {
+        this.sports = sports;
+    }
+
+    public Set<Long> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Long> events) {
+        this.events = events;
+    }
+
+    public Set<Long> getManagedEvents() {
         return managedEvents;
     }
 
-    public void setManagedEvents(Set<String> managedEvents) {
+    public void setManagedEvents(Set<Long> managedEvents) {
         this.managedEvents = managedEvents;
     }
 }

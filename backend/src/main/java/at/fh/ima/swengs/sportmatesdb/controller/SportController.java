@@ -14,14 +14,11 @@ public class SportController {
     @Autowired
     private SportFacade sportFacade;
 
-    @GetMapping("/sports/")
-    List<SportDTO> getAllSports() {
-        return sportFacade.getAllSports();
-    }
 
-    @GetMapping("/sports/{sportname}")
-    SportDTO getById(@PathVariable String sportName) {
-        return sportFacade.getByUsername(sportName);
+
+    @GetMapping("/sports/{id}")
+    SportDTO getById(@PathVariable Long id) {
+        return sportFacade.getById(id);
     }
 
     @PostMapping("/sports")
@@ -29,9 +26,9 @@ public class SportController {
         return sportFacade.create(dto);
     }
 
-    @PutMapping("/sports/{sportname}")
-    SportDTO update(@RequestBody @Valid SportDTO dto, @PathVariable String sportName) {
-        return sportFacade.update(sportName, dto);
+    @PutMapping("/sports/{id}")
+    SportDTO update(@RequestBody @Valid SportDTO dto, @PathVariable Long id) {
+        return sportFacade.update(id, dto);
     }
 
 }

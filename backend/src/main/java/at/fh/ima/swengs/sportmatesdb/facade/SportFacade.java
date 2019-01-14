@@ -37,7 +37,7 @@ public class SportFacade {
         entity.setTeam(dto.isTeam());
         entity.setTeamSize(dto.getTeamSize());
         entity.setSportPicture(dto.getSportPicture());
-        entity.setSportUsers(userService.getUsersByUsername(dto.getSportUsers()));
+        //entity.setUsers(userService.getUsers());
         //entity.setEvents(eventService.getEvents(dto.getEvents()));
 
 
@@ -50,12 +50,12 @@ public class SportFacade {
         dto.setTeam(entity.isTeam());
         dto.setTeamSize(entity.getTeamSize());
         dto.setSportPicture(entity.getSportPicture());
-        dto.setSportUsers(entity.getSportUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
-        dto.setEvents(entity.getEvents().stream().map(e -> e.getEventTitle()).collect(Collectors.toSet()));
+        //dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
+        //dto.setEvents(entity.getEvents().stream().map(e -> e.getEventTitle()).collect(Collectors.toSet()));
     }
 
-    public SportDTO update(String usernameId, SportDTO dto) {
-        Sport entity = sportService.findBySportName(usernameId).get();
+    public SportDTO update(Long id, SportDTO dto) {
+        Sport entity = sportService.findById(id).get();
         mapDtoToEntity(dto, entity);
         mapEntityToDto(sportService.save(entity), dto);
         return dto;
@@ -70,23 +70,19 @@ public class SportFacade {
 
 
 
-    public SportDTO getByUsername(String username) {
+    /*public SportDTO getByUsername(String username) {
         Sport entity = sportService.findBySportName(username).get();
         SportDTO dto = new SportDTO();
         mapEntityToDto(entity, dto);
         return dto;
-    }
+    }*/
 
-    public List<SportDTO> getAllSports() {
-        List<SportDTO> roles = new ArrayList<>();
 
-        sportService.getAllSports().forEach(entity -> {
-            SportDTO dto = new SportDTO();
-            mapEntityToDto(entity,dto);
-            roles.add(dto);
-        });
-
-        return roles;
+    public SportDTO getById(Long id) {
+        Sport entity = sportService.findById(id).get();
+        SportDTO dto = new SportDTO();
+        mapEntityToDto(entity, dto);
+        return dto;
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "username")
+        property = "id")
 public class User {
 
     @Id
