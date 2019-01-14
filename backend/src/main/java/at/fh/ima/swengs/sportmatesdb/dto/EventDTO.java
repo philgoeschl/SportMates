@@ -1,5 +1,6 @@
 package at.fh.ima.swengs.sportmatesdb.dto;
 
+import at.fh.ima.swengs.sportmatesdb.model.EventType;
 import at.fh.ima.swengs.sportmatesdb.model.Media;
 
 
@@ -11,7 +12,7 @@ public class EventDTO {
 
     private Long id;
     private String eventTitle;
-    private String eventType;
+    private EventType eventType;
     private String eventDescription;
     private String eventTown;
     private String eventManager;
@@ -34,11 +35,11 @@ public class EventDTO {
         this.id = id;
     }
 
-    public String getEventType() {
+    public EventType getEventType() {
         return eventType;
     }
 
-    public void setEventType(String eventType) {
+    public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
 

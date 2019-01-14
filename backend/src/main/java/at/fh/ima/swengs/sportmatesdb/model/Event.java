@@ -17,14 +17,17 @@ public class Event {
     private Long id;
 
     private String eventTitle;
-    private String eventType;
+
+    @Enumerated(EnumType.STRING)
+    private EventType eventType;
+
     private String eventDescription;
     private String eventTown;
     private int eventZIP;
     private String eventStreet;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date eventDateTime;
 
 
@@ -91,11 +94,11 @@ public class Event {
         this.eventTitle = eventTitle;
     }
 
-    public String getEventType() {
+    public EventType getEventType() {
         return eventType;
     }
 
-    public void setEventType(String eventType) {
+    public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
 

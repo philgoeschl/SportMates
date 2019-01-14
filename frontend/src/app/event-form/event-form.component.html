@@ -17,15 +17,31 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventType">Type:</label>
-        <input id="eventType" type="text" name="eventType" formControlName="eventType" class="form-control"/>
-      </div>
+  <div class="col">
+    <label>Type</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="eventType" id="radio1" formControlName="eventType"
+             value="TRAINING">
+      <label class="form-check-label" for="radio1">
+        Training
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="eventType" id="radio2" formControlName="eventType"
+             value="COMPETITION">
+      <label class="form-check-label" for="radio2">
+        Competition
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="eventType" id="radio3" formControlName="eventType"
+             value="JUSTFORFUN">
+      <label class="form-check-label" for="radio3">
+        Just for fun
+      </label>
     </div>
   </div>
+
 
   <div class="row">
     <div class="col">
@@ -56,13 +72,13 @@
 
   <div class="row">
     <div class="col">
-      <label for="eventDate">Date:</label>
-      <input id="eventDate" type="text" bsDatepicker name="eventDate" formControlName="eventDate"
+      <label for="eventDateTime">Date:</label>
+      <input id="eventDateTime" type="text" bsDatepicker name="eventDateTime" formControlName="eventDateTime"
              class="form-control"/>
     </div>
   </div>
 
-  
+
   <div class="btn-group">
     <button type="submit" class="btn btn-primary">
       Save

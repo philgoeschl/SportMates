@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {EventService} from '../services/event.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-event-form',
@@ -21,13 +21,13 @@ export class EventFormComponent implements OnInit {
 
     this.eventForm = new FormGroup({
       'id': new FormControl(),
-      'eventTitle': new FormControl(),
-      'eventType': new FormControl(),
+      'eventTitle': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'eventType': new FormControl('', [Validators.required, Validators.required]),
       'eventDescription': new FormControl(),
-      'eventTown': new FormControl(),
+      'eventTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'eventZIP': new FormControl(),
       'eventStreet': new FormControl(),
-      'eventDate': new FormControl(),
+      'eventDateTime': new FormControl(),
       'eventOrganizer': new FormControl(),
       'eventImage': new FormControl([]),
 
