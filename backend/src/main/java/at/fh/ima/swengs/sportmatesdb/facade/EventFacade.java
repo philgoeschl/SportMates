@@ -44,10 +44,10 @@ public class EventFacade {
         /*Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
         if (((Optional) eventManagerOptional).isPresent()) {
             entity.setEventManager(eventManagerOptional.get());
-        }*/
+        }
 
-        entity.setSport(sportService.findBySportName(dto.getSport()).get());*/
-        entity.setUsers(userService.getUsersByUsername(dto.getUsers()));
+        entity.setSport(sportService.findBySportName(dto.getSport()).get());
+        entity.setUsers(userService.getUsersByUsername(dto.getUsers()));*/
 
     }
 

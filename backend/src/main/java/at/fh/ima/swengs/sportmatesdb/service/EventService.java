@@ -21,26 +21,26 @@ public class EventService {
         return eventRepository.save(entity);
     }
 
-<<<<<<< HEAD
+
     public Optional<Event> findById(Long id) {
         return eventRepository.findById(id);
     }
 
+
+
     public List<Event> getAll() {
-=======
-    /*public List<Event> getAll() {
->>>>>>> master
+
         return eventRepository.findAll();
-    }*/
+    }
 
     /*public List<Event> getAllEventsFromUser(String username) {
-<<<<<<< HEAD
+
         return eventRepository.findByUsername(username);
     }
-=======
+
         return eventRepository.findEventByUsersUsername(username);
     }*/
->>>>>>> master
+
 
     public Set<Event> getEvents(Set<Long> dtos) {
         Set<Event> entities = new HashSet<>();
@@ -49,16 +49,6 @@ public class EventService {
         }
         return entities;
     }
-
-<<<<<<< HEAD
-    public Optional<Event> findById(Long id) {
-        return eventRepository.findById(id);
-    }*/
-=======
-    public Optional<Event> findById(Long eventID) {
-        return eventRepository.findById(eventID);
-    }
->>>>>>> master
 
 
 }
