@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 public class EventController {
@@ -14,21 +13,18 @@ public class EventController {
     @Autowired
     private EventFacade eventFacade;
 
-
-    @GetMapping("/events/{id}")
-    EventDTO getByEventTitle(@PathVariable Long eventID) {
-        return eventFacade.getEventByID(eventID);
+    @GetMapping("/dto/events/{id}")
+    EventDTO getById(@PathVariable Long id) {
+        return eventFacade.getById(id);
     }
 
-
-    @PostMapping("/events")
+    @PostMapping("/dto/events")
     EventDTO create(@RequestBody @Valid EventDTO dto) {
         return eventFacade.create(dto);
     }
 
-    @PutMapping("/events/{id}")
+    @PutMapping("/dto/events/{id}")
     EventDTO update(@RequestBody @Valid EventDTO dto, @PathVariable Long id) {
         return eventFacade.update(id, dto);
     }
-
 }

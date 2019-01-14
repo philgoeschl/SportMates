@@ -1,6 +1,7 @@
 package at.fh.ima.swengs.sportmatesdb.model;
 
 import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.*;
@@ -8,23 +9,16 @@ import java.util.*;
 @Entity
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
+<<<<<<< HEAD
+        property = "id") // changed from eventTitle to id
+=======
         property = "id")
+>>>>>>> master
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @ManyToOne
-    @JsonIgnoreProperties("sports")
-    private Sport sport;
-
-    @ManyToMany
-    @JsonIgnoreProperties("events")
-    private Set<User> users;
-
-    @ManyToOne
-    private User eventManager;
+    private Long id;
 
     private String eventTitle;
     private String eventType;
@@ -39,7 +33,24 @@ public class Event {
 
 
     private String eventOrganizer;
-    private String eventImage;
+
+
+    @ManyToMany
+    @JoinTable(name="events_eventImage",
+            joinColumns = @JoinColumn(name="event_id"),
+            inverseJoinColumns = @JoinColumn(name="eventImage_id"))
+    private Set<Media> eventImage = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnore
+    private Sport sport;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<User> users;
+
+    @ManyToOne
+    private User eventManager;
 
 
     @Version
@@ -49,7 +60,11 @@ public class Event {
     public Event() {
     }
 
-    public Event(Sport sport, Set<User> users, User eventManager, String eventTitle, String eventType, String eventDescription, String eventTown, int eventZIP, String eventStreet, Date eventDateTime, String eventOrganizer, String eventImage) {
+    public Event(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
+
+    /*public Event(Sport sport, Set<User> users, User eventManager, String eventTitle, String eventType, String eventDescription, String eventTown, int eventZIP, String eventStreet, Date eventDateTime, String eventOrganizer, String eventImage) {
         this.sport = sport;
         this.users = users;
         this.eventManager = eventManager;
@@ -62,16 +77,23 @@ public class Event {
         this.eventDateTime = eventDateTime;
         this.eventOrganizer = eventOrganizer;
         this.eventImage = eventImage;
-    }
+    }*/
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
 
     public String getEventType() {
         return eventType;
@@ -121,7 +143,6 @@ public class Event {
         this.eventDateTime = eventDateTime;
     }
 
-
     public String getEventOrganizer() {
         return eventOrganizer;
     }
@@ -130,8 +151,12 @@ public class Event {
         this.eventOrganizer = eventOrganizer;
     }
 
-    public String getEventImage() {
+    public Set<Media> getEventImage() {
         return eventImage;
+    }
+
+    public void setEventImage(Set<Media> eventImage) {
+        this.eventImage = eventImage;
     }
 
     public Sport getSport() {
@@ -150,16 +175,12 @@ public class Event {
         this.users = users;
     }
 
-    public String getEventTitle() {
-        return eventTitle;
+    public User getEventManager() {
+        return eventManager;
     }
 
-    public void setEventTitle(String eventTitle) {
-        this.eventTitle = eventTitle;
-    }
-
-    public void setEventImage(String eventImage) {
-        this.eventImage = eventImage;
+    public void setEventManager(User eventManager) {
+        this.eventManager = eventManager;
     }
 
     public long getVersion() {
@@ -170,14 +191,28 @@ public class Event {
         this.version = version;
     }
 
-    public void setEventManager(User eventManager) {
-        this.eventManager = eventManager;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return id == event.id;
     }
 
-    public User getEventManager() {
-        return eventManager;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", eventTitle='" + eventTitle + '\'' +
+                '}';
+    }
+
+    /*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -202,5 +237,5 @@ public class Event {
     @Override
     public int hashCode() {
         return Objects.hash(id, sport, users, eventManager, eventTitle, eventType, eventDescription, eventTown, eventZIP, eventStreet, eventDateTime, eventOrganizer, eventImage, version);
-    }
+    }*/
 }
