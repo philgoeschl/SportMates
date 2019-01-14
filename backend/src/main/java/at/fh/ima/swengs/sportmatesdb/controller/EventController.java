@@ -15,27 +15,20 @@ public class EventController {
     private EventFacade eventFacade;
 
 
-    @GetMapping("/events/{eventID}")
-    EventDTO getByEventTitle(@PathVariable String eventID) {
+    @GetMapping("/events/{id}")
+    EventDTO getByEventTitle(@PathVariable Long eventID) {
         return eventFacade.getEventByID(eventID);
     }
 
-    @GetMapping("/events/{eventManager}")
-    List<EventDTO> getAllManagedEvents(@PathVariable String eventManager) {
-        return eventFacade.getAllEventsFromUser(eventManager);
-    }
-
-    @GetMapping("/events/")
-    List<EventDTO> getAllEvents() { return eventFacade.getAllEvents(); }
 
     @PostMapping("/events")
     EventDTO create(@RequestBody @Valid EventDTO dto) {
         return eventFacade.create(dto);
     }
 
-    @PutMapping("/events/{eventID}")
-    EventDTO update(@RequestBody @Valid EventDTO dto, @PathVariable String eventID) {
-        return eventFacade.update(eventID, dto);
+    @PutMapping("/events/{id}")
+    EventDTO update(@RequestBody @Valid EventDTO dto, @PathVariable Long id) {
+        return eventFacade.update(id, dto);
     }
 
 }

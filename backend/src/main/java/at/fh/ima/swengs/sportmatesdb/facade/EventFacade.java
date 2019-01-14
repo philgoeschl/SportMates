@@ -41,13 +41,13 @@ public class EventFacade {
         entity.setEventTown(dto.getEventTown());
         entity.setEventZIP(dto.getEventZIP());
 
-        Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
+        /*Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
         if(((Optional) eventManagerOptional).isPresent()) {
             entity.setEventManager(eventManagerOptional.get());
-        }
+        }*/
 
-        entity.setSport(sportService.findBySportName(dto.getSport()).get());
-        entity.setUsers(userService.getUsersByUsername(dto.getUsers()));
+        //entity.setSport(sportService.findBySportName(dto.getSport()).get());
+        //entity.setUsers(userService.getUsersByUsername(dto.getUsers()));
 
     }
 
@@ -65,9 +65,9 @@ public class EventFacade {
         dto.setEventZIP(entity.getEventZIP());
 
 
-        dto.setEventManager(entity.getEventManager().getUsername());
-        dto.setSport(entity.getSport().getSportName());
-        dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
+        //dto.setEventManager(entity.getEventManager().getUsername());
+        //dto.setSport(entity.getSport().getSportName());
+        //dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
     }
 
     public EventDTO create(EventDTO dto) {
@@ -79,38 +79,14 @@ public class EventFacade {
 
 
 
-    public List<EventDTO> getAllEventsFromUser(String eventManagerName) {
-        List<EventDTO> events = new ArrayList<EventDTO>();
-
-        eventService.getAllEventsFromUser(eventManagerName).forEach(entity -> {
-            EventDTO dto = new EventDTO();
-            mapEntityToDto(entity,dto);
-            events.add(dto);
-        });
-
-        return events;
-    }
-
-    public List<EventDTO> getAllEvents() {
-        List<EventDTO> events = new ArrayList<EventDTO>();
-
-        eventService.getAll().forEach(entity -> {
-            EventDTO dto = new EventDTO();
-            mapEntityToDto(entity,dto);
-            events.add(dto);
-        });
-
-        return events;
-    }
-
-    public EventDTO getEventByID(String eventID) {
+    public EventDTO getEventByID(Long eventID) {
         Event entity = eventService.findById(eventID).get();
         EventDTO dto = new EventDTO();
         mapEntityToDto(entity, dto);
         return dto;
     }
 
-    public EventDTO update(String eventID, EventDTO dto) {
+    public EventDTO update(Long eventID, EventDTO dto) {
         Event entity  = eventService.findById(eventID).get();
         mapDtoToEntity(dto, entity);
         mapEntityToDto(eventService.save(entity), dto);

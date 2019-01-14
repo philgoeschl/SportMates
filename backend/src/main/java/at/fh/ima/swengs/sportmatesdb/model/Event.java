@@ -8,7 +8,7 @@ import java.util.*;
 @Entity
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "eventTitle")
+        property = "id")
 public class Event {
 
     @Id

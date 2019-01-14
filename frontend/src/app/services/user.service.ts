@@ -1,24 +1,31 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {catchError, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {config, Subject} from 'rxjs';
+import {config, of, Subject} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {User} from "../api/user";
-import {Actor} from "../api/actor";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  isLoggedIn: boolean;
+  isLoggedIn = false;
   loggedInChange: Subject<boolean> = new Subject<boolean>();
+  jwtHelperService: JwtHelperService;
 
   accessTokenLocalStorageKey = 'access_token';
 
   constructor(private http: HttpClient, private router: Router) {
-    this.isLoggedIn = !!localStorage.getItem(this.accessTokenLocalStorageKey);
+    this.jwtHelperService = new JwtHelperService();
+    const token = localStorage.getItem(this.accessTokenLocalStorageKey);
+    if (token) {
+      console.log('Token expiration date: '
+        + this.jwtHelperService.getTokenExpirationDate(token));
+      this.isLoggedIn = !this.jwtHelperService.isTokenExpired(token);
+    }
     this.loggedInChange.subscribe((value) => {
       this.isLoggedIn = value;
     });
@@ -32,8 +39,7 @@ export class UserService {
     }).pipe(map((res: any) => {
       const token = res.headers.get('Authorization').replace(/^Bearer /, '');
       localStorage.setItem(this.accessTokenLocalStorageKey, token);
-      const helper = new JwtHelperService();
-      console.log(helper.decodeToken(token));
+      console.log(this.jwtHelperService.decodeToken(token));
       this.loggedInChange.next(true);
       this.router.navigate(['/user-list']);
       return res;
@@ -46,34 +52,35 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
-  getAll() {
-    return this.http.get('/api/users');
-  }
 
   getById(id: string) {
-    return this.http.get('/api/users/' + id);
+    return this.http.get('/api/dto/users/' + id).pipe(map((res: any) => {
+      if (res.dayOfBirth) {
+        res.dayOfBirth = new Date(res.dayOfBirth);
+      }
+      return res;
+    }));
+  }
+
+  getAll() {
+    return this.http.get('/api/users').pipe(
+      map((response: any) => {
+        return response._embedded.users;
+      })
+    );
+  }
+
+  delete(user) {
+    return this.http.delete('/api/users/' + user.id);
   }
 
   update(user: User) {
-    return this.http.put('/api/users/' + user.id, user);
+    return this.http.put('/api/dto/users/' + user.id, user);
   }
 
   create(user: User) {
-    return this.http.post('/api/users', user);
+    return this.http.post('/api/dto/users', user);
   }
-
-  getRole() {
-    const helper = new JwtHelperService();
-    let token = localStorage.getItem(this.accessTokenLocalStorageKey);
-    token = helper.decodeToken(token);
-    // console.log(token)
-    if (token['authorities'].includes('ROLE_ADMIN')) {
-      return true;
-    }
-
-    return false;
-  }
-
 
 
 

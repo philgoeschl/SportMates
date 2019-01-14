@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "sportname")
+        property = "id")
 public class Sport {
 
     @Id
@@ -29,7 +29,7 @@ public class Sport {
 
     @ManyToMany
     @JsonIgnoreProperties("sports")
-    private Set<User> users;
+    private List<User> users;
 
     @OneToMany(mappedBy = "sport")
     private Set<Event> events;
@@ -49,13 +49,13 @@ public class Sport {
         this.sportPicture = sportPicture;
     }
 
-    public Sport(String sportName, String sportDescription, boolean team, int teamSize, String sportPicture, Set<User> sportUsers, Set<Event> events) {
+    public Sport(String sportName, String sportDescription, boolean team, int teamSize, String sportPicture, List<User> users, Set<Event> events) {
         this.sportName = sportName;
         this.sportDescription = sportDescription;
         this.team = team;
         this.teamSize = teamSize;
         this.sportPicture = sportPicture;
-        this.users = sportUsers;
+        this.users = users;
         this.events = events;
     }
 
@@ -115,12 +115,12 @@ public class Sport {
         this.version = version;
     }
 
-    public Set<User> getSportUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setSportUsers(Set<User> sportUsers) {
-        this.users = sportUsers;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public Set<Event> getEvents() {

@@ -21,15 +21,15 @@ public class EventService {
         return eventRepository.save(entity);
     }
 
-    public List<Event> getAll() {
+    /*public List<Event> getAll() {
         return eventRepository.findAll();
-    }
+    }*/
 
-    public List<Event> getAllEventsFromUser(String username) {
+    /*public List<Event> getAllEventsFromUser(String username) {
         return eventRepository.findEventByUsersUsername(username);
-    }
+    }*/
 
-    public Set<Event> getEvents(Set<String> dtos) {
+    public Set<Event> getEvents(Set<Long> dtos) {
         Set<Event> entities = new HashSet<>();
         if (dtos != null) {
             dtos.forEach((dto) -> entities.add(eventRepository.findById(dto).get()));
@@ -37,7 +37,7 @@ public class EventService {
         return entities;
     }
 
-    public Optional<Event> findById(String eventID) {
+    public Optional<Event> findById(Long eventID) {
         return eventRepository.findById(eventID);
     }
 
