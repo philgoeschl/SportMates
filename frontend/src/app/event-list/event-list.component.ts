@@ -36,4 +36,11 @@ export class EventListComponent implements OnInit {
   createEvent() {
     this.router.navigate(['/event-form']);
   }
+
+  filterEvents(filterValue){
+    if(filterValue){
+      return true;
+    }
+
+  }
 }

@@ -29,7 +29,7 @@ export class EventFormComponent implements OnInit {
       'eventStreet': new FormControl(),
       'eventDate': new FormControl(),
       'eventOrganizer': new FormControl(),
-      'eventImage': new FormControl(),
+      'eventImage': new FormControl([]),
 
 
 

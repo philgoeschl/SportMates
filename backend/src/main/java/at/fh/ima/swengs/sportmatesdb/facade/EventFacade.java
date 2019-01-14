@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("Duplicates")
 
 @Service()
 @Transactional
@@ -27,28 +26,27 @@ public class EventFacade {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SportService sportService;
+    /*@Autowired
+    private SportService sportService;*/
 
 
     void mapDtoToEntity(EventDTO dto, Event entity) {
         entity.setEventDateTime(dto.getEventDateTime());
         entity.setEventDescription(dto.getEventDescription());
-        entity.setEventImage(dto.getEventImage());
         entity.setEventTitle(dto.getEventTitle());
         entity.setEventOrganizer(dto.getEventOrganizer());
-        entity.setEventImage(dto.getEventImage());
         entity.setEventStreet(dto.getEventStreet());
         entity.setEventType(dto.getEventType());
         entity.setEventTown(dto.getEventTown());
         entity.setEventZIP(dto.getEventZIP());
+        entity.setEventImage(dto.getEventImage());
 
-        Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
+        /*Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
         if (((Optional) eventManagerOptional).isPresent()) {
             entity.setEventManager(eventManagerOptional.get());
         }
 
-        entity.setSport(sportService.findBySportName(dto.getSport()).get());
+        entity.setSport(sportService.findBySportName(dto.getSport()).get());*/
         entity.setUsers(userService.getUsersByUsername(dto.getUsers()));
 
     }
@@ -58,18 +56,16 @@ public class EventFacade {
         dto.setId(entity.getId());
         dto.setEventDateTime(entity.getEventDateTime());
         dto.setEventDescription(entity.getEventDescription());
-        dto.setEventImage(entity.getEventImage());
         dto.setEventTitle(entity.getEventTitle());
         dto.setEventOrganizer(entity.getEventOrganizer());
-        dto.setEventImage(entity.getEventImage());
         dto.setEventStreet(entity.getEventStreet());
         dto.setEventType(entity.getEventType());
         dto.setEventTown(entity.getEventTown());
         dto.setEventZIP(entity.getEventZIP());
+        dto.setEventImage(entity.getEventImage());
 
-
-        dto.setEventManager(entity.getEventManager().getUsername());
-        dto.setSport(entity.getSport().getSportName());
+        /*dto.setEventManager(entity.getEventManager().getUsername());
+        dto.setSport(entity.getSport().getSportName());*/
         dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
     }
 

@@ -8,7 +8,6 @@ export interface Event {
   eventStreet?: string;
   eventDate?: Date;
   eventOrganizer?: string;
-  eventImage?: string;
 
   users?: Array<string>;
   sports?: Array<string>;

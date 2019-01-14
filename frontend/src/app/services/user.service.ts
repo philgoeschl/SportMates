@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 import {config, Subject} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {User} from "../api/user";
-import {Actor} from "../api/actor";
 
 @Injectable({
   providedIn: 'root'

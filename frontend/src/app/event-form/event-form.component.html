@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <div class="form-group">
-        <label for="eventTitle">Event title:</label>
+        <label for="eventTitle">Title:</label>
         <input id="eventTitle" type="text" name="eventTitle" formControlName="eventTitle" class="form-control"/>
       </div>
     </div>
@@ -11,11 +11,58 @@
   <div class="row">
     <div class="col">
       <div class="form-group">
-
+        <label for="eventDescription">Description</label>
+        <input id="eventDescription" type="text" name="eventDescription" formControlName="eventDescription"
+               class="form-control"/>
       </div>
     </div>
   </div>
 
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="eventType">Type:</label>
+        <input id="eventType" type="text" name="eventType" formControlName="eventType" class="form-control"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="eventTown">Town:</label>
+        <input id="eventTown" type="text" name="eventTown" formControlName="eventTown" class="form-control"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="eventZIP">ZIP:</label>
+        <input id="eventZIP" type="text" name="eventZIP" formControlName="eventZIP" class="form-control"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="eventStreet">Street:</label>
+        <input id="eventStreet" type="text" name="eventStreet" formControlName="eventStreet" class="form-control"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="eventDate">Date:</label>
+      <input id="eventDate" type="text" bsDatepicker name="eventDate" formControlName="eventDate"
+             class="form-control"/>
+    </div>
+  </div>
+
+  
   <div class="btn-group">
     <button type="submit" class="btn btn-primary">
       Save

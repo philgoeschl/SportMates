@@ -1,5 +1,7 @@
 package at.fh.ima.swengs.sportmatesdb.dto;
 
+import at.fh.ima.swengs.sportmatesdb.model.Media;
+
 
 import java.util.Date;
 import java.util.Set;
@@ -17,10 +19,12 @@ public class EventDTO {
     private String eventStreet;
     private Date eventDateTime;
     private String eventOrganizer;
-    private String eventImage;
+    private Set<Media> eventImage;
 
     private String sport;
     private Set<String> users;
+
+
 
     public Long getId() {
         return id;
@@ -87,13 +91,6 @@ public class EventDTO {
         this.eventOrganizer = eventOrganizer;
     }
 
-    public String getEventImage() {
-        return eventImage;
-    }
-
-    public void setEventImage(String eventImage) {
-        this.eventImage = eventImage;
-    }
 
 
     public String getEventTitle() {
@@ -126,5 +123,13 @@ public class EventDTO {
 
     public void setEventManager(String eventManager) {
         this.eventManager = eventManager;
+    }
+
+    public Set<Media> getEventImage() {
+        return eventImage;
+    }
+
+    public void setEventImage(Set<Media> eventImage) {
+        this.eventImage = eventImage;
     }
 }
