@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Actor} from '../api/actor';
+
 
 import {Router} from '@angular/router';
 import {User} from "../api/user";
