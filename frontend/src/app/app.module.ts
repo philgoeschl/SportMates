@@ -17,6 +17,9 @@ import { EventFormComponent } from './event-form/event-form.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {SafePipe} from './safe.pipe';
 import {MediainputComponent} from './mediainput/mediainput.component';
+import { NgxSelectModule } from 'ngx-select-ex';
+
+
 export function tokenGetter(){
   return localStorage.getItem('access_token');
 }
@@ -40,6 +43,7 @@ export function tokenGetter(){
     FormsModule,
     FileUploadModule,
     ReactiveFormsModule,
+    NgxSelectModule,
     BsDatepickerModule.forRoot(),
     JwtModule.forRoot({
       config:{

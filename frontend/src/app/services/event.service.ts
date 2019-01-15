@@ -21,14 +21,14 @@ export class EventService {
   }
 
   getById(id: string) {
-    return this.http.get('/api/events/' + id).pipe(map((res: any) => {
+    return this.http.get('/api/dto/events/' + id).pipe(map((res: any) => {
       res.eventDateTime = new Date(res.eventDateTime);
       return res;
     }));
   }
 
   update(event: Event) {
-    return this.http.put('/api/events/' + event.id, event);
+    return this.http.put('/api/dto/events/' + event.id, event);
   }
 
   delete(event) {
@@ -36,6 +36,6 @@ export class EventService {
   }
 
   create(event: Event) {
-    return this.http.post('/api/events', event);
+    return this.http.post('/api/dto/events', event);
   }
 }

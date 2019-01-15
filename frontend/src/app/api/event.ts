@@ -9,8 +9,8 @@ export interface Event {
   eventDateTime?: Date;
   eventOrganizer?: string;
 
-
-  users?: Array<string>;
   sports?: Array<string>;
+  users?: Array<string>;
+
 
 }

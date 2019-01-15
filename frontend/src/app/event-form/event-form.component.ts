@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {EventService} from '../services/event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {SportService} from '../services/sport.service';
 
 @Component({
   selector: 'app-event-form',
@@ -13,9 +14,11 @@ export class EventFormComponent implements OnInit {
   eventForm;
   shouldNavigateToList: boolean;
   event: any;
+  sportOptions;
 
 
-  constructor(private eventService: EventService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private eventService: EventService, private route: ActivatedRoute,
+              private router: Router, private sportService: SportService) { } //
 
   ngOnInit() {
 
@@ -35,6 +38,7 @@ export class EventFormComponent implements OnInit {
       'eventDateTime': new FormControl(),
       'eventOrganizer': new FormControl(),
       'image': new FormControl([]),
+      'eventSport': new FormControl(),
 
 
 
@@ -58,6 +62,14 @@ export class EventFormComponent implements OnInit {
     if(event){
       this.eventForm.patchValue(event);
     }*/
+
+
+
+    this.sportService.getAll()
+    .subscribe((sports: any) => {
+    this.sportOptions = sports._embedded.sports;
+    });
+
 
   }
 
