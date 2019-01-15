@@ -1,5 +1,6 @@
 package at.fh.ima.swengs.sportmatesdb.dto;
 
+import at.fh.ima.swengs.sportmatesdb.model.EventType;
 import at.fh.ima.swengs.sportmatesdb.model.Media;
 
 
@@ -11,7 +12,7 @@ public class EventDTO {
 
     private Long id;
     private String eventTitle;
-    private String eventType;
+    private EventType eventType;
     private String eventDescription;
     private String eventTown;
     private String eventManager;
@@ -19,7 +20,7 @@ public class EventDTO {
     private String eventStreet;
     private Date eventDateTime;
     private String eventOrganizer;
-    private Set<Media> eventImage;
+    private Set<Media> image;
 
     private String sport;
     private Set<String> users;
@@ -34,11 +35,11 @@ public class EventDTO {
         this.id = id;
     }
 
-    public String getEventType() {
+    public EventType getEventType() {
         return eventType;
     }
 
-    public void setEventType(String eventType) {
+    public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
 
@@ -125,11 +126,11 @@ public class EventDTO {
         this.eventManager = eventManager;
     }
 
-    public Set<Media> getEventImage() {
-        return eventImage;
+    public Set<Media> getImage() {
+        return image;
     }
 
-    public void setEventImage(Set<Media> eventImage) {
-        this.eventImage = eventImage;
+    public void setImage(Set<Media> image) {
+        this.image = image;
     }
 }

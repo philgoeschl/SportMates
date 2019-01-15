@@ -2,7 +2,6 @@ package at.fh.ima.swengs.sportmatesdb.facade;
 
 import at.fh.ima.swengs.sportmatesdb.dto.EventDTO;
 import at.fh.ima.swengs.sportmatesdb.model.Event;
-import at.fh.ima.swengs.sportmatesdb.model.User;
 import at.fh.ima.swengs.sportmatesdb.service.EventService;
 import at.fh.ima.swengs.sportmatesdb.service.SportService;
 import at.fh.ima.swengs.sportmatesdb.service.UserService;
@@ -39,7 +38,7 @@ public class EventFacade {
         entity.setEventType(dto.getEventType());
         entity.setEventTown(dto.getEventTown());
         entity.setEventZIP(dto.getEventZIP());
-        entity.setEventImage(dto.getEventImage());
+        entity.setImage(dto.getImage());
 
         /*Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
         if (((Optional) eventManagerOptional).isPresent()) {
@@ -62,7 +61,7 @@ public class EventFacade {
         dto.setEventType(entity.getEventType());
         dto.setEventTown(entity.getEventTown());
         dto.setEventZIP(entity.getEventZIP());
-        dto.setEventImage(entity.getEventImage());
+        dto.setImage(entity.getImage());
 
         /*dto.setEventManager(entity.getEventManager().getUsername());
         dto.setSport(entity.getSport().getSportName());*/

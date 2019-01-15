@@ -1,7 +1,12 @@
-<input type="text" #box (keyup)="filterEvents(box.value);" value="" placeholder="filter">
+<input id="filterEvents" type="text" name="filterEvents" #box (keyup)="filterEvents(box.value);" value=""
+       placeholder="Filter Events">
 
-<div *ngFor="let event of events">
-  {{event.eventTitle}} <a [routerLink]="'/event-form/' + event.id">Edit</a> <button type="button" (click)="deleteEvent(event)">Delete</button>
+<div *ngFor="let event of eventArray">
+  {{event.eventTitle}}
+  {{event.eventTown}}
+  {{event.eventDateTime}}
+  <a [routerLink]="'/event-form/' + event.id">Edit</a>
+  <button type="button" (click)="deleteEvent(event)">Delete</button>
 </div>
 
 <button type="button" (click)="createEvent()">

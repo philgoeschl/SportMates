@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {EventService} from '../services/event.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {SportService} from '../services/sport.service';
 
 @Component({
   selector: 'app-event-form',
@@ -13,11 +14,18 @@ export class EventFormComponent implements OnInit {
   eventForm;
   shouldNavigateToList: boolean;
   event: any;
+  sportOptions;
 
 
-  constructor(private eventService: EventService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private eventService: EventService, private route: ActivatedRoute,
+              private router: Router, private sportService: SportService) { } //
 
   ngOnInit() {
+
+    /*
+    Resolver related code
+    const data = this.route.snapshot.data;
+     */
 
     this.eventForm = new FormGroup({
       'id': new FormControl(),
@@ -27,13 +35,18 @@ export class EventFormComponent implements OnInit {
       'eventTown': new FormControl(),
       'eventZIP': new FormControl(),
       'eventStreet': new FormControl(),
-      'eventDate': new FormControl(),
+      'eventDateTime': new FormControl(),
       'eventOrganizer': new FormControl(),
-      'eventImage': new FormControl([]),
+      'image': new FormControl([]),
+      'eventSport': new FormControl(),
+
 
 
 
     });
+
+
+
 
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -42,6 +55,21 @@ export class EventFormComponent implements OnInit {
           this.eventForm.patchValue(response);
         });
     }
+
+    /*
+    RESOLVER related code
+    const event = data.event;
+    if(event){
+      this.eventForm.patchValue(event);
+    }*/
+
+
+/* Get sports for eventSport
+    this.sportService.getAll()
+    .subscribe((sports: any) => {
+    this.sportOptions = sports._embedded.sports;
+    });
+*/
 
   }
 

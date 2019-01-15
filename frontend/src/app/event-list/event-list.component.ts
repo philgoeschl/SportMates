@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class EventListComponent implements OnInit {
 
   events: Array<Event>;
+  eventArray;
 
   constructor(private eventService: EventService, private router: Router) {
   }
@@ -20,6 +21,7 @@ export class EventListComponent implements OnInit {
     this.eventService.getAll()
       .subscribe((events: any) => {
         this.events = events;
+        this.eventArray = events;
       });
 
   }
@@ -39,7 +41,12 @@ export class EventListComponent implements OnInit {
 
   filterEvents(filterValue){
     if(filterValue){
-      return true;
+      this.eventArray = this.events.filter((event) => {
+        return event.eventTitle.toLowerCase().indexOf(filterValue.toLowerCase()) !== -1 ||
+          event.eventTown.toLowerCase().indexOf(filterValue.toLowerCase()) !== -1;
+      });
+    } else {
+      this.eventArray = this.events;
     }
 
   }

@@ -21,11 +21,14 @@ export class EventService {
   }
 
   getById(id: string) {
-    return this.http.get('/api/events/' + id);
+    return this.http.get('/api/dto/events/' + id).pipe(map((res: any) => {
+      res.eventDateTime = new Date(res.eventDateTime);
+      return res;
+    }));
   }
 
   update(event: Event) {
-    return this.http.put('/api/events/' + event.id, event);
+    return this.http.put('/api/dto/events/' + event.id, event);
   }
 
   delete(event) {
