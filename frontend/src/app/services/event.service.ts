@@ -21,7 +21,10 @@ export class EventService {
   }
 
   getById(id: string) {
-    return this.http.get('/api/events/' + id);
+    return this.http.get('/api/events/' + id).pipe(map((res: any) => {
+      res.eventDateTime = new Date(res.eventDateTime);
+      return res;
+    }));
   }
 
   update(event: Event) {

@@ -4,6 +4,7 @@
 <div *ngFor="let event of eventArray">
   {{event.eventTitle}}
   {{event.eventTown}}
+  {{event.eventDateTime}}
   <a [routerLink]="'/event-form/' + event.id">Edit</a>
   <button type="button" (click)="deleteEvent(event)">Delete</button>
 </div>
