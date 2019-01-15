@@ -19,6 +19,11 @@ export class EventFormComponent implements OnInit {
 
   ngOnInit() {
 
+    /*
+    Resolver related code
+    const data = this.route.snapshot.data;
+     */
+
     this.eventForm = new FormGroup({
       'id': new FormControl(),
       'eventTitle': new FormControl(),
@@ -33,7 +38,11 @@ export class EventFormComponent implements OnInit {
 
 
 
+
     });
+
+
+
 
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -42,6 +51,13 @@ export class EventFormComponent implements OnInit {
           this.eventForm.patchValue(response);
         });
     }
+
+    /*
+    RESOLVER related code
+    const event = data.event;
+    if(event){
+      this.eventForm.patchValue(event);
+    }*/
 
   }
 

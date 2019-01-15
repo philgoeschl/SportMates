@@ -7,7 +7,7 @@ import {UserFormComponent} from "./user-form/user-form.component";
 import {RegisterComponent} from "./register/register.component";
 import {EventListComponent} from './event-list/event-list.component';
 import {EventFormComponent} from './event-form/event-form.component';
-import {UserListResolver} from "./resolver/userList.resolver";
+import {EventResolver} from './resolver/events.resolver';
 
 
 const routes: Routes = [
