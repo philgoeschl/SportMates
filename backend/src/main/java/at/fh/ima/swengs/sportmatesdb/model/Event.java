@@ -35,10 +35,10 @@ public class Event {
 
 
     @ManyToMany
-    @JoinTable(name="events_eventImage",
-            joinColumns = @JoinColumn(name="event_id"),
-            inverseJoinColumns = @JoinColumn(name="eventImage_id"))
-    private Set<Media> eventImage = new HashSet<>();
+    @JoinTable(name = "events_image",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "image_id"))
+    private Set<Media> image = new HashSet<>();
 
     @ManyToOne
     @JsonIgnore
@@ -150,12 +150,12 @@ public class Event {
         this.eventOrganizer = eventOrganizer;
     }
 
-    public Set<Media> getEventImage() {
-        return eventImage;
+    public Set<Media> getImage() {
+        return image;
     }
 
-    public void setEventImage(Set<Media> eventImage) {
-        this.eventImage = eventImage;
+    public void setImage(Set<Media> image) {
+        this.image = image;
     }
 
     public Sport getSport() {

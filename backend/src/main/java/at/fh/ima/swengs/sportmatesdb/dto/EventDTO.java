@@ -20,7 +20,7 @@ public class EventDTO {
     private String eventStreet;
     private Date eventDateTime;
     private String eventOrganizer;
-    private Set<Media> eventImage;
+    private Set<Media> image;
 
     private String sport;
     private Set<String> users;
@@ -126,11 +126,11 @@ public class EventDTO {
         this.eventManager = eventManager;
     }
 
-    public Set<Media> getEventImage() {
-        return eventImage;
+    public Set<Media> getImage() {
+        return image;
     }
 
-    public void setEventImage(Set<Media> eventImage) {
-        this.eventImage = eventImage;
+    public void setImage(Set<Media> image) {
+        this.image = image;
     }
 }

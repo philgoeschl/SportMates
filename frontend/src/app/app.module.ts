@@ -16,6 +16,7 @@ import { EventListComponent } from './event-list/event-list.component';
 import { EventFormComponent } from './event-form/event-form.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {SafePipe} from './safe.pipe';
+import {MediainputComponent} from './mediainput/mediainput.component';
 export function tokenGetter(){
   return localStorage.getItem('access_token');
 }
@@ -29,6 +30,7 @@ export function tokenGetter(){
     RegisterComponent,
     EventListComponent,
     EventFormComponent,
+    MediainputComponent,
     SafePipe
   ],
   imports: [
