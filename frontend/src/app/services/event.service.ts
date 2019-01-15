@@ -36,6 +36,6 @@ export class EventService {
   }
 
   create(event: Event) {
-    return this.http.post('/api/dto/events', event);
+    return this.http.post('/api/events', event);
   }
 }

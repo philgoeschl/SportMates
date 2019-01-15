@@ -64,12 +64,12 @@ export class EventFormComponent implements OnInit {
     }*/
 
 
-
+/* Get sports for eventSport
     this.sportService.getAll()
     .subscribe((sports: any) => {
     this.sportOptions = sports._embedded.sports;
     });
-
+*/
 
   }
 
