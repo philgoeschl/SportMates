@@ -21,10 +21,10 @@ export class EventFormComponent implements OnInit {
 
     this.eventForm = new FormGroup({
       'id': new FormControl(),
-      'eventTitle': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'eventType': new FormControl('', [Validators.required, Validators.required]),
+      'eventTitle': new FormControl(),
+      'eventType': new FormControl(),
       'eventDescription': new FormControl(),
-      'eventTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'eventTown': new FormControl(),
       'eventZIP': new FormControl(),
       'eventStreet': new FormControl(),
       'eventDateTime': new FormControl(),
