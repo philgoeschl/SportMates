@@ -41,15 +41,15 @@ public class UserFacade {
 
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
-        entity.setAdmin(dto.getAdmin());
+        entity.setAdmin(dto.isAdmin());
         entity.setDayOfBirth(dto.getDayOfBirth());
         entity.setUsername(dto.getUsername());
         entity.setHomeTown(dto.getHomeTown());
         entity.setUserLocation(dto.getUserLocation());
         entity.seteMail(dto.geteMail());
-        entity.setSports(sportService.getSports(dto.getSports()));
-        entity.setEvents(eventService.getEvents(dto.getEvents()));
-        entity.setManagedEvents(eventService.getEvents(dto.getManagedEvents()));
+        //entity.setSports(sportService.getSports(dto.getSports()));
+        //entity.setEvents(eventService.getEvents(dto.getEvents()));
+        //entity.setManagedEvents(eventService.getEvents(dto.getManagedEvents()));
     }
 
     private void mapEntityToDto(User entity, UserDTO dto) {
@@ -63,23 +63,13 @@ public class UserFacade {
         dto.setAdmin(entity.isAdmin());
         dto.seteMail(entity.geteMail());
 
-        dto.setSports(entity.getSports().stream().map((s) -> s.getSportName()).collect(Collectors.toSet()));
-        dto.setEvents(entity.getEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));
-        dto.setManagedEvents(entity.getManagedEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));
+        //dto.setSports(entity.getSports().stream().map((s) -> s.getSportName()).collect(Collectors.toSet()));
+        //dto.setEvents(entity.getEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));
+        //dto.setManagedEvents(entity.getManagedEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));
 
     }
 
-    public List<UserDTO> getAllUsers() {
-        List<UserDTO> users = new ArrayList<>();
 
-        userService.getAll().forEach(entity -> {
-            UserDTO dto = new UserDTO();
-            mapEntityToDto(entity,dto);
-            users.add(dto);
-        });
-
-        return users;
-    }
 
     public UserDTO getByUsername(String username) {
         User entity = userService.findByUserName(username).get();
@@ -88,8 +78,8 @@ public class UserFacade {
         return dto;
     }
 
-    public UserDTO update(String usernameId, UserDTO dto) {
-        User entity = userService.findByUserName(usernameId).get();
+    public UserDTO update(Long id, UserDTO dto) {
+        User entity = userService.findById(id).get();
         mapDtoToEntity(dto, entity);
         mapEntityToDto(userService.save(entity), dto);
         return dto;
@@ -100,6 +90,25 @@ public class UserFacade {
         mapDtoToEntity(dto, entity);
         mapEntityToDto(userService.save(entity), dto);
         return dto;
+    }
+
+    public UserDTO getById(Long id) {
+        User entity = userService.findById(id).get();
+        UserDTO dto = new UserDTO();
+        mapEntityToDto(entity, dto);
+        return dto;
+    }
+
+    public List<UserDTO> getAllUsers() {
+        List<UserDTO> users = new ArrayList<>();
+
+        userService.getUsers().forEach(entity -> {
+            UserDTO dto = new UserDTO();
+            mapEntityToDto(entity,dto);
+            users.add(dto);
+        });
+
+        return users;
     }
 
 }

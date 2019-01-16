@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-@SuppressWarnings("Duplicates")
+
 @Service()
 public class EventService {
 
@@ -21,24 +21,33 @@ public class EventService {
         return eventRepository.save(entity);
     }
 
+
+    public Optional<Event> findById(Long id) {
+        return eventRepository.findById(id);
+    }
+
+
+
     public List<Event> getAll() {
+
         return eventRepository.findAll();
     }
 
-    public List<Event> getAllEventsFromUser(String username) {
-        return eventRepository.findEventByUsersUsername(username);
+    /*public List<Event> getAllEventsFromUser(String username) {
+
+        return eventRepository.findByUsername(username);
     }
 
-    public Set<Event> getEvents(Set<String> dtos) {
+        return eventRepository.findEventByUsersUsername(username);
+    }*/
+
+
+    public Set<Event> getEvents(Set<Long> dtos) {
         Set<Event> entities = new HashSet<>();
         if (dtos != null) {
             dtos.forEach((dto) -> entities.add(eventRepository.findById(dto).get()));
         }
         return entities;
-    }
-
-    public Optional<Event> findById(String eventID) {
-        return eventRepository.findById(eventID);
     }
 
 

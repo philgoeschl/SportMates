@@ -2,7 +2,6 @@ package at.fh.ima.swengs.sportmatesdb.facade;
 
 import at.fh.ima.swengs.sportmatesdb.dto.EventDTO;
 import at.fh.ima.swengs.sportmatesdb.model.Event;
-import at.fh.ima.swengs.sportmatesdb.model.User;
 import at.fh.ima.swengs.sportmatesdb.service.EventService;
 import at.fh.ima.swengs.sportmatesdb.service.SportService;
 import at.fh.ima.swengs.sportmatesdb.service.UserService;
@@ -14,60 +13,67 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-@SuppressWarnings("Duplicates")
+
 
 @Service()
 @Transactional
 public class EventFacade {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private SportService sportService;
-
-    @Autowired
     private EventService eventService;
 
-    private void mapDtoToEntity(EventDTO dto, Event entity) {
+    @Autowired
+    private UserService userService;
+
+    /*@Autowired
+    private SportService sportService;*/
+
+
+    void mapDtoToEntity(EventDTO dto, Event entity) {
         entity.setEventDateTime(dto.getEventDateTime());
         entity.setEventDescription(dto.getEventDescription());
-        entity.setEventImage(dto.getEventImage());
         entity.setEventTitle(dto.getEventTitle());
         entity.setEventOrganizer(dto.getEventOrganizer());
-        entity.setEventImage(dto.getEventImage());
         entity.setEventStreet(dto.getEventStreet());
         entity.setEventType(dto.getEventType());
         entity.setEventTown(dto.getEventTown());
         entity.setEventZIP(dto.getEventZIP());
+        entity.setImage(dto.getImage());
 
-        Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
-        if(((Optional) eventManagerOptional).isPresent()) {
+        /*Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
+        if (((Optional) eventManagerOptional).isPresent()) {
             entity.setEventManager(eventManagerOptional.get());
         }
 
         entity.setSport(sportService.findBySportName(dto.getSport()).get());
-        entity.setUsers(userService.getUsersByUsername(dto.getUsers()));
+        entity.setUsers(userService.getUsersByUsername(dto.getUsers()));*/
 
     }
 
     private void mapEntityToDto(Event entity, EventDTO dto) {
 
+        dto.setId(entity.getId());
         dto.setEventDateTime(entity.getEventDateTime());
         dto.setEventDescription(entity.getEventDescription());
-        dto.setEventImage(entity.getEventImage());
         dto.setEventTitle(entity.getEventTitle());
         dto.setEventOrganizer(entity.getEventOrganizer());
-        dto.setEventImage(entity.getEventImage());
         dto.setEventStreet(entity.getEventStreet());
         dto.setEventType(entity.getEventType());
         dto.setEventTown(entity.getEventTown());
         dto.setEventZIP(entity.getEventZIP());
+        dto.setImage(entity.getImage());
 
-
-        dto.setEventManager(entity.getEventManager().getUsername());
-        dto.setSport(entity.getSport().getSportName());
+        /*dto.setEventManager(entity.getEventManager().getUsername());
+        dto.setSport(entity.getSport().getSportName());*/
         dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
+    }
+
+    public EventDTO update(Long id, EventDTO dto) {
+        Event entity = eventService.findById(id).get();
+        mapDtoToEntity(dto, entity);
+        mapEntityToDto(eventService.save(entity), dto);
+        return dto;
+
     }
 
     public EventDTO create(EventDTO dto) {
@@ -77,14 +83,20 @@ public class EventFacade {
         return dto;
     }
 
+    public EventDTO getById(Long id) {
+        Event entity = eventService.findById(id).get();
+        EventDTO dto = new EventDTO();
+        mapEntityToDto(entity, dto);
+        return dto;
+    }
 
-
+/*
     public List<EventDTO> getAllEventsFromUser(String eventManagerName) {
         List<EventDTO> events = new ArrayList<EventDTO>();
 
         eventService.getAllEventsFromUser(eventManagerName).forEach(entity -> {
             EventDTO dto = new EventDTO();
-            mapEntityToDto(entity,dto);
+            mapEntityToDto(entity, dto);
             events.add(dto);
         });
 
@@ -96,25 +108,12 @@ public class EventFacade {
 
         eventService.getAll().forEach(entity -> {
             EventDTO dto = new EventDTO();
-            mapEntityToDto(entity,dto);
+            mapEntityToDto(entity, dto);
             events.add(dto);
         });
 
         return events;
-    }
+    }*/
 
-    public EventDTO getEventByID(String eventID) {
-        Event entity = eventService.findById(eventID).get();
-        EventDTO dto = new EventDTO();
-        mapEntityToDto(entity, dto);
-        return dto;
-    }
 
-    public EventDTO update(String eventID, EventDTO dto) {
-        Event entity  = eventService.findById(eventID).get();
-        mapDtoToEntity(dto, entity);
-        mapEntityToDto(eventService.save(entity), dto);
-        return dto;
-
-    }
 }

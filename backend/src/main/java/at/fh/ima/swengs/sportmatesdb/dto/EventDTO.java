@@ -1,23 +1,18 @@
 package at.fh.ima.swengs.sportmatesdb.dto;
 
-import at.fh.ima.swengs.sportmatesdb.model.Sport;
-import at.fh.ima.swengs.sportmatesdb.model.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import at.fh.ima.swengs.sportmatesdb.model.EventType;
+import at.fh.ima.swengs.sportmatesdb.model.Media;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 public class EventDTO {
 
 
+    private Long id;
     private String eventTitle;
-    private String eventType;
+    private EventType eventType;
     private String eventDescription;
     private String eventTown;
     private String eventManager;
@@ -25,18 +20,26 @@ public class EventDTO {
     private String eventStreet;
     private Date eventDateTime;
     private String eventOrganizer;
-    private String eventImage;
+    private Set<Media> image;
 
     private String sport;
     private Set<String> users;
 
 
 
-    public String getEventType() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public EventType getEventType() {
         return eventType;
     }
 
-    public void setEventType(String eventType) {
+    public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
 
@@ -89,13 +92,6 @@ public class EventDTO {
         this.eventOrganizer = eventOrganizer;
     }
 
-    public String getEventImage() {
-        return eventImage;
-    }
-
-    public void setEventImage(String eventImage) {
-        this.eventImage = eventImage;
-    }
 
 
     public String getEventTitle() {
@@ -128,5 +124,13 @@ public class EventDTO {
 
     public void setEventManager(String eventManager) {
         this.eventManager = eventManager;
+    }
+
+    public Set<Media> getImage() {
+        return image;
+    }
+
+    public void setImage(Set<Media> image) {
+        this.image = image;
     }
 }

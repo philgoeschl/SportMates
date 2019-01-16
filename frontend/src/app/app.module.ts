@@ -12,8 +12,14 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import {BsDatepickerModule} from "ngx-bootstrap";
 import { RegisterComponent } from './register/register.component';
-import { SportFormComponent } from './sport-form/sport-form.component';
-import { SportListComponent } from './sport-list/sport-list.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { EventFormComponent } from './event-form/event-form.component';
+import {FileUploadModule} from 'ng2-file-upload';
+import {SafePipe} from './safe.pipe';
+import {MediainputComponent} from './mediainput/mediainput.component';
+import { NgxSelectModule } from 'ngx-select-ex';
+
+
 export function tokenGetter(){
   return localStorage.getItem('access_token');
 }
@@ -25,15 +31,19 @@ export function tokenGetter(){
     UserListComponent,
     UserFormComponent,
     RegisterComponent,
-    SportFormComponent,
-    SportListComponent,
+    EventListComponent,
+    EventFormComponent,
+    MediainputComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    FileUploadModule,
     ReactiveFormsModule,
+    NgxSelectModule,
     BsDatepickerModule.forRoot(),
     JwtModule.forRoot({
       config:{

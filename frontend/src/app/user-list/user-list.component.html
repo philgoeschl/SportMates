@@ -1,15 +1,6 @@
-<div>
-<!--<div *ngFor="let user of users">-->
-  <!--<label>
-    Username:
-    <input type="text" name="username" [(ngModel)]="user.username" readonly/>
-  </label>
-  <label *ngIf="isAdmin">
-    Admin:
-    <input type="checkbox" name="isAdmin" [(ngModel)]="user.admin"/>
-  </label>
-  <button type="button" (click)="editUser(user)" *ngIf="isAdmin">Save</button>-->
-
+<div *ngFor="let user of users">
+  {{user.username}}<a [routerLink]="'/user-form/' + user.id">Edit</a> <button type="button" (click)="deleteActor(user)">Delete</button>
 </div>
-
-
+<button type="button" (click)="createActor()">
+  Create actor
+</button>
