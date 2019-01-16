@@ -27,7 +27,7 @@ export class UserListComponent implements OnInit {
 
   }
 
-  deleteActor(user: User) {
+  deleteUser(user: User) {
 
     this.userService.delete(user)
       .subscribe(() => {

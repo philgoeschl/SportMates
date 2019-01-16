@@ -5,6 +5,7 @@ import at.fh.ima.swengs.sportmatesdb.model.Event;
 import at.fh.ima.swengs.sportmatesdb.service.EventService;
 import at.fh.ima.swengs.sportmatesdb.service.SportService;
 import at.fh.ima.swengs.sportmatesdb.service.UserService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class EventFacade {
     private EventService eventService;
 
     @Autowired
+    @JsonIgnore
     private UserService userService;
 
     /*@Autowired
@@ -45,8 +47,8 @@ public class EventFacade {
             entity.setEventManager(eventManagerOptional.get());
         }
 
-        entity.setSport(sportService.findBySportName(dto.getSport()).get());
-        entity.setUsers(userService.getUsersByUsername(dto.getUsers()));*/
+        entity.setSport(sportService.findBySportName(dto.getSport()).get());*/
+        //entity.setUsers(userService.getUsersByUsername(dto.getUsers()));
 
     }
 
@@ -63,9 +65,12 @@ public class EventFacade {
         dto.setEventZIP(entity.getEventZIP());
         dto.setImage(entity.getImage());
 
-        /*dto.setEventManager(entity.getEventManager().getUsername());
-        dto.setSport(entity.getSport().getSportName());*/
-        dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
+        //dto.setEventManager(entity.getEventManager().getUsername());
+        //dto.setSport(entity.getSport().getSportName());
+        if(entity.getUsers() != null) {
+            dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
+        }
+
     }
 
     public EventDTO update(Long id, EventDTO dto) {

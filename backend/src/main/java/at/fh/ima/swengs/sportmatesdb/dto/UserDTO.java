@@ -13,6 +13,7 @@ import java.util.Set;
 
 public class UserDTO {
 
+    private Long id;
     private boolean isAdmin =false;
     private String firstName;
     private String lastName;
@@ -28,6 +29,14 @@ public class UserDTO {
     private Set<Long> events;
     private Set<Long> managedEvents;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public boolean isAdmin() {
         return isAdmin;

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {User} from "../api/user";
 
 @Component({
   selector: 'app-user-form',
@@ -10,35 +11,40 @@ import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/form
 })
 export class UserFormComponent implements OnInit {
 
-  public BooleanValue: Boolean;
+
   userForm;
   shouldNavigateToList: boolean;
   user: any;
+  saveIsAdmin: boolean = false;
 
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
   }
 
 
-    ngOnInit()
-    {
-      this.userForm = new FormGroup({
-        //'id': new FormControl(),
-        'firstName': new FormControl('', [Validators.required, Validators.minLength(3)]),
-        'lastName': new FormControl('', [Validators.required, Validators.minLength(3)]),
-        'username': new FormControl('', [Validators.required, Validators.minLength(3)]),
-        'password': new FormControl('', [Validators.required, Validators.minLength(3)]),
-        'isAdmin': new FormControl(),
-        'eMail': new FormControl('', [Validators.required, Validators.minLength(3)]),
-        'dayOfBirth': new FormControl(),
-        'homeTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
-        'userLocation': new FormControl(),
-      });
+  ngOnInit() {
+    this.userForm = new FormGroup({
+      //'id': new FormControl(),
+      'firstName': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'lastName': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'username': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'password': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'admin': new FormControl(),
+      'eMail': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'dayOfBirth': new FormControl(),
+      'homeTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'userLocation': new FormControl(),
+    });
 
+    const data = this.route.snapshot.data;
 
-
-
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.userService.getById(id)
+        .subscribe((response) => {
+          this.userForm.patchValue(response);
+        });
     }
-
+  }
   saveUser() {
 
     const user = this.userForm.value;
@@ -46,7 +52,7 @@ export class UserFormComponent implements OnInit {
       this.userService.update(user)
         .subscribe((response) => {
           alert('updated successfully');
-          this.userForm.setValue(response);
+          this.userForm.patchValue(response);
           if (this.shouldNavigateToList) {
             this.navigateToList();
           }
@@ -58,20 +64,20 @@ export class UserFormComponent implements OnInit {
           if (this.shouldNavigateToList) {
             this.navigateToList();
           } else {
-            this.router.navigate(['/user-form', response.id]);
+            this.router.navigate(['/user-list']);
           }
         });
     }
+
   }
 
-    navigateToList() {
-      this.router.navigate(['/login']);
-    }
+  navigateToList() {
+    this.router.navigate(['/user-list']);
+  }
 
-    setShouldNavigateToList() {
-      this.shouldNavigateToList = true;
-    }
-
+  setShouldNavigateToList() {
+    this.shouldNavigateToList = true;
+  }
 
 
 }
