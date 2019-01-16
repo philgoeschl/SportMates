@@ -26,9 +26,10 @@ public class UserController {
         return userFacade.create(dto);
     }
 
-    @PutMapping("/dto/users/{id}")
+    @PutMapping("/dto/sports/{id}")
     UserDTO update(@RequestBody @Valid UserDTO dto, @PathVariable Long id) {
         return userFacade.update(id, dto);
     }
+
 
 }

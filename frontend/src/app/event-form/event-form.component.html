@@ -126,7 +126,7 @@
       <div class="form-group">
         <label for="eventStreet">Street:</label>
         <input id="eventStreet" type="text" name="eventStreet" formControlName="eventStreet"
-               class="form-control" required minlength="4"/>
+               class="form-control" required minlength="2"/>
         <div
           *ngIf="eventForm.controls.eventStreet.invalid && (eventForm.controls.eventStreet.dirty || eventForm.controls.eventStreet.touched)"
           class="alert alert-danger">

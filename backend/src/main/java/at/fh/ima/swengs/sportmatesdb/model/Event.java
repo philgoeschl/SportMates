@@ -45,7 +45,6 @@ public class Event {
     private Sport sport;
 
     @ManyToMany
-    @JsonIgnore
     private Set<User> users;
 
     @ManyToOne
@@ -142,14 +141,6 @@ public class Event {
         this.eventDateTime = eventDateTime;
     }
 
-    public String getEventOrganizer() {
-        return eventOrganizer;
-    }
-
-    public void setEventOrganizer(String eventOrganizer) {
-        this.eventOrganizer = eventOrganizer;
-    }
-
     public Set<Media> getImage() {
         return image;
     }
@@ -158,7 +149,17 @@ public class Event {
         this.image = image;
     }
 
-    public Sport getSport() {
+
+    public String getEventOrganizer() {
+        return eventOrganizer;
+    }
+
+    public void setEventOrganizer(String eventOrganizer) {
+        this.eventOrganizer = eventOrganizer;
+    }
+
+
+    /*public Sport getSport() {
         return sport;
     }
 
@@ -166,13 +167,7 @@ public class Event {
         this.sport = sport;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 
     public User getEventManager() {
         return eventManager;
@@ -180,6 +175,14 @@ public class Event {
 
     public void setEventManager(User eventManager) {
         this.eventManager = eventManager;
+    }
+*/
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public long getVersion() {

@@ -62,7 +62,7 @@ public class UserFacade {
         dto.setHomeTown(entity.getHomeTown());
         dto.setAdmin(entity.isAdmin());
         dto.seteMail(entity.geteMail());
-
+        dto.setPassword(entity.getPassword());
         //dto.setSports(entity.getSports().stream().map((s) -> s.getSportName()).collect(Collectors.toSet()));
         //dto.setEvents(entity.getEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));
         //dto.setManagedEvents(entity.getManagedEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));
