@@ -102,14 +102,6 @@ public class EventDTO {
         this.eventTitle = eventTitle;
     }
 
-    public String getSport() {
-        return sport;
-    }
-
-    public void setSport(String sport) {
-        this.sport = sport;
-    }
-
     public Set<String> getUsers() {
         return users;
     }
@@ -118,13 +110,23 @@ public class EventDTO {
         this.users = users;
     }
 
+    /*public String getSport() {
+        return sport;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+
+
+
     public String getEventManager() {
         return eventManager;
     }
 
     public void setEventManager(String eventManager) {
         this.eventManager = eventManager;
-    }
+    }*/
 
     public Set<Media> getImage() {
         return image;
