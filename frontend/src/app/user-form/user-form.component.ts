@@ -23,19 +23,17 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = new FormGroup({
-      //'id': new FormControl(),
+      'id': new FormControl(),
       'firstName': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'lastName': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'username': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'password': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'password': new FormControl('', [Validators.minLength(3)]),
       'admin': new FormControl(),
-      'eMail': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'eMail': new FormControl('', [Validators.minLength(3)]),
       'dayOfBirth': new FormControl(),
       'homeTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'userLocation': new FormControl(),
     });
-
-    const data = this.route.snapshot.data;
 
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -45,6 +43,7 @@ export class UserFormComponent implements OnInit {
         });
     }
   }
+
   saveUser() {
 
     const user = this.userForm.value;
@@ -64,13 +63,11 @@ export class UserFormComponent implements OnInit {
           if (this.shouldNavigateToList) {
             this.navigateToList();
           } else {
-            this.router.navigate(['/user-list']);
+            this.router.navigate(['/user-form', response.id]);
           }
         });
     }
-
   }
-
   navigateToList() {
     this.router.navigate(['/user-list']);
   }

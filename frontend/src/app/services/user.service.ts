@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {config, of, Subject} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {User} from "../api/user";
+import {Sport} from "../api/sport";
 
 
 @Injectable({
