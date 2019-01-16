@@ -67,12 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-    /*@Override
+    @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/users");
-    }*/
+                .antMatchers("/dto/users");
+    }
 
     @Bean
     public JwtConfig jwtConfig() {

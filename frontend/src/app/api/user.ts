@@ -2,13 +2,13 @@ export interface User {
   id?: number;
   username: string;
   password?: string;
-  isAdmin?: boolean;
+  admin?: boolean;
   firstName?: string;
   lastName?: string;
   eMail?: string;
 
   dayOfBirth?: Date;
-  homeTown?: boolean;
+  homeTown?: string;
   userLocation?: string;
 
   sports?: Array<string>;
