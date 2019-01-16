@@ -18,6 +18,8 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {SafePipe} from './safe.pipe';
 import {MediainputComponent} from './mediainput/mediainput.component';
 import { NgxSelectModule } from 'ngx-select-ex';
+import {SportListComponent} from './sport-list/sport-list.component';
+import {SportFormComponent} from './sport-form/sport-form.component';
 
 
 export function tokenGetter(){
@@ -33,6 +35,8 @@ export function tokenGetter(){
     RegisterComponent,
     EventListComponent,
     EventFormComponent,
+    SportListComponent,
+    SportFormComponent,
     MediainputComponent,
     SafePipe
   ],
