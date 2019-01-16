@@ -45,6 +45,7 @@ public class SportFacade {
 
     private void mapEntityToDto(Sport entity, SportDTO dto) {
 
+        dto.setId(entity.getId());
         dto.setSportName(entity.getSportName());
         dto.setSportDescription(entity.getSportDescription());
         dto.setTeam(entity.isTeam());

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SportService} from '../services/sport.service';
 import {Sport} from '../api/sport';
 import {Router} from '@angular/router';
+import {Event} from '../api/event';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class SportListComponent implements OnInit {
 
   }
 
-  editSport(sport: Sport) {
+ /* editSport(sport: Sport) {
 
     this.sportService.update(sport)
       .subscribe(() => {
@@ -33,10 +34,19 @@ export class SportListComponent implements OnInit {
         this.ngOnInit();
       });
 
-  }
+  }*/
 
   createSport() {
     this.router.navigate(['/sport-form']);
+  }
+
+  deleteSport(sport: Sport) {
+
+    this.sportService.delete(sport)
+      .subscribe(() => {
+        this.ngOnInit();
+      });
+
   }
 
 }

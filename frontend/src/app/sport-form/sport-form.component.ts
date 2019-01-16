@@ -24,6 +24,14 @@ export class SportFormComponent implements OnInit {
       'team': new FormControl(),
       'teamSize': new FormControl()
     });
+
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.sportService.getById(id)
+        .subscribe((response) => {
+          this.sportForm.patchValue(response);
+        });
+    }
   }
 
   saveSport() {
@@ -33,27 +41,28 @@ export class SportFormComponent implements OnInit {
       this.sportService.update(sport)
         .subscribe((response) => {
           alert('updated successfully');
-          this.sportForm.setValue(response);
+          this.sportForm.patchValue(response);
           if (this.shouldNavigateToList) {
             this.navigateToList();
           }
         });
-    } else {
+   } else {
       this.sportService.create(sport)
         .subscribe((response: any) => {
           alert('created successfully');
           if (this.shouldNavigateToList) {
             this.navigateToList();
           } else {
-            this.router.navigate(['/user-form', response.id]);
+            this.router.navigate(['/sport-form', response.id]);
           }
         });
     }
+
   }
 
 
   navigateToList() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/sport-list']);
   }
 
   setShouldNavigateToList() {

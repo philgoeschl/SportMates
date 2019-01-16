@@ -16,17 +16,17 @@ public class SportController {
 
 
 
-    @GetMapping("/sports/{id}")
+    @GetMapping("/dto/sports/{id}")
     SportDTO getById(@PathVariable Long id) {
         return sportFacade.getById(id);
     }
 
-    @PostMapping("/sports")
+    @PostMapping("/dto/sports")
     SportDTO create(@RequestBody @Valid SportDTO dto) {
         return sportFacade.create(dto);
     }
 
-    @PutMapping("/sports/{id}")
+    @PutMapping("/dto/sports/{id}")
     SportDTO update(@RequestBody @Valid SportDTO dto, @PathVariable Long id) {
         return sportFacade.update(id, dto);
     }

@@ -11,6 +11,7 @@ import java.util.Set;
 
 public class SportDTO {
 
+    private Long id;
     private String sportName;
     private String sportDescription;
     private boolean team;
@@ -75,5 +76,13 @@ public class SportDTO {
 
     public void setEvents(Set<Long> events) {
         this.events = events;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

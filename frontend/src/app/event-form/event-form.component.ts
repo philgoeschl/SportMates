@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EventService} from '../services/event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -18,7 +18,8 @@ export class EventFormComponent implements OnInit {
 
 
   constructor(private eventService: EventService, private route: ActivatedRoute,
-              private router: Router, private sportService: SportService) { } //
+              private router: Router, private sportService: SportService) {
+  } //
 
   ngOnInit() {
 
@@ -41,11 +42,7 @@ export class EventFormComponent implements OnInit {
       'eventSport': new FormControl(),
 
 
-
-
     });
-
-
 
 
     const id = this.route.snapshot.paramMap.get('id');
@@ -64,12 +61,12 @@ export class EventFormComponent implements OnInit {
     }*/
 
 
-/* Get sports for eventSport
-    this.sportService.getAll()
-    .subscribe((sports: any) => {
-    this.sportOptions = sports._embedded.sports;
-    });
-*/
+    /* Get sports for eventSport
+        this.sportService.getAll()
+        .subscribe((sports: any) => {
+        this.sportOptions = sports._embedded.sports;
+        });
+    */
 
   }
 
