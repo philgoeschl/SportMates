@@ -12,7 +12,7 @@ import {Sport} from "../api/sport";
   providedIn: 'root'
 })
 export class UserService {
-
+  currLoggedInUserName: string;
   isLoggedIn = false;
   loggedInChange: Subject<boolean> = new Subject<boolean>();
   jwtHelperService: JwtHelperService;
@@ -26,9 +26,12 @@ export class UserService {
       console.log('Token expiration date: '
         + this.jwtHelperService.getTokenExpirationDate(token));
       this.isLoggedIn = !this.jwtHelperService.isTokenExpired(token);
+      const decodedToken = this.jwtHelperService.decodeToken(token);
+      this.currLoggedInUserName = decodedToken.sub;
     }
     this.loggedInChange.subscribe((value) => {
       this.isLoggedIn = value;
+
     });
   }
 
@@ -54,7 +57,16 @@ export class UserService {
   }
 
 
-  getById(id: string) {
+  getById(id: number) {
+    return this.http.get('/api/dto/users/' + id).pipe(map((res: any) => {
+      if (res.dayOfBirth) {
+        res.dayOfBirth = new Date(res.dayOfBirth);
+      }
+      return res;
+    }));
+  }
+
+  getByIdString(id: string) {
     return this.http.get('/api/dto/users/' + id).pipe(map((res: any) => {
       if (res.dayOfBirth) {
         res.dayOfBirth = new Date(res.dayOfBirth);

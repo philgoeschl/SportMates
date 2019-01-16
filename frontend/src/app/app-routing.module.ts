@@ -11,6 +11,7 @@ import {EventResolver} from './resolver/events.resolver';
 import {SportFormComponent} from './sport-form/sport-form.component';
 import {SportListComponent} from './sport-list/sport-list.component';
 import {Sport} from './api/sport';
+import {UserProfileComponent} from "./user-profile/user-profile.component";
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'user-form/:id', component: UserFormComponent, canActivate: [AuthGuard]},
   {path: 'sport-form', component: SportFormComponent},
   {path: 'sport-list', component: SportListComponent},
-  {path: 'sport-form/:id', component: SportFormComponent}
+  {path: 'sport-form/:id', component: SportFormComponent},
+  {path: 'user-profile', component: UserProfileComponent}
 
 
 ];

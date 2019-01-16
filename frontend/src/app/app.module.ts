@@ -20,6 +20,7 @@ import {MediainputComponent} from './mediainput/mediainput.component';
 import { NgxSelectModule } from 'ngx-select-ex';
 import {SportListComponent} from './sport-list/sport-list.component';
 import {SportFormComponent} from './sport-form/sport-form.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 export function tokenGetter(){
@@ -38,7 +39,8 @@ export function tokenGetter(){
     SportListComponent,
     SportFormComponent,
     MediainputComponent,
-    SafePipe
+    SafePipe,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
