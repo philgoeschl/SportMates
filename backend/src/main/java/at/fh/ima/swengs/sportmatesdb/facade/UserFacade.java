@@ -37,8 +37,6 @@ public class UserFacade {
     void mapDtoToEntity(UserDTO dto, User entity) {
         String passwordEncoded = encoder.encode(dto.getPassword());
         entity.setPassword(passwordEncoded);
-
-
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setAdmin(dto.isAdmin());
@@ -54,6 +52,7 @@ public class UserFacade {
 
     private void mapEntityToDto(User entity, UserDTO dto) {
 
+        dto.setId(entity.getId());
         dto.setUsername(entity.getUsername());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
