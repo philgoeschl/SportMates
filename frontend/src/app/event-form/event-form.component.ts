@@ -3,6 +3,7 @@ import {EventService} from '../services/event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SportService} from '../services/sport.service';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-event-form',
@@ -18,8 +19,8 @@ export class EventFormComponent implements OnInit {
 
 
   constructor(private eventService: EventService, private route: ActivatedRoute,
-              private router: Router, private sportService: SportService) {
-  } //
+              private router: Router, private sportService: SportService,
+              private userService: UserService) { } //
 
   ngOnInit() {
 
@@ -61,12 +62,12 @@ export class EventFormComponent implements OnInit {
     }*/
 
 
-    /* Get sports for eventSport
-        this.sportService.getAll()
-        .subscribe((sports: any) => {
-        this.sportOptions = sports._embedded.sports;
-        });
-    */
+/* Get sports for eventSport
+    this.sportService.getAll()
+    .subscribe((sports: any) => {
+    this.sportOptions = sports._embedded.sports;
+    });
+*/
 
   }
 
