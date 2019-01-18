@@ -110,7 +110,7 @@ public class EventDTO {
         this.users = users;
     }
 
-    /*public String getSport() {
+    public String getSport() {
         return sport;
     }
 
@@ -119,7 +119,7 @@ public class EventDTO {
     }
 
 
-
+/*
     public String getEventManager() {
         return eventManager;
     }

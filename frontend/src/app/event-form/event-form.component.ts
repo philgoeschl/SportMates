@@ -40,7 +40,7 @@ export class EventFormComponent implements OnInit {
       'eventDateTime': new FormControl(),
       'eventOrganizer': new FormControl(),
       'image': new FormControl([]),
-      'eventSport': new FormControl(),
+      'sport': new FormControl(),
 
 
     });
@@ -62,12 +62,13 @@ export class EventFormComponent implements OnInit {
     }*/
 
 
-/* Get sports for eventSport
+/* Get sports for eventSport */
     this.sportService.getAll()
     .subscribe((sports: any) => {
     this.sportOptions = sports._embedded.sports;
     });
-*/
+
+
 
   }
 

@@ -10,7 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-@SuppressWarnings("Duplicates")
+
+
 @Service()
 public class SportService {
 
@@ -21,9 +22,9 @@ public class SportService {
         return sportRepository.save(entity);
     }
 
-    /*public List<Sport> getAllSportsFromUser(String username) {
+    public List<Sport> getAllSportsFromUser(String username) {
         return sportRepository.findSportsByUsersUsername(username);
-    }*/
+    }
 
     public Set<Sport> getSports(Set<Long> dtos) {
         Set<Sport> entities = new HashSet<>();
@@ -33,12 +34,12 @@ public class SportService {
         return entities;
     }
 
-    /*public Optional<Sport> findBySportName(String sportName) {
+    public Optional<Sport> findBySportName(String sportName) {
         return sportRepository.findBySportName(sportName);
     }
 
     public List<Sport> getAllSports() {
-        return sportRepository.findAll();}*/
+        return sportRepository.findAll();}
 
     public Optional<Sport> findById(Long id) {
         return sportRepository.findById(id);

@@ -9,7 +9,7 @@ export interface Event {
   eventDateTime?: Date;
   eventOrganizer?: string;
 
-  sports?: Array<string>;
+  sports?: Array<any>;
   users?: Array<string>;
 
 

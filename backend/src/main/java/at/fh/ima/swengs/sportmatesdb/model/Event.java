@@ -41,7 +41,6 @@ public class Event {
     private Set<Media> image = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnore
     private Sport sport;
 
     @ManyToMany
@@ -159,14 +158,14 @@ public class Event {
     }
 
 
-    /*public Sport getSport() {
+    public Sport getSport() {
         return sport;
     }
 
     public void setSport(Sport sport) {
         this.sport = sport;
     }
-
+/*
 
 
     public User getEventManager() {
