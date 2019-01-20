@@ -23,7 +23,6 @@ export class SportListComponent implements OnInit {
       .subscribe((response: any) => {
         this.sports = response._embedded.sports;
       });
-
   }
 
  /* editSport(sport: Sport) {

@@ -12,11 +12,11 @@ import {Sport} from "../api/sport";
   providedIn: 'root'
 })
 export class UserService {
-
+  currLoggedInUserName: string;
   isLoggedIn = false;
   loggedInChange: Subject<boolean> = new Subject<boolean>();
   jwtHelperService: JwtHelperService;
-
+  userRole: string;
   accessTokenLocalStorageKey = 'access_token';
 
   constructor(private http: HttpClient, private router: Router) {
@@ -26,9 +26,15 @@ export class UserService {
       console.log('Token expiration date: '
         + this.jwtHelperService.getTokenExpirationDate(token));
       this.isLoggedIn = !this.jwtHelperService.isTokenExpired(token);
+      const decodedToken = this.jwtHelperService.decodeToken(token);
+      this.userRole = decodedToken.authorities;
+      this.currLoggedInUserName = decodedToken.sub;
+      console.log(this.userRole)
     }
     this.loggedInChange.subscribe((value) => {
       this.isLoggedIn = value;
+
+
     });
   }
 
@@ -42,10 +48,18 @@ export class UserService {
       localStorage.setItem(this.accessTokenLocalStorageKey, token);
       console.log(this.jwtHelperService.decodeToken(token));
       this.loggedInChange.next(true);
-      this.router.navigate(['/user-list']);
+      this.router.navigate(['/user-profile'])
+      const decodedToken = this.jwtHelperService.decodeToken(token);
+      this.currLoggedInUserName = decodedToken.sub;
+      this.userRole = decodedToken.authorities;
       return res;
     }));
   }
+
+  loadUserProfile(){
+  this.router.navigate(['/user-profile']);
+
+}
 
   logout() {
     localStorage.removeItem(this.accessTokenLocalStorageKey);
@@ -54,7 +68,16 @@ export class UserService {
   }
 
 
-  getById(id: string) {
+  getById(id: number) {
+    return this.http.get('/api/dto/users/' + id).pipe(map((res: any) => {
+      if (res.dayOfBirth) {
+        res.dayOfBirth = new Date(res.dayOfBirth);
+      }
+      return res;
+    }));
+  }
+
+  getByIdString(id: string) {
     return this.http.get('/api/dto/users/' + id).pipe(map((res: any) => {
       if (res.dayOfBirth) {
         res.dayOfBirth = new Date(res.dayOfBirth);

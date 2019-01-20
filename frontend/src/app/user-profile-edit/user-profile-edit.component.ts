@@ -1,25 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from "../services/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
 import {User} from "../api/user";
+import {ActivatedRoute, Router} from "@angular/router";
+import {UserService} from "../services/user.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-user-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  selector: 'app-user-profile-edit',
+  templateUrl: './user-profile-edit.component.html',
+  styleUrls: ['./user-profile-edit.component.scss']
 })
-export class UserFormComponent implements OnInit {
-
+export class UserProfileEditComponent implements OnInit {
 
   userForm;
+  currentUser: string;
+  firstName: string;
+  id: number;
+  users: Array<User>;
+  userArray
   shouldNavigateToList: boolean;
-  user: any;
-  saveIsAdmin: boolean = false;
-
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
-  }
-
+  mapUsers: Map<string, User>;
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.userForm = new FormGroup({
@@ -34,15 +34,24 @@ export class UserFormComponent implements OnInit {
       'homeTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'userLocation': new FormControl(),
     });
+    this.userService.getAll()
+      .subscribe((users: any) => {
+        this.users = users;
+        this.currentUser = this.userService.currLoggedInUserName;
 
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.userService.getByIdString(id)
-        .subscribe((response) => {
-          this.userForm.patchValue(response);
-        });
-    }
+
+        this.id = this.users.find(x=>x.username == this.currentUser).id;
+
+        this.userService.getById(this.id)
+          .subscribe((response) => {
+            this.userForm.patchValue(response);
+          });
+      });
+
+
   }
+
+
 
   saveUser() {
 
@@ -63,7 +72,7 @@ export class UserFormComponent implements OnInit {
           if (this.shouldNavigateToList) {
             this.navigateToList();
           } else {
-            this.router.navigate(['/user-form', response.id]);
+            this.router.navigate(['/user-profile', response.id]);
           }
         });
     }
@@ -75,6 +84,5 @@ export class UserFormComponent implements OnInit {
   setShouldNavigateToList() {
     this.shouldNavigateToList = true;
   }
-
 
 }
