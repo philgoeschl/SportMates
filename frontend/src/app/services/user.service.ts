@@ -16,7 +16,7 @@ export class UserService {
   isLoggedIn = false;
   loggedInChange: Subject<boolean> = new Subject<boolean>();
   jwtHelperService: JwtHelperService;
-
+  userRole: string;
   accessTokenLocalStorageKey = 'access_token';
 
   constructor(private http: HttpClient, private router: Router) {
@@ -27,10 +27,13 @@ export class UserService {
         + this.jwtHelperService.getTokenExpirationDate(token));
       this.isLoggedIn = !this.jwtHelperService.isTokenExpired(token);
       const decodedToken = this.jwtHelperService.decodeToken(token);
+      this.userRole = decodedToken.authorities;
       this.currLoggedInUserName = decodedToken.sub;
+      console.log(this.userRole)
     }
     this.loggedInChange.subscribe((value) => {
       this.isLoggedIn = value;
+
 
     });
   }
@@ -45,10 +48,18 @@ export class UserService {
       localStorage.setItem(this.accessTokenLocalStorageKey, token);
       console.log(this.jwtHelperService.decodeToken(token));
       this.loggedInChange.next(true);
-      this.router.navigate(['/user-list']);
+      this.router.navigate(['/user-profile'])
+      const decodedToken = this.jwtHelperService.decodeToken(token);
+      this.currLoggedInUserName = decodedToken.sub;
+      this.userRole = decodedToken.authorities;
       return res;
     }));
   }
+
+  loadUserProfile(){
+  this.router.navigate(['/user-profile']);
+
+}
 
   logout() {
     localStorage.removeItem(this.accessTokenLocalStorageKey);

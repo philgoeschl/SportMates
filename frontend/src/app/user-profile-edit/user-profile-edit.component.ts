@@ -1,29 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from "../api/user";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../services/user.service";
-import {User} from "../api/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  selector: 'app-user-profile-edit',
+  templateUrl: './user-profile-edit.component.html',
+  styleUrls: ['./user-profile-edit.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileEditComponent implements OnInit {
+
   userForm;
   currentUser: string;
   firstName: string;
-  lastName: string;
-  usernameShow: string;
-  eMail: string;
-  dayOfBirthShow: Date;
-  homeTown: string;
-  userLocation: string;
   id: number;
   users: Array<User>;
-  user: Array<User>;
+  userArray
   shouldNavigateToList: boolean;
-
+  mapUsers: Map<string, User>;
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
@@ -46,15 +41,8 @@ export class UserProfileComponent implements OnInit {
 
 
         this.id = this.users.find(x=>x.username == this.currentUser).id;
-        this.firstName = this.users.find(x=>x.username == this.currentUser).firstName;
-        this.lastName = this.users.find(x=>x.username == this.currentUser).lastName;
-        this.usernameShow = this.users.find(x=>x.username == this.currentUser).username;
-        this.eMail = this.users.find(x=>x.username == this.currentUser).eMail;
-        this.dayOfBirthShow = this.users.find(x=>x.username == this.currentUser).dayOfBirth;
-        this.homeTown = this.users.find(x=>x.username == this.currentUser).homeTown;
-        this.userLocation = this.users.find(x=>x.username == this.currentUser).userLocation;
 
-     this.userService.getById(this.id)
+        this.userService.getById(this.id)
           .subscribe((response) => {
             this.userForm.patchValue(response);
           });
@@ -65,7 +53,30 @@ export class UserProfileComponent implements OnInit {
 
 
 
+  saveUser() {
 
+    const user = this.userForm.value;
+    if (user.id) {
+      this.userService.update(user)
+        .subscribe((response) => {
+          alert('updated successfully');
+          this.userForm.patchValue(response);
+          if (this.shouldNavigateToList) {
+            this.navigateToList();
+          }
+        });
+    } else {
+      this.userService.create(user)
+        .subscribe((response: any) => {
+          alert('created successfully');
+          if (this.shouldNavigateToList) {
+            this.navigateToList();
+          } else {
+            this.router.navigate(['/user-profile', response.id]);
+          }
+        });
+    }
+  }
   navigateToList() {
     this.router.navigate(['/user-list']);
   }
