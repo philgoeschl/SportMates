@@ -14,8 +14,17 @@ export class UserProfileEditComponent implements OnInit {
 
   userForm;
   currentUser: string;
-  firstName: string;
+
   id: number;
+  firstName: string;
+  lastName: string;
+  username: string;
+  eMail: string;
+  dayOfBirth: Date;
+  homeTown: string;
+  userLocation: string;
+  password: string;
+  admin: boolean;
   users: Array<User>;
   userArray
   shouldNavigateToList: boolean;
@@ -26,13 +35,14 @@ export class UserProfileEditComponent implements OnInit {
   ngOnInit() {
     this.userForm = new FormGroup({
       'id': new FormControl(),
-      'firstName': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'lastName': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'username': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'password': new FormControl('', [Validators.minLength(3)]),
-      'admin': new FormControl(),
-      'eMail': new FormControl('', [Validators.minLength(3),Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      'encodeNumber': new FormControl(0),
+      'firstName': new FormControl('', [Validators.required, Validators.minLength(2)]),
+      'lastName': new FormControl('', [Validators.required, Validators.minLength(2)]),
+      'username': new FormControl('', [Validators.required,Validators.minLength(4)]),
+      'eMail': new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
       'dayOfBirth': new FormControl(),
+      'admin': new FormControl(),
+      'password': new FormControl(),
       'homeTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'userLocation': new FormControl(),
       'sport': new FormControl(),
@@ -42,12 +52,14 @@ export class UserProfileEditComponent implements OnInit {
         this.users = users;
         this.currentUser = this.userService.currLoggedInUserName;
 
-
         this.id = this.users.find(x=>x.username == this.currentUser).id;
+
+
 
         this.userService.getById(this.id)
           .subscribe((response) => {
             this.userForm.patchValue(response);
+            console.log(response)
           });
 
         this.sportService.getforUser()
