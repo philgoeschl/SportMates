@@ -11,7 +11,7 @@ export interface User {
   homeTown?: string;
   userLocation?: string;
 
-  sports?: Array<string>;
+  sports?: Array<any>;
   events?: Array<string>;
   managedEvents?: Array<string>;
 

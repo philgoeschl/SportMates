@@ -35,7 +35,10 @@ public class User {
     private boolean isAdmin =false;
     private String firstName;
     private String lastName;
+
+    @Column(unique=true)
     private String username;
+
     private String password;
     private String eMail;
 
