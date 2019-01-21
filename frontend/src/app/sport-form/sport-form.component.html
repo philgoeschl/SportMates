@@ -28,28 +28,24 @@
 
   <div *ngIf="sportForm.controls.team.value === true">
     <div class="col">
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label for="teamSize">Team size:</label>
-            <input id="teamSize" type="text" name="teamSize" formControlName="teamSize" class="form-control"/>
-            </div>
-          </div>
-        </div>
-      </div>
+      <label for="teamSize">Team size:</label>
+      <input id="teamSize" type="text" name="teamSize" formControlName="teamSize" class="form-control"/>
     </div>
+  </div>
 
 
-  <div class="btn-group">
-    <button type="submit" class="btn btn-primary" [disabled]="sportForm.invalid">
+  <!--div class="btn-group"-->
+  <div class="btn">
+    <button type="submit" class="btn btn-red" [disabled]="sportForm.invalid">
       Save
     </button>
-    <button type="submit" (click)="setShouldNavigateToList()" class="btn btn-primary" [disabled]="sportForm.invalid">
+    <button type="submit" (click)="setShouldNavigateToList()" class=" btn btn-green" [disabled]="sportForm.invalid">
       Save and Back
     </button>
-    <button type="submit" (click)="navigateToList()" class="btn btn-primary">
+    <button type="submit" (click)="navigateToList()" class="btn btn-yellow">
       Back without saving
     </button>
-
   </div>
+
+  <!--/div-->
 </form>
