@@ -22,6 +22,12 @@ export class SportService {
     return this.http.get('/api/sports');
   }
 
+  getforUser() {
+    return this.http.get('/api/sports').pipe(map((response: any) => {
+      return response._embedded.sports;
+    }));
+  }
+
   update(sport: Sport) {
     return this.http.put('/api/dto/sports/' + sport.id, sport);
   }

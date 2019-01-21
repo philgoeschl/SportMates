@@ -37,8 +37,6 @@ public class UserFacade {
     void mapDtoToEntity(UserDTO dto, User entity) {
         String passwordEncoded = encoder.encode(dto.getPassword());
         entity.setPassword(passwordEncoded);
-
-
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setAdmin(dto.isAdmin());
@@ -47,13 +45,14 @@ public class UserFacade {
         entity.setHomeTown(dto.getHomeTown());
         entity.setUserLocation(dto.getUserLocation());
         entity.seteMail(dto.geteMail());
-        //entity.setSports(sportService.getSports(dto.getSports()));
+        entity.setSports(sportService.getSports(dto.getSports()));
         //entity.setEvents(eventService.getEvents(dto.getEvents()));
         //entity.setManagedEvents(eventService.getEvents(dto.getManagedEvents()));
     }
 
     private void mapEntityToDto(User entity, UserDTO dto) {
 
+        dto.setId(entity.getId());
         dto.setUsername(entity.getUsername());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
@@ -63,7 +62,7 @@ public class UserFacade {
         dto.setAdmin(entity.isAdmin());
         dto.seteMail(entity.geteMail());
         dto.setPassword(entity.getPassword());
-        //dto.setSports(entity.getSports().stream().map((s) -> s.getSportName()).collect(Collectors.toSet()));
+        dto.setSports(entity.getSports().stream().map((s) -> s.getId()).collect(Collectors.toSet()));
         //dto.setEvents(entity.getEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));
         //dto.setManagedEvents(entity.getManagedEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));
 

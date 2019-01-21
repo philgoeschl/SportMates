@@ -48,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig))
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-
+                .antMatchers(HttpMethod.POST, "/dto/users").permitAll()
+                .antMatchers(HttpMethod.GET, "/users").permitAll()
                 // allow all POST requests
                 //.authorizeRequests()
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
@@ -67,12 +68,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-    @Override
+    /*@Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
                 .antMatchers("/dto/users");
-    }
+    }*/
 
     @Bean
     public JwtConfig jwtConfig() {
