@@ -35,11 +35,14 @@ export class UserProfileEditComponent implements OnInit {
   ngOnInit() {
     this.userForm = new FormGroup({
       'id': new FormControl(),
+      'encodeNumber': new FormControl(0),
       'firstName': new FormControl('', [Validators.required, Validators.minLength(2)]),
       'lastName': new FormControl('', [Validators.required, Validators.minLength(2)]),
       'username': new FormControl('', [Validators.required,Validators.minLength(4)]),
       'eMail': new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
       'dayOfBirth': new FormControl(),
+      'admin': new FormControl(),
+      'password': new FormControl(),
       'homeTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'userLocation': new FormControl(),
       'sport': new FormControl(),
@@ -51,13 +54,12 @@ export class UserProfileEditComponent implements OnInit {
 
         this.id = this.users.find(x=>x.username == this.currentUser).id;
 
- 
 
-        this.firstName = this.users.find(x=>x.username == this.currentUser).firstName;
 
         this.userService.getById(this.id)
           .subscribe((response) => {
             this.userForm.patchValue(response);
+            console.log(response)
           });
 
         this.sportService.getforUser()

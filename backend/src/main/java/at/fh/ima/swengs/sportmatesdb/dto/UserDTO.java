@@ -13,13 +13,13 @@ import java.util.Set;
 
 public class UserDTO {
 
+    private int encodeNumber;
     private Long id;
     private boolean isAdmin =false;
     private String firstName;
     private String lastName;
     private String username;
     private String password;
-    private String hash;
     private String eMail;
     private Date dayOfBirth;
     private String homeTown;
@@ -133,5 +133,13 @@ public class UserDTO {
 
     public void setManagedEvents(Set<Long> managedEvents) {
         this.managedEvents = managedEvents;
+    }
+
+    public int getEncodeNumber() {
+        return encodeNumber;
+    }
+
+    public void setEncodeNumber(int encodeNumber) {
+        this.encodeNumber = encodeNumber;
     }
 }

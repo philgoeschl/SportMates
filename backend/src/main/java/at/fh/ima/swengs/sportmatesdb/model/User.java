@@ -41,7 +41,7 @@ public class User {
 
     private String password;
 
-    private String hash;
+    private int encodeNumber;
 
     private String eMail;
 
@@ -157,12 +157,13 @@ public class User {
         this.managedEvents = managedEvents;
     }
 
-    public String getHash() {
-        return hash;
+
+    public int getEncodeNumber() {
+        return encodeNumber;
     }
 
-    public void setHash(String hash) {
-        this.hash = hash;
+    public void setEncodeNumber(int encodeNumber) {
+        this.encodeNumber = encodeNumber;
     }
 
     @Override
@@ -255,4 +256,6 @@ public class User {
         this.homeTown = homeTown;
         this.userLocation = userLocation;
     }
+
+
 }

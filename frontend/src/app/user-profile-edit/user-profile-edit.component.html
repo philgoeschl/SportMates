@@ -83,6 +83,10 @@
       <ngx-select id="sports" [items]="sportOptions" name="sports" [multiple]="true"
                   formControlName="sport" optionTextField="sportName"></ngx-select>
     </div>
+    <div class="col">
+      <label for="encodeNumber">encodeNumber:</label>
+      <input id="encodeNumber" type="text" name="encodeNumber" formControlName="encodeNumber" class="form-control" value="1" readonly/>
+    </div>
 
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
