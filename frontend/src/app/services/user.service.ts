@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, delay, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {config, of, Subject} from 'rxjs';
+import {config, Observable, of, Subject} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {User} from "../api/user";
 import {Sport} from "../api/sport";
+import { Http } from '@angular/http';
+
 
 
 @Injectable({
@@ -18,6 +20,7 @@ export class UserService {
   jwtHelperService: JwtHelperService;
   userRole: string;
   accessTokenLocalStorageKey = 'access_token';
+  users;
 
   constructor(private http: HttpClient, private router: Router) {
     this.jwtHelperService = new JwtHelperService();
@@ -56,10 +59,6 @@ export class UserService {
     }));
   }
 
-  loadUserProfile(){
-  this.router.navigate(['/user-profile']);
-
-}
 
   logout() {
     localStorage.removeItem(this.accessTokenLocalStorageKey);
@@ -94,6 +93,10 @@ export class UserService {
     );
   }
 
+  getAllRegister() {
+    return this.http.get('/api/users');
+  }
+
   delete(user) {
     return this.http.delete('/api/users/' + user.id);
   }
@@ -105,6 +108,7 @@ export class UserService {
   create(user: User) {
     return this.http.post('/api/dto/users', user);
   }
+
 
 
 
