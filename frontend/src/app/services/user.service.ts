@@ -32,11 +32,14 @@ export class UserService {
       const decodedToken = this.jwtHelperService.decodeToken(token);
       this.userRole = decodedToken.authorities;
       this.currLoggedInUserName = decodedToken.sub;
-      console.log(this.userRole)
     }
     this.loggedInChange.subscribe((value) => {
       this.isLoggedIn = value;
 
+      if (this.isLoggedIn === false) {
+        this.currLoggedInUserName = '';
+        this.userRole = '';
+      }
 
     });
   }
@@ -50,11 +53,12 @@ export class UserService {
       const token = res.headers.get('Authorization').replace(/^Bearer /, '');
       localStorage.setItem(this.accessTokenLocalStorageKey, token);
       console.log(this.jwtHelperService.decodeToken(token));
-      this.loggedInChange.next(true);
-      this.router.navigate(['/user-profile'])
       const decodedToken = this.jwtHelperService.decodeToken(token);
       this.currLoggedInUserName = decodedToken.sub;
       this.userRole = decodedToken.authorities;
+      this.loggedInChange.next(true);
+      this.router.navigate(['/user-profile'])
+
       return res;
     }));
   }
