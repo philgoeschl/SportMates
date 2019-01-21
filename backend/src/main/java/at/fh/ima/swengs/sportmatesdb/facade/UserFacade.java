@@ -35,8 +35,10 @@ public class UserFacade {
 
 
     void mapDtoToEntity(UserDTO dto, User entity) {
+
         String passwordEncoded = encoder.encode(dto.getPassword());
         entity.setPassword(passwordEncoded);
+
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setAdmin(dto.isAdmin());
@@ -61,7 +63,6 @@ public class UserFacade {
         dto.setHomeTown(entity.getHomeTown());
         dto.setAdmin(entity.isAdmin());
         dto.seteMail(entity.geteMail());
-        dto.setPassword(entity.getPassword());
         dto.setSports(entity.getSports().stream().map((s) -> s.getId()).collect(Collectors.toSet()));
         //dto.setEvents(entity.getEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));
         //dto.setManagedEvents(entity.getManagedEvents().stream().map((e) -> e.getEventTitle()).collect(Collectors.toSet()));

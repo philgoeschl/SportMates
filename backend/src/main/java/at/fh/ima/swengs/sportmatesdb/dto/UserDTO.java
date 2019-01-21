@@ -19,6 +19,7 @@ public class UserDTO {
     private String lastName;
     private String username;
     private String password;
+    private String hash;
     private String eMail;
     private Date dayOfBirth;
     private String homeTown;
