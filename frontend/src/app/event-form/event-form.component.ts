@@ -3,6 +3,8 @@ import {EventService} from '../services/event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SportService} from '../services/sport.service';
+import {UserService} from '../services/user.service';
+import {AuthGuard} from '../guards/auth.guard';
 
 @Component({
   selector: 'app-event-form',
@@ -15,13 +17,18 @@ export class EventFormComponent implements OnInit {
   shouldNavigateToList: boolean;
   event: any;
   sportOptions;
+  currentLoggedInUser: string;
+  isReadOnly: boolean;
 
 
   constructor(private eventService: EventService, private route: ActivatedRoute,
-              private router: Router, private sportService: SportService) {
-  } //
+              private router: Router, private sportService: SportService,
+              private userService: UserService) { } //
 
   ngOnInit() {
+
+
+
 
     /*
     Resolver related code
@@ -39,10 +46,12 @@ export class EventFormComponent implements OnInit {
       'eventDateTime': new FormControl(),
       'eventOrganizer': new FormControl(),
       'image': new FormControl([]),
-      'eventSport': new FormControl(),
+      'sport': new FormControl(),
 
 
     });
+
+    this.eventForm.controls.eventOrganizer.disable();
 
 
     const id = this.route.snapshot.paramMap.get('id');
@@ -53,6 +62,10 @@ export class EventFormComponent implements OnInit {
         });
     }
 
+
+
+
+
     /*
     RESOLVER related code
     const event = data.event;
@@ -61,16 +74,26 @@ export class EventFormComponent implements OnInit {
     }*/
 
 
-    /* Get sports for eventSport
-        this.sportService.getAll()
-        .subscribe((sports: any) => {
-        this.sportOptions = sports._embedded.sports;
-        });
-    */
+/* Get sports for eventSport */
+    this.sportService.getAll()
+    .subscribe((sports: any) => {
+    this.sportOptions = sports._embedded.sports;
+    });
+
+
+
+
+
+
+
 
   }
 
   saveEvent() {
+
+
+
+    this.currentLoggedInUser = this.userService.currLoggedInUserName;
 
     const event = this.eventForm.value;
     if (event.id) {
@@ -83,6 +106,7 @@ export class EventFormComponent implements OnInit {
           }
         });
     } else {
+      event.eventOrganizer = this.currentLoggedInUser;
       this.eventService.create(event)
         .subscribe((response: any) => {
           alert('created successfully');

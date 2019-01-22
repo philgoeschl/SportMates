@@ -38,7 +38,7 @@ public class SportFacade {
         entity.setTeamSize(dto.getTeamSize());
         entity.setSportPicture(dto.getSportPicture());
         //entity.setUsers(userService.getUsers());
-        //entity.setEvents(eventService.getEvents(dto.getEvents()));
+        entity.setEvents(eventService.getEvents(dto.getEvents()));
 
 
     }
@@ -52,7 +52,7 @@ public class SportFacade {
         dto.setTeamSize(entity.getTeamSize());
         dto.setSportPicture(entity.getSportPicture());
         //dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
-        //dto.setEvents(entity.getEvents().stream().map(e -> e.getEventTitle()).collect(Collectors.toSet()));
+        dto.setEvents(entity.getEvents().stream().map(e -> e.getId()).collect(Collectors.toSet()));
     }
 
     public SportDTO update(Long id, SportDTO dto) {

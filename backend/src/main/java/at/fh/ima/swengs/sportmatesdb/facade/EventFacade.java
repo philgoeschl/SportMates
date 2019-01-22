@@ -2,6 +2,7 @@ package at.fh.ima.swengs.sportmatesdb.facade;
 
 import at.fh.ima.swengs.sportmatesdb.dto.EventDTO;
 import at.fh.ima.swengs.sportmatesdb.model.Event;
+import at.fh.ima.swengs.sportmatesdb.model.Sport;
 import at.fh.ima.swengs.sportmatesdb.service.EventService;
 import at.fh.ima.swengs.sportmatesdb.service.SportService;
 import at.fh.ima.swengs.sportmatesdb.service.UserService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +29,8 @@ public class EventFacade {
     @JsonIgnore
     private UserService userService;
 
-    /*@Autowired
-    private SportService sportService;*/
+    @Autowired
+    private SportService sportService;
 
 
     void mapDtoToEntity(EventDTO dto, Event entity) {
@@ -42,12 +44,21 @@ public class EventFacade {
         entity.setEventZIP(dto.getEventZIP());
         entity.setImage(dto.getImage());
 
+        Optional<Sport> optionalSport = sportService.findById(dto.getSport());
+        if(((Optional) optionalSport).isPresent()) {
+            entity.setSport(optionalSport.get());
+        }
+
+        //entity.setSport(sportService.getSports(dto.getSport()));
+
         /*Optional<User> eventManagerOptional = userService.findByUserName(dto.getEventManager());
         if (((Optional) eventManagerOptional).isPresent()) {
             entity.setEventManager(eventManagerOptional.get());
-        }
+        }*/
 
-        entity.setSport(sportService.findBySportName(dto.getSport()).get());*/
+
+
+
         //entity.setUsers(userService.getUsersByUsername(dto.getUsers()));
 
     }
@@ -65,8 +76,13 @@ public class EventFacade {
         dto.setEventZIP(entity.getEventZIP());
         dto.setImage(entity.getImage());
 
+        if(entity.getSport() != null) {
+            dto.setSport(entity.getSport().getId());
+        }
+
+
         //dto.setEventManager(entity.getEventManager().getUsername());
-        //dto.setSport(entity.getSport().getSportName());
+
         if(entity.getUsers() != null) {
             dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
         }

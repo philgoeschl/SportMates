@@ -4,6 +4,7 @@ import at.fh.ima.swengs.sportmatesdb.model.Event;
 import at.fh.ima.swengs.sportmatesdb.model.EventRepository;
 import at.fh.ima.swengs.sportmatesdb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -27,7 +28,6 @@ public class EventService {
     }
 
 
-
     public List<Event> getAll() {
 
         return eventRepository.findAll();
@@ -40,6 +40,12 @@ public class EventService {
 
         return eventRepository.findEventByUsersUsername(username);
     }*/
+
+    public String getLoggedInUser(){
+
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+
+    }
 
 
     public Set<Event> getEvents(Set<Long> dtos) {

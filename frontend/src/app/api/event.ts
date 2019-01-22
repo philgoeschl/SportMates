@@ -7,10 +7,10 @@ export interface Event {
   eventZIP?: number;
   eventStreet?: string;
   eventDateTime?: Date;
-  eventOrganizer?: string;
+  eventOrganizer: string;
 
-  sports?: Array<string>;
-  users?: Array<string>;
+  sports?: Array<number>;
+  users?: Array<number>;
 
 
 }
