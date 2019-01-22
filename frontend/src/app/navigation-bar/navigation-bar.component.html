@@ -1,32 +1,24 @@
-<div class="card bg-light top " *ngIf="loggedIn">
+<!--<div class="card bg-light top ">
   <div class="card-body text-dark">
-    <div class="container-fluid">
+    <div class="container-fluid">-->
 
 
 
-      <nav class="navbar navbar-expand-lg navbar-dark justify-content-between">
-        <div class="col-1" *ngIf="loggedIn">
-          <a class="navbar-brand brand" [routerLink]="'/user-profile/'">My Profile</a>
-        </div>
+      <div class="topnav">
+          <a [routerLink]="'/user-profile/'" *ngIf="loggedIn">My Profile</a>
+          <a [routerLink]="'/event-list/'">Events</a>
+          <a [routerLink]="'/user-list/'" *ngIf="isAdmin">User List</a>
+          <a [routerLink]="'/sport-list/'" *ngIf="isAdmin">Sports</a>
+          <a class="button" (click)="logout()" style="float:right" *ngIf="loggedIn">Logout</a>
+          <a [routerLink]="'/register/'" *ngIf="!loggedIn">Register</a>
+          <a style="float:right" *ngIf="!loggedIn"><app-login></app-login></a>
+      </div>
 
 
-        <div class="navbar-nav">
-          <a class="navbar-brand brand" [routerLink]="'/event-list/'">Events</a>
-        </div>
 
-        <div class="navbar-nav" *ngIf="isAdmin">
-          <a class="navbar-brand brand" [routerLink]="'/user-list/'">User List</a>
-        </div>
 
-        <div class="navbar-nav" *ngIf="isAdmin">
-          <a class="navbar-brand brand" [routerLink]="'/sport-list/'">Sports</a>
-        </div>
-
-        <div class="col-2 btn-group-sm">
-          <button (click)="logout()">Logout</button>
-        </div>
-      </nav>
+      <!--</div>
     </div>
-  </div>
+  </div>-->
 
-</div>
+
