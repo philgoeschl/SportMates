@@ -5,10 +5,9 @@
   </label>
   <label>
     Password:
-    <input type="text" name="password" [(ngModel)]="user.password"/>
+    <input [type]="show ? 'text' : 'password'"  id="password" type="text" name="password" [(ngModel)]="user.password"/>
   </label>
   <button type="submit">
     Login
   </button>
-  <input type="button" onclick="location.href='/register';" value="Register" />
 </form>

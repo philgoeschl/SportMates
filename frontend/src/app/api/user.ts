@@ -1,5 +1,6 @@
 export interface User {
   id?: number;
+  encodeNumber?: number;
   username: string;
   password?: string;
   admin?: boolean;
