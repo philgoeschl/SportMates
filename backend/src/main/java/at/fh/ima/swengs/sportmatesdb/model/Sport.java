@@ -27,9 +27,12 @@ public class Sport {
     private int teamSize;
     private String sportPicture;
 
-    @ManyToMany
-    @JsonIgnoreProperties("sports")
-    private List<User> users;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "sports_users",
+            joinColumns = @JoinColumn(name = "sport_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> users;
+
 
     @OneToMany(mappedBy = "sport")
     private Set<Event> events;
@@ -55,7 +58,6 @@ public class Sport {
         this.team = team;
         this.teamSize = teamSize;
         this.sportPicture = sportPicture;
-        this.users = users;
         this.events = events;
     }
 
@@ -115,11 +117,11 @@ public class Sport {
         this.version = version;
     }
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
