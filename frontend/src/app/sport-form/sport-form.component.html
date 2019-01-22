@@ -6,7 +6,18 @@
   <div class="col">
     <div class="form-group">
       <label for="sportName">Sport:</label>
-      <input id="sportName" type="text" name="sportName" formControlName="sportName" class="form-control"/>
+      <input id="sportName" type="text" name="sportName" formControlName="sportName" class="form-control" required
+             minlength="2"/>
+      <div
+        *ngIf="sportForm.controls.sportName.invalid && (sportForm.controls.sportName.dirty || sportForm.controls.sportName.touched)"
+        class="alert alert-danger">
+        <div *ngIf="sportForm.controls.sportName.errors.required">
+          Name is required!
+        </div>
+        <div *ngIf="sportForm.controls.sportName.errors.minlength">
+          Name must be at least 2 characters long!
+        </div>
+      </div>
     </div>
   </div>
   <div class="col">
@@ -33,16 +44,22 @@
     </div>
   </div>
 
+  <div class="col">
+    <div class="btn-media">
+      <app-mediainput name="sportImage" formControlName="sportImage"></app-mediainput>
+    </div>
+  </div>
+
 
   <!--div class="btn-group"-->
   <div class="btn">
-    <button type="submit" class="btn btn-red" [disabled]="sportForm.invalid">
+    <button type="submit" class="btn btn-primary" [disabled]="sportForm.invalid">
       Save
     </button>
-    <button type="submit" (click)="setShouldNavigateToList()" class=" btn btn-green" [disabled]="sportForm.invalid">
+    <button type="submit" (click)="setShouldNavigateToList()" class="btn btn-primary" [disabled]="sportForm.invalid">
       Save and Back
     </button>
-    <button type="submit" (click)="navigateToList()" class="btn btn-yellow">
+    <button type="submit" (click)="navigateToList()" class="btn btn-primary">
       Back without saving
     </button>
   </div>
