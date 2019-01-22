@@ -1,11 +1,27 @@
-<div *ngFor="let sport of sports">
+<!--div *ngFor="let sport of sports">
   {{sport.sportName}}
   {{sport.sportDescription}}
-  <a [routerLink]="'/sport-form/' + sport.id">Edit</a>
-  <button type="button" (click)="deleteSport(sport)">Delete</button>
-</div>
+
 
 <button type="button" (click)="createSport()">
   Create sport
-</button>
+</button-->
 
+
+<div *ngFor="let sport of sports">
+  <div class="col">
+    {{sport.sportName}}
+    {{sport.sportDescription}}
+    {{sport.sportPicture}}
+  </div>
+  <div class="btn">
+    <a [routerLink]="'/sport-form/' + sport.id">
+      <button>Edit</button>
+    </a>
+    <button type="button" (click)="deleteSport(sport)">Delete</button>
+
+  </div>
+</div>
+<div class="btn">
+  <button type="button" (click)="createSport()">Create Sport</button>
+</div>
