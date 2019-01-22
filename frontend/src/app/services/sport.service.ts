@@ -18,6 +18,12 @@ export class SportService {
     }));
   }
 
+  getByIdNumber(id: number) {
+    return this.http.get('/api/dto/sports/' + id).pipe(map((res: any) => {
+      return res;
+    }));
+  }
+
   getAll() {
     return this.http.get('/api/sports');
   }
