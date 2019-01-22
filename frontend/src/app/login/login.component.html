@@ -1,15 +1,15 @@
 <form (ngSubmit)="login()">
   <div class="topnav">
-  <a style="float:right;">
+
+  <a>
     Username:
     <input type="text" name="username" [(ngModel)]="user.username"/>
-
 
     Password:
     <input [type]="show ? 'text' : 'password'"  id="password" type="text" name="password" [(ngModel)]="user.password"/>
 
-  <button class="a" style="float:right; cursor: pointer;" onmouseover="this.style.backgroundColor='#ddd';this.style.color='#000000'"
-     onmouseout="this.style.backgroundColor='';this.style.color=''">Login</button>
+  <button class="button" type="submit" class="a" style="float:right; cursor: pointer;" onmouseover="this.style.backgroundColor='#ddd';this.style.color='#000000'"
+             onmouseout="this.style.backgroundColor='';this.style.color=''">Login</button>
   </a>
   </div>
 </form>

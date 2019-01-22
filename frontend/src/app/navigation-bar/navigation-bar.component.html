@@ -10,7 +10,7 @@
           <a [routerLink]="'/user-list/'" *ngIf="isAdmin">User List</a>
           <a [routerLink]="'/sport-list/'" *ngIf="isAdmin">Sports</a>
           <a class="button" (click)="logout()" style="float:right; cursor: pointer;" *ngIf="loggedIn" >Logout</a>
-          <a [routerLink]="'/register/'" *ngIf="!loggedIn">Register</a>
+          <a [routerLink]="'/register/'" *ngIf="!loggedIn" style="float:right;">Register</a>
           <app-login *ngIf="!loggedIn"></app-login>
       </div>
 
