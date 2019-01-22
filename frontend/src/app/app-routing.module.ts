@@ -14,10 +14,11 @@ import {Sport} from './api/sport';
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {UserProfileEditComponent} from "./user-profile-edit/user-profile-edit.component";
 import {AdminGuard} from "./guards/admin.guard";
+import {AppComponent} from "./app.component";
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: '', redirectTo: '', pathMatch: 'full'},
   {path: 'register', component: RegisterComponent},
   {path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'user-form', component: UserFormComponent, canActivate: [AdminGuard]},

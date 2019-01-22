@@ -11,7 +11,7 @@ import {UserService} from "../services/user.service";
 export class LoginComponent implements OnInit {
 
   user: any;
-
+  show = false;
   constructor(private userservice: UserService, private router: Router) {
   }
 

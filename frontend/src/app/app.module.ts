@@ -22,6 +22,7 @@ import {SportListComponent} from './sport-list/sport-list.component';
 import {SportFormComponent} from './sport-form/sport-form.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProfileEditComponent } from './user-profile-edit/user-profile-edit.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
 
 export function tokenGetter(){
@@ -42,7 +43,8 @@ export function tokenGetter(){
     MediainputComponent,
     SafePipe,
     UserProfileComponent,
-    UserProfileEditComponent
+    UserProfileEditComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,
