@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {User} from "../api/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Sport} from "../api/sport";
 
 @Component({
   selector: 'app-user-profile',
@@ -19,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   dayOfBirthShow: Date;
   homeTown: string;
   userLocation: string;
+  sports: Array<Sport>;
   id: number;
   users: Array<User>;
   user: Array<User>;
@@ -38,6 +40,7 @@ export class UserProfileComponent implements OnInit {
       'dayOfBirth': new FormControl(),
       'homeTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'userLocation': new FormControl(),
+      'sports': new FormControl(),
     });
     this.userService.getAll()
       .subscribe((users: any) => {

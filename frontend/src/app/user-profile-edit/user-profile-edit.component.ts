@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SportService} from "../services/sport.service";
+import {Sport} from "../api/sport";
 
 @Component({
   selector: 'app-user-profile-edit',
@@ -26,6 +27,7 @@ export class UserProfileEditComponent implements OnInit {
   password: string;
   admin: boolean;
   users: Array<User>;
+  sports: Array<Sport>;
   userArray
   shouldNavigateToList: boolean;
   sportOptions;
@@ -45,7 +47,7 @@ export class UserProfileEditComponent implements OnInit {
       'password': new FormControl(),
       'homeTown': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'userLocation': new FormControl(),
-      'sport': new FormControl(),
+      'sports': new FormControl(),
     });
     this.userService.getAll()
       .subscribe((users: any) => {

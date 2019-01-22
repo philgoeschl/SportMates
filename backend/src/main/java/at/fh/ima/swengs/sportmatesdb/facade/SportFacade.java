@@ -37,7 +37,7 @@ public class SportFacade {
         entity.setTeam(dto.isTeam());
         entity.setTeamSize(dto.getTeamSize());
         entity.setSportPicture(dto.getSportPicture());
-        //entity.setUsers(userService.getUsers());
+        entity.setUsers(userService.getUsers());
         entity.setEvents(eventService.getEvents(dto.getEvents()));
 
 

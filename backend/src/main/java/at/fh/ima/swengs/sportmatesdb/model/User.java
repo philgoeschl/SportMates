@@ -19,7 +19,11 @@ public class User {
     private long id;
 
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany
+    @JoinTable(name = "users_sports",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "sport_id")
+    )
     private Set<Sport> sports;
 
     @ManyToMany(mappedBy = "users")
