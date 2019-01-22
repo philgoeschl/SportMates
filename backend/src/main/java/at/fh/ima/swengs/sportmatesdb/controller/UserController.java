@@ -12,7 +12,6 @@ import java.util.List;
 public class UserController {
 
 
-
     @Autowired
     private UserFacade userFacade;
 
@@ -30,6 +29,5 @@ public class UserController {
     UserDTO update(@RequestBody @Valid UserDTO dto, @PathVariable Long id) {
         return userFacade.update(id, dto);
     }
-
 
 }

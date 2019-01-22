@@ -2,6 +2,7 @@ package at.fh.ima.swengs.sportmatesdb.model;
 
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cascade;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import java.util.*;

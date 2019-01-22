@@ -44,7 +44,7 @@ public class EventFacade {
         entity.setEventZIP(dto.getEventZIP());
         entity.setImage(dto.getImage());
 
-        Optional<Sport> optionalSport = sportService.findBySportName(dto.getSport());
+        Optional<Sport> optionalSport = sportService.findById(dto.getSport());
         if(((Optional) optionalSport).isPresent()) {
             entity.setSport(optionalSport.get());
         }
@@ -77,7 +77,7 @@ public class EventFacade {
         dto.setImage(entity.getImage());
 
         if(entity.getSport() != null) {
-            dto.setSport(entity.getSport().getSportName());
+            dto.setSport(entity.getSport().getId());
         }
 
 

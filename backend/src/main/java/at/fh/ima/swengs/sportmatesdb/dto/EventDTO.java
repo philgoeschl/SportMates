@@ -15,14 +15,13 @@ public class EventDTO {
     private EventType eventType;
     private String eventDescription;
     private String eventTown;
-    private String eventManager;
     private int eventZIP;
     private String eventStreet;
     private Date eventDateTime;
     private String eventOrganizer;
     private Set<Media> image;
 
-    private String sport;
+    private Long sport;
     private Set<String> users;
 
 
@@ -110,11 +109,11 @@ public class EventDTO {
         this.users = users;
     }
 
-    public String getSport() {
+    public Long getSport() {
         return sport;
     }
 
-    public void setSport(String sport) {
+    public void setSport(Long sport) {
         this.sport = sport;
     }
 

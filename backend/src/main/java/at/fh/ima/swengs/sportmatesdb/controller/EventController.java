@@ -27,4 +27,8 @@ public class EventController {
     EventDTO update(@RequestBody @Valid EventDTO dto, @PathVariable Long id) {
         return eventFacade.update(id, dto);
     }
+
+
+
+
 }

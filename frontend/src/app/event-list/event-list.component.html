@@ -1,12 +1,21 @@
 <input id="filterEvents" type="text" name="filterEvents" #box (keyup)="filterEvents(box.value);" value=""
        placeholder="Filter Events">
 
+Current User: {{currentLoggedInUser}}
+
 <div *ngFor="let event of eventArray">
   {{event.eventTitle}}
   {{event.eventTown}}
   {{event.eventDateTime}}
-  <a [routerLink]="'/event-form/' + event.id">Edit</a>
-  <button type="button" (click)="deleteEvent(event)">Delete</button>
+
+
+  <button
+    [routerLink]="'/event-form/' + event.id" *ngIf="event.eventOrganizer !== currentLoggedInUser">View</button>
+
+  <button [routerLink]="'/event-form/' + event.id" *ngIf="event.eventOrganizer === currentLoggedInUser">Edit</button>
+  <button class="btn-success" type="button" (click)="participateEvent(event)" *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate</button>
+
+  <button class="btn-danger" type="button" (click)="deleteEvent(event)" *ngIf="event.eventOrganizer === currentLoggedInUser">Delete</button>
 </div>
 
 <button type="button" (click)="createEvent()">
