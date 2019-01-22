@@ -1,68 +1,58 @@
 <form [formGroup]="eventForm" (ngSubmit)="saveEvent()">
-  <div>
-    {{currentLoggedInUser}}
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventTitle">Title:</label>
-        <input id="eventTitle" type="text" name="eventTitle" formControlName="eventTitle" class="form-control"
-               required
-               minlength="2"/>
-        <div
-          *ngIf="eventForm.controls.eventTitle.invalid && (eventForm.controls.eventTitle.dirty || eventForm.controls.eventTitle.touched)"
-          class="alert alert-danger">
-          <div *ngIf="eventForm.controls.eventTitle.errors.required">
-            Title is required!
-          </div>
-          <div *ngIf="eventForm.controls.eventTitle.errors.minlength">
-            Title must be at least 2 characters long!
-          </div>
+
+  <h1>Event</h1>
+  <!--div class="row"-->
+  <div class="col">
+    <div class="form-group">
+      <label for="eventTitle">Title:</label>
+      <input id="eventTitle" type="text" name="eventTitle" formControlName="eventTitle" class="form-control" required
+             minlength="2"/>
+      <div
+        *ngIf="eventForm.controls.eventTitle.invalid && (eventForm.controls.eventTitle.dirty || eventForm.controls.eventTitle.touched)"
+        class="alert alert-danger">
+        <div *ngIf="eventForm.controls.eventTitle.errors.required">
+          Title is required!
+        </div>
+        <div *ngIf="eventForm.controls.eventTitle.errors.minlength">
+          Title must be at least 2 characters long!
         </div>
       </div>
     </div>
   </div>
+  <!--/div-->
 
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventOrganizer">Organizer</label>
-        <input id="eventOrganizer" type="text" name="eventOrganizer" formControlName="eventOrganizer"
-               class="form-control"/>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventDescription">Description</label>
-        <input id="eventDescription" type="text" name="eventDescription" formControlName="eventDescription"
-               class="form-control" required minlength="2"/>
-        <div
-          *ngIf="eventForm.controls.eventDescription.invalid && (eventForm.controls.eventDescription.dirty || eventForm.controls.eventDescription.touched)"
-          class="alert alert-danger">
-          <div *ngIf="eventForm.controls.eventDescription.errors.required">
-            Title is required!
-          </div>
-          <div *ngIf="eventForm.controls.eventDescription.errors.minlength">
-            Title must be at least 2 characters long!
-          </div>
+  <!--div class="row"-->
+  <div class="col">
+    <div class="form-group">
+      <label for="eventDescription">Description:</label>
+      <input id="eventDescription" type="text" name="eventDescription" formControlName="eventDescription"
+             class="form-control" required minlength="2"/>
+      <div
+        *ngIf="eventForm.controls.eventDescription.invalid && (eventForm.controls.eventDescription.dirty || eventForm.controls.eventDescription.touched)"
+        class="alert alert-danger">
+        <div *ngIf="eventForm.controls.eventDescription.errors.required">
+          Title is required!
+        </div>
+        <div *ngIf="eventForm.controls.eventDescription.errors.minlength">
+          Title must be at least 2 characters long!
         </div>
       </div>
     </div>
   </div>
-
-  <div class="col">
-    <label>Sport</label>
-    <div class="form-check">
-      <ngx-select id="sport" [items]="sportOptions" name="sport" formControlName="sport"
-                  [multiple]="false" optionTextField="sportName"></ngx-select>
+  <!--/div-->
+  <!--
+    <div class="col">
+      <label>Sport</label>
+      <div class="form-check">
+        <ngx-select id="eventSport" [items]="items" name="eventSport" formControlName="eventSport"
+                    [multiple]="false" optionTextField="title"></ngx-select>
+      </div>
     </div>
-  </div>
+
+    -->
 
   <div class="col">
-    <label>Type</label>
+    <label>Type:</label>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="eventType" id="radio3" formControlName="eventType"
              value="JUSTFORFUN">
@@ -96,80 +86,82 @@
   </div>
 
 
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventTown">Town:</label>
-        <input id="eventTown" type="text" name="eventTown" formControlName="eventTown"
-               class="form-control" required minlength="2"/>
-        <div
-          *ngIf="eventForm.controls.eventTown.invalid && (eventForm.controls.eventTown.dirty || eventForm.controls.eventTown.touched)"
-          class="alert alert-danger">
-          <div *ngIf="eventForm.controls.eventTown.errors.required">
-            Town is required!
-          </div>
-          <div *ngIf="eventForm.controls.eventTown.errors.minlength">
-            Town must be at least 2 characters long!
-          </div>
+  <!--div class="row"-->
+  <div class="col">
+    <div class="form-group">
+      <label for="eventTown">Town:</label>
+      <input id="eventTown" type="text" name="eventTown" formControlName="eventTown"
+             class="form-control" required minlength="2"/>
+      <div
+        *ngIf="eventForm.controls.eventTown.invalid && (eventForm.controls.eventTown.dirty || eventForm.controls.eventTown.touched)"
+        class="alert alert-danger">
+        <div *ngIf="eventForm.controls.eventTown.errors.required">
+          Town is required!
+        </div>
+        <div *ngIf="eventForm.controls.eventTown.errors.minlength">
+          Town must be at least 2 characters long!
         </div>
       </div>
     </div>
   </div>
+  <!--/div-->
 
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventZIP">ZIP:</label>
-        <input id="eventZIP" type="number" name="eventZIP" formControlName="eventZIP"
-               class="form-control" required/>
-        <div
-          *ngIf="eventForm.controls.eventZIP.invalid && (eventForm.controls.eventZIP.dirty || eventForm.controls.eventZIP.touched)"
-          class="alert alert-danger">
-          <div *ngIf="eventForm.controls.eventZIP.errors.required">
-            ZIP is required!
-          </div>
+  <!--div class="row"-->
+  <div class="col">
+    <div class="form-group">
+      <label for="eventZIP">ZIP:</label>
+      <input id="eventZIP" type="number" name="eventZIP" formControlName="eventZIP"
+             class="form-control" required/>
+      <div
+        *ngIf="eventForm.controls.eventZIP.invalid && (eventForm.controls.eventZIP.dirty || eventForm.controls.eventZIP.touched)"
+        class="alert alert-danger">
+        <div *ngIf="eventForm.controls.eventZIP.errors.required">
+          ZIP is required!
         </div>
       </div>
     </div>
   </div>
+  <!--/div-->
 
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventStreet">Street:</label>
-        <input id="eventStreet" type="text" name="eventStreet" formControlName="eventStreet"
-               class="form-control" required minlength="2"/>
-        <div
-          *ngIf="eventForm.controls.eventStreet.invalid && (eventForm.controls.eventStreet.dirty || eventForm.controls.eventStreet.touched)"
-          class="alert alert-danger">
-          <div *ngIf="eventForm.controls.eventStreet.errors.required">
-            Street is required!
-          </div>
-          <div *ngIf="eventForm.controls.eventStreet.errors.minlength">
-            Street must be at least 2 characters long!
-          </div>
+  <!--div class="row"-->
+  <div class="col">
+    <div class="form-group">
+      <label for="eventStreet">Street:</label>
+      <input id="eventStreet" type="text" name="eventStreet" formControlName="eventStreet"
+             class="form-control" required minlength="2"/>
+      <div
+        *ngIf="eventForm.controls.eventStreet.invalid && (eventForm.controls.eventStreet.dirty || eventForm.controls.eventStreet.touched)"
+        class="alert alert-danger">
+        <div *ngIf="eventForm.controls.eventStreet.errors.required">
+          Street is required!
+        </div>
+        <div *ngIf="eventForm.controls.eventStreet.errors.minlength">
+          Street must be at least 2 characters long!
         </div>
       </div>
     </div>
   </div>
+  <!--/div-->
 
-  <div class="row">
-    <div class="col">
-      <label for="eventDateTime">Date:</label>
-      <input id="eventDateTime" type="text" bsDatepicker name="eventDateTime" formControlName="eventDateTime"
-             class="form-control"/>
-    </div>
+  <!--div class="row"-->
+  <div class="col">
+    <label for="eventDateTime">Date:</label>
+    <input id="eventDateTime" type="text" bsDatepicker name="eventDateTime" formControlName="eventDateTime"
+           class="form-control"/>
   </div>
+  <!--/div-->
 
   <!-- Media Input -->
 
-  <div class="row">
-    <div class="col">
+  <!--div class="row"-->
+  <div class="col">
+    <div class="btn-media">
       <app-mediainput name="image" formControlName="image"></app-mediainput>
     </div>
   </div>
+  <!--/div-->
 
-  <div class="btn-group">
+  <div class="btn">
     <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">
       Save
     </button>

@@ -1,5 +1,6 @@
 export interface User {
   id?: number;
+  encodeNumber?: number;
   username: string;
   password?: string;
   admin?: boolean;
@@ -11,7 +12,7 @@ export interface User {
   homeTown?: string;
   userLocation?: string;
 
-  sports?: Array<string>;
+  sports?: Array<any>;
   events?: Array<string>;
   managedEvents?: Array<string>;
 

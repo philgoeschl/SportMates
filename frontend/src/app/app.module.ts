@@ -21,6 +21,7 @@ import { NgxSelectModule } from 'ngx-select-ex';
 import {SportListComponent} from './sport-list/sport-list.component';
 import {SportFormComponent} from './sport-form/sport-form.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { EventInfoComponent } from './event-info/event-info.component';
 
 
@@ -42,6 +43,8 @@ export function tokenGetter(){
     MediainputComponent,
     SafePipe,
     UserProfileComponent,
+    UserProfileEditComponent,
+    NavigationBarComponent
     EventInfoComponent
   ],
   imports: [

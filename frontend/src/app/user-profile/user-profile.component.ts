@@ -13,11 +13,17 @@ export class UserProfileComponent implements OnInit {
   userForm;
   currentUser: string;
   firstName: string;
+  lastName: string;
+  usernameShow: string;
+  eMail: string;
+  dayOfBirthShow: Date;
+  homeTown: string;
+  userLocation: string;
   id: number;
   users: Array<User>;
-  userArray
+  user: Array<User>;
   shouldNavigateToList: boolean;
-  mapUsers: Map<string, User>;
+
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
@@ -36,16 +42,19 @@ export class UserProfileComponent implements OnInit {
     this.userService.getAll()
       .subscribe((users: any) => {
         this.users = users;
-        /*this.currentUser = this.userService.currLoggedInUserName;
+        this.currentUser = this.userService.currLoggedInUserName;
 
-        console.log(this.currentUser)
-        this.firstName = this.users.find(x=>x.username == this.currentUser).firstName;
-        console.log(this.firstName)
-        //this.loadData()*/
-        this.loadData()
+
         this.id = this.users.find(x=>x.username == this.currentUser).id;
+        this.firstName = this.users.find(x=>x.username == this.currentUser).firstName;
+        this.lastName = this.users.find(x=>x.username == this.currentUser).lastName;
+        this.usernameShow = this.users.find(x=>x.username == this.currentUser).username;
+        this.eMail = this.users.find(x=>x.username == this.currentUser).eMail;
+        this.dayOfBirthShow = this.users.find(x=>x.username == this.currentUser).dayOfBirth;
+        this.homeTown = this.users.find(x=>x.username == this.currentUser).homeTown;
+        this.userLocation = this.users.find(x=>x.username == this.currentUser).userLocation;
 
-        this.userService.getById(this.id)
+     this.userService.getById(this.id)
           .subscribe((response) => {
             this.userForm.patchValue(response);
           });
@@ -54,42 +63,9 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  loadData() {
-    this.currentUser = this.userService.currLoggedInUserName;
-    console.log(this.currentUser)
-    console.log(this.userArray)
-    this.userArray = this.users.find(x=>x.username == this.currentUser);
-    this.firstName = this.users.find(x=>x.username == this.currentUser).firstName;
-    this.id = this.users.find(x=>x.username == this.currentUser).id;
-    console.log(this.userArray)
-    const data = this.route.snapshot.data;
 
-  }
 
-  saveUser() {
 
-    const user = this.userForm.value;
-    if (user.id) {
-      this.userService.update(user)
-        .subscribe((response) => {
-          alert('updated successfully');
-          this.userForm.patchValue(response);
-          if (this.shouldNavigateToList) {
-            this.navigateToList();
-          }
-        });
-    } else {
-      this.userService.create(user)
-        .subscribe((response: any) => {
-          alert('created successfully');
-          if (this.shouldNavigateToList) {
-            this.navigateToList();
-          } else {
-            this.router.navigate(['/user-form', response.id]);
-          }
-        });
-    }
-  }
   navigateToList() {
     this.router.navigate(['/user-list']);
   }

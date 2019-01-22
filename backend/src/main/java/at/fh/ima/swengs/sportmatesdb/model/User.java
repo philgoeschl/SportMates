@@ -35,8 +35,14 @@ public class User {
     private boolean isAdmin =false;
     private String firstName;
     private String lastName;
+
+    @Column(unique=true)
     private String username;
+
     private String password;
+
+    private int encodeNumber;
+
     private String eMail;
 
 
@@ -152,6 +158,13 @@ public class User {
     }
 
 
+    public int getEncodeNumber() {
+        return encodeNumber;
+    }
+
+    public void setEncodeNumber(int encodeNumber) {
+        this.encodeNumber = encodeNumber;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -233,4 +246,16 @@ public class User {
         this.homeTown = homeTown;
         this.userLocation = userLocation;
     }
+
+    public User(String firstName, String lastName, String username, String eMail, Date dayOfBirth, String homeTown, String userLocation) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.eMail = eMail;
+        this.dayOfBirth = dayOfBirth;
+        this.homeTown = homeTown;
+        this.userLocation = userLocation;
+    }
+
+
 }

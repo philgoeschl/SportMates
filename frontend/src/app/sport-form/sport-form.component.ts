@@ -22,7 +22,8 @@ export class SportFormComponent implements OnInit {
       'sportName': new FormControl(),
       'sportDescription': new FormControl(),
       'team': new FormControl(),
-      'teamSize': new FormControl()
+      'teamSize': new FormControl(),
+      'sportImage': new FormControl()
     });
 
     const id = this.route.snapshot.paramMap.get('id');
