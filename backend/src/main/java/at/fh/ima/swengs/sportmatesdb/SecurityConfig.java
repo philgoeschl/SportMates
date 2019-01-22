@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/dto/users").permitAll()
                 .antMatchers(HttpMethod.GET, "/users").permitAll()
-                .antMatchers(HttpMethod.GET, "/events").permitAll()
+                .antMatchers(HttpMethod.GET, "/dto/events").permitAll()
                 // allow all POST requests
                 //.authorizeRequests()
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
