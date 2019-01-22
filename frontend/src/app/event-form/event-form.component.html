@@ -21,6 +21,16 @@
   </div>
   <!--/div-->
 
+
+    <div class="col">
+      <div class="form-group">
+        <label for="eventOrganizer">Organizer</label>
+        <input id="eventOrganizer" type="text" name="eventOrganizer" formControlName="eventOrganizer"
+               class="form-control"/>
+      </div>
+    </div>
+
+
   <!--div class="row"-->
   <div class="col">
     <div class="form-group">
@@ -39,17 +49,14 @@
       </div>
     </div>
   </div>
-  <!--/div-->
-  <!--
-    <div class="col">
-      <label>Sport</label>
-      <div class="form-check">
-        <ngx-select id="eventSport" [items]="items" name="eventSport" formControlName="eventSport"
-                    [multiple]="false" optionTextField="title"></ngx-select>
-      </div>
+  
+  <div class="col">
+    <label>Sport</label>
+    <div class="form-check">
+      <ngx-select id="sport" [items]="sportOptions" name="sport" formControlName="sport"
+                  [multiple]="false" optionTextField="sportName"></ngx-select>
     </div>
-
-    -->
+  </div>
 
   <div class="col">
     <label>Type:</label>

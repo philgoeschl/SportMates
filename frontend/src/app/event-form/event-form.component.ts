@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SportService} from '../services/sport.service';
 import {UserService} from '../services/user.service';
-import {AuthGuard} from '../auth.guard';
+import {AuthGuard} from '../guards/auth.guard';
 
 @Component({
   selector: 'app-event-form',

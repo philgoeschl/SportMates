@@ -28,6 +28,7 @@ const routes: Routes = [
   {path: 'event-list', component: EventListComponent, canActivate: [AuthGuard]},
   {path: 'event-form', component: EventFormComponent, canActivate: [AuthGuard]},
   {path: 'event-form/:id', component: EventFormComponent, canActivate: [AuthGuard]},
+  {path: 'event-info/:id', component: EventInfoComponent, canActivate: [AuthGuard]},
   {path: 'user-form/:id', component: UserFormComponent, canActivate: [AdminGuard]},
   {path: 'sport-form', component: SportFormComponent, canActivate: [AuthGuard]},
   {path: 'sport-list', component: SportListComponent, canActivate: [AuthGuard]},

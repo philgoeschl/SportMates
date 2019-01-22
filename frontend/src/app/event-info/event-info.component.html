@@ -1,121 +1,25 @@
 <form [formGroup]="eventInfo">
 
+  <div class="container">
 
+    <h1>{{event.eventTitle}}</h1>
 
+    <h4>Sport: {{event.sport}}</h4><h4>Type: {{event.eventType}}</h4>
 
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventTitle">Title:</label>
+    <h4>Organizer: {{event.eventOrganizer}}</h4>
 
-        <div id="eventTitle"> {{event.eventTitle}}</div>
+    <h4>Date: {{event.eventDateTime}}</h4>
 
+    <h4>Description: {{event.eventDescription}}</h4>
 
-      </div>
+    <h4>Location: {{event.eventZIP}} {{event.eventTown}}, {{event.eventStreet}}</h4>
+    <h4></h4>
+
+    <div class="btn-group">
+      <button type="submit" (click)="navigateToList()" class="btn btn-primary">
+        Back
+      </button>
+
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventOrganizer">Organizer:</label>
-
-        <div id="eventOrganizer"> {{event.eventOrganizer}}</div>
-
-
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventDescription">Title:</label>
-
-        <div id="eventDescription"> {{event.eventDescription}}</div>
-
-
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="sport">Sport:</label>
-
-        <div id="sport"> {{event.sport}}</div>
-
-
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventType">Type:</label>
-
-        <div id="eventType">Type comes here</div>
-
-
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventTown">Town:</label>
-
-        <div id="eventTown"> {{event.eventTown}}</div>
-
-
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventZIP">Town:</label>
-
-        <div id="eventZIP"> {{event.eventZIP}}</div>
-
-
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventStreet">Town:</label>
-
-        <div id="eventStreet"> {{event.eventStreet}}</div>
-
-
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="eventDate">Town:</label>
-
-        <div id="eventDate"> {{event.eventDateTime}}</div>
-
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="btn-group">
-    <button type="submit" (click)="navigateToList()" class="btn btn-primary">
-      Back
-    </button>
-
   </div>
 </form>
