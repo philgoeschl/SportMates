@@ -14,7 +14,7 @@ import {UserService} from "../services/user.service";
 export class UserListComponent implements OnInit {
 
   users: Array<User>;
-  ;
+
 
   constructor(private userService: UserService, private router: Router) {
   }
