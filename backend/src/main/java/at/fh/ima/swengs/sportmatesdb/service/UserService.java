@@ -37,4 +37,12 @@ public class UserService {
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
+
+    public Set<User> getUsersByName(Set<String> dtos) {
+        Set<User> entities = new HashSet<>();
+        if (dtos != null) {
+            dtos.forEach((dto) -> entities.add(userRepository.findByUsername(dto).get()));
+        }
+        return entities;
+    }
 }

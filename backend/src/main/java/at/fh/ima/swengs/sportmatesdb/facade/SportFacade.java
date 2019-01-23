@@ -37,7 +37,7 @@ public class SportFacade {
         entity.setTeam(dto.isTeam());
         entity.setTeamSize(dto.getTeamSize());
         entity.setSportPicture(dto.getSportPicture());
-        //entity.setUsers(userService.getUsers());
+        entity.setUsers(userService.getUsersByName(dto.getUsers()));
         entity.setEvents(eventService.getEvents(dto.getEvents()));
 
 
@@ -51,7 +51,7 @@ public class SportFacade {
         dto.setTeam(entity.isTeam());
         dto.setTeamSize(entity.getTeamSize());
         dto.setSportPicture(entity.getSportPicture());
-        //dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
+        dto.setUsers(entity.getUsers().stream().map(u -> u.getUsername()).collect(Collectors.toSet()));
         dto.setEvents(entity.getEvents().stream().map(e -> e.getId()).collect(Collectors.toSet()));
     }
 

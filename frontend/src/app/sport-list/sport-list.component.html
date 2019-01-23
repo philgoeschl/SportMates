@@ -1,27 +1,70 @@
+<h1>Sports</h1>
+
 <!--div *ngFor="let sport of sports">
-  {{sport.sportName}}
-  {{sport.sportDescription}}
-
-
-<button type="button" (click)="createSport()">
-  Create sport
-</button-->
-
-
-<div *ngFor="let sport of sports">
-  <div class="col">
-    {{sport.sportName}}
-    {{sport.sportDescription}}
-    {{sport.sportPicture}}
-  </div>
-  <div class="btn">
-    <a [routerLink]="'/sport-form/' + sport.id">
-      <button>Edit</button>
-    </a>
-    <button type="button" (click)="deleteSport(sport)">Delete</button>
-
+  <div class="row">
+    <div class="col">
+        <h5>{{sport.sportName}}</h5>
+        Description: {{sport.sportDescription}}
+        {{sport.sportPicture}}
+    </div>
+    <div class="btn">
+      <a [routerLink]="'/sport-form/' + sport.id">
+        <button>Edit</button>
+      </a>
+      <button type="button" (click)="deleteSport(sport)">Delete</button>
+    </div>
   </div>
 </div>
 <div class="btn">
   <button type="button" (click)="createSport()">Create Sport</button>
+</div-->
+
+<table class="table">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Sport Name</th>
+    <th>Description</th>
+    <th>Team</th>
+    <th>Team Size</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let sport of sports; let i = index;">
+    <td></td>
+    <td><strong>{{ sport.sportName }}</strong></td>
+    <td>{{ sport.sportDescription}}</td>
+    <td>{{sport.team}}</td>
+    <td>{{sport.teamSize}}</td>
+    <!--td>
+      <img [src]="previews[i] | safeUrl" *ngIf="previews[i]"
+           class="img-fluid">
+    </td-->
+
+    <td>
+      <!--div class="btn-group">
+        <button type="button" class="btn btn-danger" (click)="deleteMedia(i)">
+          Entfernen
+        </button>
+      </div-->
+      <div class="btn">
+        <a [routerLink]="'/sport-info/' + sport.id">
+          <button class="btn btn-primary">Details</button>
+        </a>
+      </div>
+      <div class="btn">
+        <a [routerLink]="'/sport-form/' + sport.id">
+          <button class="btn btn-primary">Edit</button>
+        </a>
+        <button type="button" class="btn btn-red" (click)="deleteSport(sport)">Delete</button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="btn">
+  <button type="button" class="btn btn-primary" (click)="createSport()">Create Sport</button>
 </div>
+

@@ -19,7 +19,7 @@ public class SportDTO {
     private String sportPicture;
 
 
-    private List<String> users;
+    private Set<String> users;
     private Set<Long> events;
 
     public String getSportName() {
@@ -62,11 +62,11 @@ public class SportDTO {
         this.sportPicture = sportPicture;
     }
 
-    public List<String> getUsers() {
+    public Set<String> getUsers() {
         return users;
     }
 
-    public void setUsers(List<String> users) {
+    public void setUsers(Set<String> users) {
         this.users = users;
     }
 
