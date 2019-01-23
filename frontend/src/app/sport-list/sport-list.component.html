@@ -49,6 +49,11 @@
         </button>
       </div-->
       <div class="btn">
+        <a [routerLink]="'/sport-info/' + sport.id">
+          <button class="btn btn-primary">Details</button>
+        </a>
+      </div>
+      <div class="btn">
         <a [routerLink]="'/sport-form/' + sport.id">
           <button class="btn btn-primary">Edit</button>
         </a>
