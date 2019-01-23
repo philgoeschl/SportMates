@@ -21,13 +21,15 @@
     </a>
   </div>
 </div>
-<div class="container">
+
 <h1>Managed Events</h1>
-<div *ngFor="let event of managedEvents">
+<div class="container">
+
+  <!--div *ngFor="let event of managedEvents"-->
 
 
     <div class="row">
-      <!--div class="col-sm-4" *ngFor="let event of eventArray"-->
+      <div class="col-sm-4" *ngFor="let event of managedEvents">
         <div class="card">
           <div class="card-header">
             {{event.eventType}}
@@ -42,18 +44,18 @@
             <p class="card-text">{{event.eventStreet}}</p>
           </div>
           <div class="card-footer">
-            <button
-              [routerLink]="'/event-info/' + event.id" *ngIf="event.eventOrganizer !== currentLoggedInUser">View
+            <button class="btn btn-primary" [routerLink]="'/event-info/' + event.id">
+              View
             </button>
 
-            <button [routerLink]="'/event-form/' + event.id" *ngIf="event.eventOrganizer === currentLoggedInUser">
+            <button class="btn btn-primary" [routerLink]="'/event-form/' + event.id">
               Edit
             </button>
             <!--button class="btn-success" type="button" (click)="participateEvent(event)"
                     *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate
             </button-->
 
-            <button class="btn-danger" type="button" (click)="deleteEvent(event)">
+            <button class="btn btn-danger" type="button" (click)="deleteEvent(event)">
               Delete
             </button>
           </div>
@@ -64,5 +66,6 @@
 
   </div>
 <!--/div-->
+
 
 
