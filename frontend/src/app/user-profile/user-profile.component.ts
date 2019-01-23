@@ -96,7 +96,7 @@ export class UserProfileComponent implements OnInit {
             this.managedEvents=[]
               //this.managedEventsToPush = this.events.find(x=>x.eventOrganizer == this.currentUser)
               events.forEach(x => {if (x.eventOrganizer.includes(this.currentUser)) this.managedEvents.push(x)});
-              console.log(this.managedEvents)
+              console.log(this.events)
 
 
           });
