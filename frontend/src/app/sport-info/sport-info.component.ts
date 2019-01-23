@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SportService} from "../services/sport.service";
 import {Sport} from "../api/sport";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -23,7 +23,7 @@ export class SportInfoComponent implements OnInit {
   users: Array<User>
   participatingUsers
   usernames
-  sportsCount
+  sportsCount:number
   sportIDs
   id
   idparser
@@ -33,6 +33,7 @@ export class SportInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.sportService.getById(id)
@@ -45,12 +46,14 @@ export class SportInfoComponent implements OnInit {
             .subscribe((users: any) => {
               this.users = users;
               this.idparser = 0;
+              this.sportsCount=0
               for (let entry of this.users) {
                 this.idparser = this.idparser + 1;
                 this.sportIDs = [];
                 this.user = []
                 this.userSportID =[]
                 this.usersFinalObject = [];
+
                 this.participatingUsers = [];
                 this.userService.getById(this.idparser)
                   .subscribe((response) => {
@@ -61,6 +64,7 @@ export class SportInfoComponent implements OnInit {
 
                     if(this.userSportID.includes(this.sportID)){
                       this.participatingUsers.push(this.user)
+                      this.sportsCount = this.sportsCount+1
 
                     }
                     //this.usersFinalObject.forEach(x => {if (x.sports.includes(this.sportID)) this.participatingUsers.push(x)});
@@ -72,8 +76,8 @@ export class SportInfoComponent implements OnInit {
               }
 
               //this.participatingUsers  = Array.from(this.participatingUsers.reduce((m, t) => m.set(t.id, t), new Map()).values());
-              this.sportsCount = (this.participatingUsers.length + 1)
-              this.sportsCount = this.sportsCount + 1
+              //this.sportsCount = (this.participatingUsers.count)
+              //this.sportsCount = this.sportsCount + 1
               console.log(this.sportsCount)
 
             })
@@ -96,5 +100,9 @@ export class SportInfoComponent implements OnInit {
     }
     return newArray;
   }
+
+
+
+
 
 }
