@@ -1,5 +1,6 @@
 package at.fh.ima.swengs.sportmatesdb.service;
 
+import at.fh.ima.swengs.sportmatesdb.model.SportRepository;
 import at.fh.ima.swengs.sportmatesdb.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,6 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+    private SportRepository sportRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -64,7 +66,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             tester.setPassword(encoder.encode("12345"));
             tester.setAdmin(false);
             userRepository.save(tester);
+
+
         }
     }
+
 
 }
