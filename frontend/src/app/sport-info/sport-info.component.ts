@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SportService} from "../services/sport.service";
 import {Sport} from "../api/sport";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {User} from "../api/user";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-sport-info',
@@ -12,14 +13,24 @@ import {User} from "../api/user";
 })
 export class SportInfoComponent implements OnInit {
 
+  userSportID
+  sports
+  username
   sport
+  user
+  usersFinalObject: Array<User>
   sportID
   users: Array<User>
   participatingUsers
-  usernames: Array<string>
+  usernames
+  sportsCount
+  sportIDs
   id
+  idparser
   data
-  constructor(private sportService:SportService,private router: Router,private route: ActivatedRoute,private userService: UserService) { }
+
+  constructor(private sportService: SportService, private router: Router, private route: ActivatedRoute, private userService: UserService) {
+  }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -28,35 +39,62 @@ export class SportInfoComponent implements OnInit {
         .subscribe((response) => {
           this.sport = <Sport>response;
           this.sportID = this.sport.id
-          console.log(this.sportID)
 
 
           this.userService.getAll()
             .subscribe((users: any) => {
               this.users = users;
-              console.log(this.users)
-              this.data = users.map(x => x.id);
-              console.log(this.data)
-
-              for (let entry of this.data) {
-                this.userService.getById(1)
+              this.idparser = 0;
+              for (let entry of this.users) {
+                this.idparser = this.idparser + 1;
+                this.sportIDs = [];
+                this.user = []
+                this.userSportID =[]
+                this.usersFinalObject = [];
+                this.participatingUsers = [];
+                this.userService.getById(this.idparser)
                   .subscribe((response) => {
-                    this.sportID = response.sports;
-                    console.log(this.sportID)
+                      this.userSportID =[]
+                      this.user = response;
+                      this.userSportID =this.user.sports
+                      this.usersFinalObject.push(this.user)
+
+                    if(this.userSportID.includes(this.sportID)){
+                      this.participatingUsers.push(this.user)
+
+                    }
+                    //this.usersFinalObject.forEach(x => {if (x.sports.includes(this.sportID)) this.participatingUsers.push(x)});
+
+
+                    }
+                  )
 
               }
-                  )}
 
+              //this.participatingUsers  = Array.from(this.participatingUsers.reduce((m, t) => m.set(t.id, t), new Map()).values());
+              this.sportsCount = (this.participatingUsers.length + 1)
+              this.sportsCount = this.sportsCount + 1
+              console.log(this.sportsCount)
 
             })
         });
     }
 
 
-
   }
 
+  removeDuplicates(originalArray, prop) {
+    var newArray = [];
+    var lookupObject  = {};
 
+    for(var i in originalArray) {
+      lookupObject[originalArray[i][prop]] = originalArray[i];
+    }
 
+    for(i in lookupObject) {
+      newArray.push(lookupObject[i]);
+    }
+    return newArray;
+  }
 
 }
