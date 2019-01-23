@@ -4,8 +4,12 @@ import {UserService} from "../services/user.service";
 import {User} from "../api/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Sport} from "../api/sport";
+import {Event} from "../api/event";
 import {SportService} from "../services/sport.service";
 import {compareNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
+import {EventService} from "../services/event.service";
+
+
 
 @Component({
   selector: 'app-user-profile',
@@ -23,7 +27,9 @@ export class UserProfileComponent implements OnInit {
   homeTown: string;
   userLocation: string;
   sports: Array<Sport>
-  sportOptions;
+  events: Array<Event>
+  managedEventsToPush
+  managedEvents: Array<Event>;
   id: number;
   sportsID: Array<Number>;
   users: Array<User>;
@@ -32,7 +38,7 @@ export class UserProfileComponent implements OnInit {
   data
   sportNames: Array<string>
   sportName
-  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService,private sportService: SportService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService,private sportService: SportService, private eventService: EventService) { }
 
   ngOnInit() {
     this.userForm = new FormGroup({
@@ -65,7 +71,7 @@ export class UserProfileComponent implements OnInit {
           .subscribe((response) => {
             this.userForm.patchValue(response);
             this.sportsID = response.sports;
-
+            console.log(response)
 
 
 
@@ -74,15 +80,27 @@ export class UserProfileComponent implements OnInit {
           .subscribe((sports: any) => {
             this.sports = sports;
             this.sportNames =[];
-            console.log(this.sportsID)
+
             for (let entry of this.sportsID) {
               this.sportName = this.sports.find(x=>x.id == entry).sportName
-              this.sportNames.push(this.sportName)
-              console.log(this.sportNames)
+              this.sportNames.push(" " + this.sportName)
+
             }
-            console.log(this.sportNames)
           });
           });
+
+        this.eventService.getAll()
+          .subscribe((events: any) => {
+            this.events = events
+            this.managedEventsToPush =[];
+            this.managedEvents=[]
+              //this.managedEventsToPush = this.events.find(x=>x.eventOrganizer == this.currentUser)
+              events.forEach(x => {if (x.eventOrganizer.includes(this.currentUser)) this.managedEvents.push(x)});
+              console.log(this.managedEvents)
+
+
+          });
+
       });
 
 

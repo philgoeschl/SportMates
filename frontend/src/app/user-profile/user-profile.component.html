@@ -1,23 +1,17 @@
-<form [formGroup]="userForm">
+
 
   <h1>{{usernameShow}}</h1>
-
+  <div class="container">
   <div class="col">
-    <div class="form-group">
       First Name: {{firstName}}
-    </div>
   </div>
   <div class="col">
-    <div class="form-group">
       Last Name: {{lastName}}
-    </div>
   </div>
 
 
     <div class="col">
-      <div class="form-group">
       Favourite Sports: {{sportNames}}
-    </div>
     </div>
   <br>
 
@@ -28,5 +22,10 @@
       </button>
     </a>
   </div>
+    <h1>Managed Events</h1>
+    <div *ngFor="let event of managedEvents">
+      {{event.eventTitle}}{{event.eventDateTime}}<a [routerLink]="'/event-form/' + event.id">Edit</a> <button type="button" (click)="deleteUser(event)" >Delete</button>
+    </div>
 
-</form>
+  </div>
+
