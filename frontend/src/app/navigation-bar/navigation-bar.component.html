@@ -2,7 +2,20 @@
   <div class="card-body text-dark">
     <div class="container-fluid">-->
 
+<div class="login">
+  <div class="row">
+    <div class="topnav">
 
+      <a [routerLink]="'/user-profile/'" *ngIf="loggedIn">My Profile</a>
+      <a [routerLink]="'/event-list/'">
+        Events
+      </a>
+      <a [routerLink]="'/user-list/'" *ngIf="isAdmin">
+        User List
+      </a>
+      <a [routerLink]="'/sport-list/'" *ngIf="isAdmin">
+        Sports
+      </a>
 
       <div class="topnav">
           <a [routerLink]="'/user-profile/'" *ngIf="loggedIn">My Profile</a>
@@ -14,11 +27,18 @@
           <app-login *ngIf="!loggedIn"></app-login>
       </div>
 
+  </div>
+</div>
 
 
+<!--div class="btn">
+  <a [routerLink]="'/sport-form/' + sport.id">
+    <button>Edit</button>
+  </a-->
 
-      <!--</div>
-    </div>
-  </div>-->
+
+<!--</div>
+</div>
+</div>-->
 
 

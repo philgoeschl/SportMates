@@ -2,6 +2,14 @@
 .topnav {
   background-color: #333;
   overflow: hidden;
+  color: #f2f2f2;
+  padding: 14px 16px;
+  font-size: 17px;
+}
+
+.login {
+  background-color: #333;
+  overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
@@ -21,10 +29,10 @@
 }
 
 /* Add a color to the active/current link */
-.topnav a.active {
+/*.topnav a.active {
   background-color: #4CAF50;
   color: white;
-}
+}*/
 
 .topnav.disabled {
   background-color: #333;
