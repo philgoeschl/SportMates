@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Event} from '../api/event';
 import {EventService} from '../services/event.service';
 import {Router} from '@angular/router';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-event-list',
@@ -12,11 +13,16 @@ export class EventListComponent implements OnInit {
 
   events: Array<Event>;
   eventArray;
+  currentLoggedInUser: string;
 
-  constructor(private eventService: EventService, private router: Router) {
+  constructor(private eventService: EventService, private router: Router, private userService: UserService) {
   }
 
   ngOnInit() {
+
+    this.updateCurrentLoggedInUser();
+
+
 
     this.eventService.getAll()
       .subscribe((events: any) => {
@@ -33,6 +39,10 @@ export class EventListComponent implements OnInit {
         this.ngOnInit();
       });
 
+  }
+
+  updateCurrentLoggedInUser(){
+    this.currentLoggedInUser = this.userService.currLoggedInUserName;
   }
 
   createEvent() {

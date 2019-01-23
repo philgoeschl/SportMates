@@ -1,0 +1,25 @@
+<form [formGroup]="eventInfo">
+
+  <div class="container">
+
+    <h1>{{event.eventTitle}}</h1>
+
+    <h4>Sport: {{event.sport}}</h4><h4>Type: {{event.eventType}}</h4>
+
+    <h4>Organizer: {{event.eventOrganizer}}</h4>
+
+    <h4>Date: {{event.eventDateTime}}</h4>
+
+    <h4>Description: {{event.eventDescription}}</h4>
+
+    <h4>Location: {{event.eventZIP}} {{event.eventTown}}, {{event.eventStreet}}</h4>
+    <h4></h4>
+
+    <div class="btn-group">
+      <button type="submit" (click)="navigateToList()" class="btn btn-primary">
+        Back
+      </button>
+
+    </div>
+  </div>
+</form>

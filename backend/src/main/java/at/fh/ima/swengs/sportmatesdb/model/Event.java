@@ -2,6 +2,7 @@ package at.fh.ima.swengs.sportmatesdb.model;
 
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cascade;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import java.util.*;
@@ -41,7 +42,6 @@ public class Event {
     private Set<Media> image = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnore
     private Sport sport;
 
     @ManyToMany
@@ -159,14 +159,14 @@ public class Event {
     }
 
 
-    /*public Sport getSport() {
+    public Sport getSport() {
         return sport;
     }
 
     public void setSport(Sport sport) {
         this.sport = sport;
     }
-
+/*
 
 
     public User getEventManager() {

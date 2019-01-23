@@ -17,16 +17,15 @@
         Sports
       </a>
 
-      <a class="button" (click)="logout()" style="float:right" *ngIf="loggedIn">
-        Logout
-      </a>
-      <a [routerLink]="'/register/'" *ngIf="!loggedIn">
-        Register
-      </a>
-    </div>
-    <a style="float:right" *ngIf="!loggedIn">
-      <app-login></app-login>
-    </a>
+      <div class="topnav">
+          <a [routerLink]="'/user-profile/'" *ngIf="loggedIn">My Profile</a>
+          <a [routerLink]="'/event-list/'">Events</a>
+          <a [routerLink]="'/user-list/'" *ngIf="isAdmin">User List</a>
+          <a [routerLink]="'/sport-list/'" *ngIf="isAdmin">Sports</a>
+          <a class="button" (click)="logout()" style="float:right; cursor: pointer;" *ngIf="loggedIn" >Logout</a>
+          <a [routerLink]="'/register/'" *ngIf="!loggedIn" style="float:right;">Register</a>
+          <app-login *ngIf="!loggedIn"></app-login>
+      </div>
 
   </div>
 </div>

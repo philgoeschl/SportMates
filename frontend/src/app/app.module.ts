@@ -21,8 +21,9 @@ import { NgxSelectModule } from 'ngx-select-ex';
 import {SportListComponent} from './sport-list/sport-list.component';
 import {SportFormComponent} from './sport-form/sport-form.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserProfileEditComponent } from './user-profile-edit/user-profile-edit.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { EventInfoComponent } from './event-info/event-info.component';
+import {UserProfileEditComponent} from './user-profile-edit/user-profile-edit.component';
 
 
 export function tokenGetter(){
@@ -44,7 +45,8 @@ export function tokenGetter(){
     SafePipe,
     UserProfileComponent,
     UserProfileEditComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    EventInfoComponent
   ],
   imports: [
     BrowserModule,

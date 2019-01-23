@@ -15,6 +15,7 @@ import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {UserProfileEditComponent} from "./user-profile-edit/user-profile-edit.component";
 import {AdminGuard} from "./guards/admin.guard";
 import {AppComponent} from "./app.component";
+import {EventInfoComponent} from './event-info/event-info.component';
 
 
 const routes: Routes = [
@@ -24,9 +25,10 @@ const routes: Routes = [
   {path: 'user-form', component: UserFormComponent, canActivate: [AdminGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'user-form', component: UserFormComponent, canActivate: [AuthGuard]},
-  {path: 'event-list', component: EventListComponent, canActivate: [AuthGuard]},
+  {path: 'event-list', component: EventListComponent},
   {path: 'event-form', component: EventFormComponent, canActivate: [AuthGuard]},
   {path: 'event-form/:id', component: EventFormComponent, canActivate: [AuthGuard]},
+  {path: 'event-info/:id', component: EventInfoComponent, canActivate: [AuthGuard]},
   {path: 'user-form/:id', component: UserFormComponent, canActivate: [AdminGuard]},
   {path: 'sport-form', component: SportFormComponent, canActivate: [AuthGuard]},
   {path: 'sport-list', component: SportListComponent, canActivate: [AuthGuard]},
