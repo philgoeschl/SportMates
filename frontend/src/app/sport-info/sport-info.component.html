@@ -1,3 +1,20 @@
-<p>
-  sport-info works!
-</p>
+<div class="container">
+  <h1>{{sport.sportName}}</h1>
+  <div class="col">
+    Description: {{sport.description}}
+  </div>
+  <div class="col">
+    Teamsport: {{sport.team}}
+  </div>
+  <div class="col">
+    Teamsize: {{sport.teamSize}}
+  </div>
+  <div class="col">
+    Number of participating Users: {{sportsCount}}
+  </div>
+  <h1>Participating Users</h1>
+  <div *ngFor="let user of participatingUsers">
+    {{user.username}}
+  </div>
+</div>
+
