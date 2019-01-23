@@ -16,6 +16,7 @@ import {UserProfileEditComponent} from "./user-profile-edit/user-profile-edit.co
 import {AdminGuard} from "./guards/admin.guard";
 import {AppComponent} from "./app.component";
 import {EventInfoComponent} from './event-info/event-info.component';
+import {SportInfoComponent} from "./sport-info/sport-info.component";
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'sport-form', component: SportFormComponent, canActivate: [AuthGuard]},
   {path: 'sport-list', component: SportListComponent, canActivate: [AuthGuard]},
   {path: 'sport-form/:id', component: SportFormComponent, canActivate: [AuthGuard]},
+  {path: 'sport-info/:id', component: SportInfoComponent, canActivate: [AuthGuard]},
   {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   {path: 'user-profile-edit', component: UserProfileEditComponent, canActivate: [AuthGuard]}
 
