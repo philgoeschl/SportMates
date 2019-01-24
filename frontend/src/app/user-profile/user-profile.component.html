@@ -62,6 +62,35 @@
       </div>
     </div>
 
+  <h1>Accepted Events</h1>
+  <div *ngFor="let event of participatingEvents">
+
+
+    <div class="row">
+      <!--div class="col-sm-4" *ngFor="let event of eventArray"-->
+      <div class="card">
+        <div class="card-header">
+          {{event.evenType}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            {{event.eventTitle}}
+          </h5>
+          <p class="card-text"> {{event.eventDateTime}}</p>
+
+          <p class="card-text">{{event.eventZIP}} {{event.eventTown}},</p>
+          <p class="card-text">{{event.eventStreet}}</p>
+        </div>
+        <div class="card-footer">
+          <button
+            [routerLink]="'/event-info/' + event.id">View
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   </div>
 <!--/div-->
 
