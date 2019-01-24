@@ -59,7 +59,7 @@ public class EventFacade {
 
 
 
-        //entity.setUsers(userService.getUsersByUsername(dto.getUsers()));
+        entity.setUsers(userService.getUsersByName(dto.getUsers()));
 
     }
 
