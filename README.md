@@ -1,6 +1,6 @@
 # SportMates
 This web application helps athletes to find other athletes doing the same sports.
-As a user, you can create a profile where you can specify your favorite sports. Furthermore, the users can create different events, for example, for joint training. At the events the users can promise and this will then be displayed in their user profiles.
+As a user, you can create a profile where you can specify your favorite sports. Furthermore, the users can create different events, for example, for joint training. At the events the users can participate and this will then be displayed in their user profiles.
 The administrator can add sports, manage users and events.
 
 ## Team members
