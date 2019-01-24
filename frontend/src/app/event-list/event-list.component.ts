@@ -14,7 +14,8 @@ export class EventListComponent implements OnInit {
   events: Array<Event>;
   eventArray;
   currentLoggedInUser: string;
-
+  event;
+idEvent
   constructor(private eventService: EventService, private router: Router, private userService: UserService) {
   }
 
@@ -22,8 +23,8 @@ export class EventListComponent implements OnInit {
 
     this.updateCurrentLoggedInUser();
 
-
-
+    console.log(this.currentLoggedInUser)
+    this.event=[]
     this.eventService.getAll()
       .subscribe((events: any) => {
         this.events = events;
@@ -60,4 +61,9 @@ export class EventListComponent implements OnInit {
     }
 
   }
+
+
+
+
+
 }
