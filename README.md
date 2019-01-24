@@ -10,9 +10,9 @@ The administrator can add sports, manage users and events.
 
 ## Work load distribution
 - Lukas David
-  - CRUD User entity, User-Profile, User-List, Registration, 
+  - CRUD User entity, User-Profile, User-List, Registration, Admin Guard
 - Philipp Göschl
-  - CRUD Event entity, Event-Form, Event-List, Event-Details
+  - CRUD Event entity, Event-Form, Event-List, Event-Details, Event Search
 - Teresa Neuhold
   - CRUD Sport entity, Sport-Form, Sport-List, Design
   
