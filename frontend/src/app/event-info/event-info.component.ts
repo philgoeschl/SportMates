@@ -21,6 +21,7 @@ export class EventInfoComponent implements OnInit {
   userNames: Array<string>
   eventSportID
 
+
   constructor(private eventService: EventService, private route: ActivatedRoute,
               private router: Router, private sportService: SportService,private userService:UserService) { }
 

@@ -21,9 +21,13 @@
     </a>
   </div>
 </div>
+
+<h1>Managed Events</h1>
 <div class="container">
   <h1>Managed Events</h1>
   <div>
+
+  <!--div *ngFor="let event of managedEvents"-->
 
 
     <div class="row">
@@ -46,7 +50,7 @@
                     [routerLink]="'/event-info/' + event.id" *ngIf="event.eventOrganizer !== currentLoggedInUser">View
             </button>
 
-            <button [routerLink]="'/event-form/' + event.id" *ngIf="event.eventOrganizer === currentLoggedInUser">
+            <button class="btn btn-primary" [routerLink]="'/event-form/' + event.id">
               Edit
             </button>
             <!--button class="btn-success" type="button" (click)="participateEvent(event)"
