@@ -103,7 +103,7 @@ export class EventInfoComponent implements OnInit {
     this.event = this.event;
     this.eventService.update(this.event)
       .subscribe((response) => {
-        alert('updated successfully');
+        alert('now participating');
         this.router.navigate(['/event-list']);
       });
 

@@ -19,7 +19,9 @@
     <div class="row">
       Location: {{event.eventZIP}} {{event.eventTown}}, {{event.eventStreet}}
     </div>
-
+    <div class="row">
+      Participating Users: {{event.users}}
+    </div>
     <div>
       <button class="btn btn-green" type="button" (click)="participateEvent(event)" *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate</button>
       <button type="submit" (click)="navigateToList()" class="btn btn-primary">
