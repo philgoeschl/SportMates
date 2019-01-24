@@ -1,5 +1,4 @@
 <form [formGroup]="eventInfo">
-  <h1>{{event.eventTitle}}</h1>
   <div class="container">
 
     <h1>{{event.eventTitle}}</h1>
@@ -20,7 +19,10 @@
       Location: {{event.eventZIP}} {{event.eventTown}}, {{event.eventStreet}}
     </div>
     <div class="row">
-      Participating Users: {{event.users}}
+      Users:
+      <div *ngFor="let user of event.users">
+        {{user}}
+      </div>
     </div>
     <div>
       <button class="btn btn-green" type="button" (click)="participateEvent(event)" *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate</button>

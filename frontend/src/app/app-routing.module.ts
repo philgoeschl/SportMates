@@ -17,10 +17,11 @@ import {AdminGuard} from "./guards/admin.guard";
 import {AppComponent} from "./app.component";
 import {EventInfoComponent} from './event-info/event-info.component';
 import {SportInfoComponent} from "./sport-info/sport-info.component";
+import {WelcomeComponent} from "./welcome/welcome.component";
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '', pathMatch: 'full'},
+  {path: '', redirectTo: 'welcome', pathMatch: 'full'},
   {path: 'register', component: RegisterComponent},
   {path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'user-form', component: UserFormComponent, canActivate: [AdminGuard]},
@@ -36,8 +37,8 @@ const routes: Routes = [
   {path: 'sport-form/:id', component: SportFormComponent, canActivate: [AuthGuard]},
   {path: 'sport-info/:id', component: SportInfoComponent, canActivate: [AuthGuard]},
   {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
-  {path: 'user-profile-edit', component: UserProfileEditComponent, canActivate: [AuthGuard]}
-
+  {path: 'user-profile-edit', component: UserProfileEditComponent, canActivate: [AuthGuard]},
+  {path: 'welcome', component: WelcomeComponent}
 
 ];
 

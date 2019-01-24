@@ -25,6 +25,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { EventInfoComponent } from './event-info/event-info.component';
 import {UserProfileEditComponent} from './user-profile-edit/user-profile-edit.component';
 import { SportInfoComponent } from './sport-info/sport-info.component';
+import {WelcomeComponent} from "./welcome/welcome.component";
 
 
 export function tokenGetter(){
@@ -48,7 +49,8 @@ export function tokenGetter(){
     UserProfileEditComponent,
     NavigationBarComponent,
     EventInfoComponent,
-    SportInfoComponent
+    SportInfoComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
