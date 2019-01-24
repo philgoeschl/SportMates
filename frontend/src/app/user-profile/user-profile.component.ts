@@ -132,6 +132,15 @@ console.log(this.participatingEvents)
 
   }
 
+  deleteEvent(event: Event) {
+
+    this.eventService.delete(event)
+      .subscribe(() => {
+        this.ngOnInit();
+      });
+
+  }
+
 
 
 

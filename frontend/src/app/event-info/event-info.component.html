@@ -4,19 +4,24 @@
 
     <h1>{{event.eventTitle}}</h1>
 
-    <h4>Sport: {{sportName}}</h4><h4>Type: {{event.eventType}}</h4>
+    <div class="row">
+      Sport: {{sportName}}
+    </div>
+    <div class="row">
+      Type: {{event.eventType}}
+    </div>
+    <div class="row">
+      Organizer: {{event.eventOrganizer}}
+    </div>
+    <div class="row">
+      Date: {{event.eventDateTime | date:short}}
+    </div>
+    <div class="row">
+      Location: {{event.eventZIP}} {{event.eventTown}}, {{event.eventStreet}}
+    </div>
 
-    <h4>Organizer: {{event.eventOrganizer}}</h4>
-
-    <h4>Date: {{event.eventDateTime}}</h4>
-
-    <h4>Description: {{event.eventDescription}}</h4>
-
-    <h4>Location: {{event.eventZIP}} {{event.eventTown}}, {{event.eventStreet}}</h4>
-    <h4></h4>
-
-    <div class="btn-group">
-      <button class="btn-success" type="button" (click)="participateEvent(event)" *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate</button>
+    <div>
+      <button class="btn btn-green" type="button" (click)="participateEvent(event)" *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate</button>
       <button type="submit" (click)="navigateToList()" class="btn btn-primary">
         Back
       </button>

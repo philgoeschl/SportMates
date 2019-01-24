@@ -101,7 +101,9 @@ export class SportInfoComponent implements OnInit {
     return newArray;
   }
 
-
+  navigateToList() {
+    this.router.navigate(['/sport-list']);
+  }
 
 
 

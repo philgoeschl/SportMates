@@ -10,7 +10,7 @@ export interface Event {
   eventOrganizer: string;
 
   sports?: Array<number>;
-  users?: Array<number>;
+  users?: Array<string>;
 
 
 }

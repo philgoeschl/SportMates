@@ -61,11 +61,6 @@ export class EventFormComponent implements OnInit {
           this.eventForm.patchValue(response);
         });
     }
-
-
-
-
-
     /*
     RESOLVER related code
     const event = data.event;
@@ -73,19 +68,11 @@ export class EventFormComponent implements OnInit {
       this.eventForm.patchValue(event);
     }*/
 
-
 /* Get sports for eventSport */
     this.sportService.getAll()
     .subscribe((sports: any) => {
     this.sportOptions = sports._embedded.sports;
     });
-
-
-
-
-
-
-
 
   }
 
@@ -97,6 +84,7 @@ export class EventFormComponent implements OnInit {
 
     const event = this.eventForm.value;
     if (event.id) {
+      event.eventOrganizer = this.currentLoggedInUser;
       this.eventService.update(event)
         .subscribe((response) => {
           alert('updated successfully');
@@ -105,6 +93,7 @@ export class EventFormComponent implements OnInit {
             this.navigateToList();
           }
         });
+      ;
     } else {
       event.eventOrganizer = this.currentLoggedInUser;
       this.eventService.create(event)

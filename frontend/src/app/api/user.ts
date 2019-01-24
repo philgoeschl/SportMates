@@ -12,7 +12,7 @@ export interface User {
   homeTown?: string;
   userLocation?: string;
 
-  sports?: Array<number>;
+  sports?: Array<any>;
   events?: Array<string>;
   managedEvents?: Array<string>;
 

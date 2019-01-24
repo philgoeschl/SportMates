@@ -1,6 +1,27 @@
-<div *ngFor="let user of users">
-  {{user.username}}<a [routerLink]="'/user-form/' + user.id">Edit</a> <button type="button" (click)="deleteUser(user)" >Delete</button>
+<div class="container">
+  <h1>User</h1>
+
+
+  <table class="table">
+    <thead>
+    <tr>
+
+      <th>Username</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users; let i = index;">
+      <td><strong>{{user.username}}</strong></td>
+      <td>
+        <a class="btn btn-blue" [routerLink]="'/user-form/' + user.id">Edit</a>
+        <button class="btn btn-red" type="button" (click)="deleteUser(user)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-primary" type="button" (click)="createActor()">
+    Create User
+  </button>
 </div>
-<button type="button" (click)="createActor()">
-  Create actor
-</button>

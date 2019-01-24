@@ -15,19 +15,19 @@
 
   <div class="btn">
     <a [routerLink]="'/user-profile-edit'">
-      <button class="btn btn-primary">
+      <button class="btn btn-blue">
         Edit
       </button>
     </a>
   </div>
 </div>
 <div class="container">
-<h1>Managed Events</h1>
-<div *ngFor="let event of managedEvents">
+  <h1>Managed Events</h1>
+  <div>
 
 
     <div class="row">
-      <!--div class="col-sm-4" *ngFor="let event of eventArray"-->
+      <div class="col-sm-4" *ngFor="let event of managedEvents">
         <div class="card">
           <div class="card-header">
             {{event.eventType}}
@@ -36,14 +36,14 @@
             <h5 class="card-title">
               {{event.eventTitle}}
             </h5>
-            <p class="card-text"> {{event.eventDateTime}}</p>
+            <p class="card-text"> {{event.eventDateTime | date:short}}</p>
 
-            <p class="card-text">{{event.eventZIP}} {{event.eventTown}},</p>
+            <p class="card-text">{{event.eventZIP}} {{event.eventTown}}</p>
             <p class="card-text">{{event.eventStreet}}</p>
           </div>
           <div class="card-footer">
-            <button
-              [routerLink]="'/event-info/' + event.id" *ngIf="event.eventOrganizer !== currentLoggedInUser">View
+            <button class="btn btn-primary"
+                    [routerLink]="'/event-info/' + event.id" *ngIf="event.eventOrganizer !== currentLoggedInUser">View
             </button>
 
             <button [routerLink]="'/event-form/' + event.id" *ngIf="event.eventOrganizer === currentLoggedInUser">
@@ -53,7 +53,7 @@
                     *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate
             </button-->
 
-            <button class="btn-danger" type="button" (click)="deleteEvent(event)">
+            <button class="btn btn-red" type="button" (click)="deleteEvent(event)">
               Delete
             </button>
           </div>
@@ -62,36 +62,36 @@
       </div>
     </div>
 
-  <h1>Accepted Events</h1>
-  <div *ngFor="let event of participatingEvents">
+    <h1>Accepted Events</h1>
+    <div>
 
 
-    <div class="row">
-      <!--div class="col-sm-4" *ngFor="let event of eventArray"-->
-      <div class="card">
-        <div class="card-header">
-          {{event.evenType}}
+      <div class="row">
+        <div class="col-sm-4" *ngFor="let event of participatingEvents">
+          <div class="card">
+            <div class="card-header">
+              {{event.evenType}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                {{event.eventTitle}}
+              </h5>
+              <p class="card-text"> {{event.eventDateTime | date:short}}</p>
+
+              <p class="card-text">{{event.eventZIP}} {{event.eventTown}}</p>
+              <p class="card-text">{{event.eventStreet}}</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary"
+                      [routerLink]="'/event-info/' + event.id">View
+              </button>
+            </div>
+
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">
-            {{event.eventTitle}}
-          </h5>
-          <p class="card-text"> {{event.eventDateTime}}</p>
-
-          <p class="card-text">{{event.eventZIP}} {{event.eventTown}},</p>
-          <p class="card-text">{{event.eventStreet}}</p>
-        </div>
-        <div class="card-footer">
-          <button
-            [routerLink]="'/event-info/' + event.id">View
-          </button>
-        </div>
-
       </div>
+
     </div>
   </div>
-
-  </div>
-<!--/div-->
-
+</div>
 
