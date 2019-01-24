@@ -97,6 +97,8 @@ export class UserService {
     );
   }
 
+
+
   getAllRegister() {
     return this.http.get('/api/users');
   }
