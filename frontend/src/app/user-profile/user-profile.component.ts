@@ -17,6 +17,7 @@ import {EventService} from "../services/event.service";
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  idparser: number;
   userForm;
   currentUser: string;
   firstName: string;
@@ -30,6 +31,7 @@ export class UserProfileComponent implements OnInit {
   events: Array<Event>
   managedEventsToPush
   managedEvents: Array<Event>;
+  participatingEvents: Array<Event>;
   id: number;
   sportsID: Array<Number>;
   users: Array<User>;
@@ -38,6 +40,7 @@ export class UserProfileComponent implements OnInit {
   data
   sportNames: Array<string>
   sportName
+  eventparse
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService,private sportService: SportService, private eventService: EventService) { }
 
   ngOnInit() {
@@ -96,8 +99,31 @@ export class UserProfileComponent implements OnInit {
             this.managedEvents=[]
               //this.managedEventsToPush = this.events.find(x=>x.eventOrganizer == this.currentUser)
               events.forEach(x => {if (x.eventOrganizer.includes(this.currentUser)) this.managedEvents.push(x)});
-              console.log(this.events)
+            this.idparser = 0;
+            for (let entry of this.events) {
+              this.idparser = this.idparser + 1;
+              this.user = []
 
+
+              this.participatingEvents = [];
+              this.eventService.getByIdNumber(this.idparser)
+                .subscribe((response) => {
+                    this.eventparse = response;
+
+
+                    if(this.eventparse.users.includes(this.currentUser)){
+                      this.participatingEvents.push(this.eventparse)
+
+
+                    }
+                    //this.usersFinalObject.forEach(x => {if (x.sports.includes(this.sportID)) this.participatingUsers.push(x)});
+
+
+                  }
+                )
+
+            }
+console.log(this.participatingEvents)
 
           });
 
