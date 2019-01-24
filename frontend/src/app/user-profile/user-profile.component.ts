@@ -79,17 +79,17 @@ export class UserProfileComponent implements OnInit {
 
 
 
-        this.sportService.getforUser()
-          .subscribe((sports: any) => {
-            this.sports = sports;
-            this.sportNames =[];
+            this.sportService.getforUser()
+              .subscribe((sports: any) => {
+                this.sports = sports;
+                this.sportNames =[];
 
-            for (let entry of this.sportsID) {
-              this.sportName = this.sports.find(x=>x.id == entry).sportName
-              this.sportNames.push(" " + this.sportName)
+                for (let entry of this.sportsID) {
+                  this.sportName = this.sports.find(x=>x.id == entry).sportName
+                  this.sportNames.push(" " + this.sportName)
 
-            }
-          });
+                }
+              });
           });
 
         this.eventService.getAll()
@@ -97,8 +97,8 @@ export class UserProfileComponent implements OnInit {
             this.events = events
             this.managedEventsToPush =[];
             this.managedEvents=[]
-              //this.managedEventsToPush = this.events.find(x=>x.eventOrganizer == this.currentUser)
-              events.forEach(x => {if (x.eventOrganizer.includes(this.currentUser)) this.managedEvents.push(x)});
+            //this.managedEventsToPush = this.events.find(x=>x.eventOrganizer == this.currentUser)
+            events.forEach(x => {if (x.eventOrganizer.includes(this.currentUser)) this.managedEvents.push(x)});
             this.idparser = 0;
             for (let entry of this.events) {
               this.idparser = this.idparser + 1;
@@ -123,21 +123,12 @@ export class UserProfileComponent implements OnInit {
                 )
 
             }
-console.log(this.participatingEvents)
+            console.log(this.participatingEvents)
 
           });
 
       });
 
-
-  }
-
-  deleteEvent(event: Event) {
-
-    this.eventService.delete(event)
-      .subscribe(() => {
-        this.ngOnInit();
-      });
 
   }
 
