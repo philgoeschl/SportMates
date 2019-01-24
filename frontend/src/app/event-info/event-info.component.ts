@@ -3,6 +3,7 @@ import {EventService} from '../services/event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SportService} from '../services/sport.service';
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-event-info',
@@ -18,7 +19,7 @@ export class EventInfoComponent implements OnInit {
 
 
   constructor(private eventService: EventService, private route: ActivatedRoute,
-              private router: Router, private sportService: SportService) { }
+              private router: Router, private sportService: SportService,private userService:UserService) { }
 
   ngOnInit() {
 
@@ -35,6 +36,7 @@ export class EventInfoComponent implements OnInit {
       'eventOrganizer': new FormControl(),
       'image': new FormControl([]),
       'sport': new FormControl(),
+      'users': new FormControl(),
     });
 
     //this.eventInfo.controls.eventOrganizer.disable();
@@ -45,6 +47,8 @@ export class EventInfoComponent implements OnInit {
       this.eventService.getById(id)
         .subscribe((response) => {
           this.event = <Event>response;
+          console.log(this.event)
+          console.log(this.event.users)
         });
     }
     if(this.event) {
@@ -78,5 +82,33 @@ export class EventInfoComponent implements OnInit {
     this.router.navigate(['/event-list']);
   }
 
+  participateEvent() {
+    this.currentLoggedInUser = this.userService.currLoggedInUserName.toString();
+
+    this.event.users.push(this.currentLoggedInUser);
+    console.log(this.event)
+    this.event = this.event;
+    this.eventService.update(this.event)
+      .subscribe((response) => {
+        alert('updated successfully');
+        this.router.navigate(['/event-list']);
+      });
+
+
+  }
+
+  removeDuplicates(originalArray, prop) {
+    var newArray = [];
+    var lookupObject  = {};
+
+    for(var i in originalArray) {
+      lookupObject[originalArray[i][prop]] = originalArray[i];
+    }
+
+    for(i in lookupObject) {
+      newArray.push(lookupObject[i]);
+    }
+    return newArray;
+  }
 
 }

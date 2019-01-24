@@ -35,7 +35,7 @@
             [routerLink]="'/event-info/' + event.id" *ngIf="event.eventOrganizer !== currentLoggedInUser">View</button>
 
           <button [routerLink]="'/event-form/' + event.id" *ngIf="event.eventOrganizer === currentLoggedInUser">Edit</button>
-          <button class="btn-success" type="button" (click)="participateEvent(event)" *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate</button>
+
 
           <button class="btn-danger" type="button" (click)="deleteEvent(event)" *ngIf="event.eventOrganizer === currentLoggedInUser">Delete</button>
         </div>
