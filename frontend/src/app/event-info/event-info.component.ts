@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SportService} from '../services/sport.service';
 import {UserService} from "../services/user.service";
+import {Sport} from "../api/sport";
 
 @Component({
   selector: 'app-event-info',
@@ -12,12 +13,13 @@ import {UserService} from "../services/user.service";
 })
 export class EventInfoComponent implements OnInit {
 
+  sportName
   eventInfo;
   event;
   sportOptions;
   currentLoggedInUser: string;
   userNames: Array<string>
-
+  eventSportID
 
   constructor(private eventService: EventService, private route: ActivatedRoute,
               private router: Router, private sportService: SportService,private userService:UserService) { }
@@ -48,8 +50,16 @@ export class EventInfoComponent implements OnInit {
       this.eventService.getById(id)
         .subscribe((response) => {
           this.event = <Event>response;
+          this.eventSportID = this.event.sports
           console.log(this.event)
-          console.log(this.event.users)
+          this.sportService.getById(this.event.sport)
+            .subscribe((response) => {
+              this.sportName = <Sport>response.sportName;
+              console.log(this.sportName)
+            })
+
+
+
         });
     }
     if(this.event) {
