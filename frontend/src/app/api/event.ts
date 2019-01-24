@@ -1,7 +1,7 @@
 export interface Event {
   id?: number;
   eventTitle: string;
-  //eventType: string;
+  eventType: string;
   eventDescription?: string;
   eventTown: string;
   eventZIP?: number;

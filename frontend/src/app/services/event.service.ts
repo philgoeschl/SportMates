@@ -27,6 +27,23 @@ export class EventService {
     }));
   }
 
+  getByIdNumber(id: number) {
+    return this.http.get('/api/dto/events/' + id).pipe(map((res: any) => {
+      res.eventDateTime = new Date(res.eventDateTime);
+      return res;
+    }));
+  }
+
+  getByIdZ(id: number) {
+    return this.http.get('/api/dto/events/' + id).pipe(map((res: any) => {
+      if (res.dayOfBirth) {
+        res.dayOfBirth = new Date(res.dayOfBirth);
+      }
+      return res;
+    }));
+  }
+
+
   update(event: Event) {
     return this.http.put('/api/dto/events/' + event.id, event);
   }

@@ -4,7 +4,7 @@
 
     <h1>{{event.eventTitle}}</h1>
 
-    <h4>Sport: {{event.sport}}</h4><h4>Type: {{event.eventType}}</h4>
+    <h4>Sport: {{sportName}}</h4><h4>Type: {{event.eventType}}</h4>
 
     <h4>Organizer: {{event.eventOrganizer}}</h4>
 
@@ -16,6 +16,7 @@
     <h4></h4>
 
     <div class="btn-group">
+      <button class="btn-success" type="button" (click)="participateEvent(event)" *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate</button>
       <button type="submit" (click)="navigateToList()" class="btn btn-primary">
         Back
       </button>
