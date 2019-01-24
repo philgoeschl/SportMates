@@ -16,6 +16,7 @@ export class EventInfoComponent implements OnInit {
   event;
   sportOptions;
   currentLoggedInUser: string;
+  userNames: Array<string>
 
 
   constructor(private eventService: EventService, private route: ActivatedRoute,
@@ -86,7 +87,9 @@ export class EventInfoComponent implements OnInit {
     this.currentLoggedInUser = this.userService.currLoggedInUserName.toString();
 
     this.event.users.push(this.currentLoggedInUser);
-    console.log(this.event)
+    this.userNames = this.event.users
+
+    console.log(this.userNames)
     this.event = this.event;
     this.eventService.update(this.event)
       .subscribe((response) => {
