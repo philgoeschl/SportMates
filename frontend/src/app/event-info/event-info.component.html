@@ -19,13 +19,24 @@
       Location: {{event.eventZIP}} {{event.eventTown}}, {{event.eventStreet}}
     </div>
     <div class="row">
-      Users:
-      <div *ngFor="let user of event.users">
-        {{user}}
+      <div>{{event.users.length}} Participating Users:</div>
+
+
+      <div class="col-sm-4">
+        <table>
+          <tbody>
+          <tr *ngFor="let user of event.users">
+            <td>{{user}}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <div>
-      <button class="btn btn-green" type="button" (click)="participateEvent(event)" *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate</button>
+
+    <div class="row">
+      <button class="btn btn-green" type="button" (click)="participateEvent(event)"
+              *ngIf="event.eventOrganizer !== currentLoggedInUser">Participate
+      </button>
       <button type="submit" (click)="navigateToList()" class="btn btn-primary">
         Back
       </button>
