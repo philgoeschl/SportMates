@@ -76,6 +76,10 @@ public class EventFacade {
         dto.setEventZIP(entity.getEventZIP());
         dto.setImage(entity.getImage());
 
+        /*if(entity.getSport() != null) {
+            dto.setSport(entity.getSport().getSportName());
+        }*/
+
         if(entity.getSport() != null) {
             dto.setSport(entity.getSport().getId());
         }

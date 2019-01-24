@@ -2,6 +2,7 @@ package at.fh.ima.swengs.sportmatesdb.dto;
 
 import at.fh.ima.swengs.sportmatesdb.model.EventType;
 import at.fh.ima.swengs.sportmatesdb.model.Media;
+import at.fh.ima.swengs.sportmatesdb.model.Sport;
 
 
 import java.util.Date;
